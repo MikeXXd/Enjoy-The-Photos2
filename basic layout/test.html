@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="test.css"> -->
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      height: 200vh;
+      overflow: visible;
+
+    }
+
+    .parent {
+      height: 900px;
+      background-color: aqua;
+      padding: 20px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .child1 {
+      background-color: brown;
+      height: 50px;
+
+        margin: 20px;
+    }
+
+    .child2 {
+      background-color: rgb(42, 165, 56);
+      height: 50px;
+      margin: 20px;
+      position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+    }
+
+    .child3 {
+      background-color: rgb(50, 42, 165);
+      height: 50px;
+      margin: 20px;
+    }
+  </style>
+  <body>
+    <div class="parent">
+      <div class="child1">Number 1</div>
+      <div class="child2">Number 2</div>
+      <div class="child3">Number 3</div>
+    </div>
+  </body>
+</html>

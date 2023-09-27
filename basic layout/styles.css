@@ -151,11 +151,20 @@ font-family: 'Sedgwick Ave Display', cursive;
   justify-items: stretch;
   gap: 0.5rem;
 }
-
-.grid-container-masonri img {
-  object-fit: cover;
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid var(--white-color);
   border-radius: 0.3rem;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.3rem;
+  object-fit: cover;
+
 }
 
 .tall {

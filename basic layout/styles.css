@@ -58,6 +58,12 @@ a:focus {
   align-items: center;
 }
 
+ /* Hide certain elements on smaller screens */
+@media (max-width: 768px) {
+  .hide-on-small-device {
+    display: none;
+  }}
+
 .pre-header {
   font-size: 1rem;
   max-width: 14rem;
@@ -141,6 +147,8 @@ font-family: 'Sedgwick Ave Display', cursive;
   position: sticky;
   top: -1rem;
 }
+
+
 
 .grid-container-masonri {
   display: grid;

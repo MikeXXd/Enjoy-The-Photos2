@@ -56,6 +56,8 @@ a:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+
 }
 
  /* Hide certain elements on smaller screens */
@@ -84,6 +86,7 @@ font-family: 'Sedgwick Ave Display', cursive;
   display: flex;
   list-style: none;
   justify-content: space-between;
+  margin: .5rem 0; /* good when flex:wrap in parent active*/
 }
 
 .nav-bar a {
@@ -96,6 +99,7 @@ font-family: 'Sedgwick Ave Display', cursive;
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  flex-wrap: wrap;
 }
 
 .search-bar > * {

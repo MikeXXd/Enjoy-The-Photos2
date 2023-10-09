@@ -1,11 +1,21 @@
-import UsePhotos from "../hooks/UsePhotos"
+import { Photo } from "../hooks/UsePhotos";
+import PhotoContainer from "./PhotoContainer";
 
-const PhotosGrid = () => {
+interface PhotosGridProps {
+  photos: Photo[];
+}
 
-    // const { photos, error }  = UsePhotos();
-    
+const PhotosGrid = ({ photos }: PhotosGridProps) => {
+
+
+
+
   return (
-    <div>PhotosGrid</div>
+    <main className="grid-container-masonri">
+       {photos.map((photo) => (
+        <PhotoContainer key={photo.id} photo={photo} />
+       ))}
+      </main>
   )
 }
 

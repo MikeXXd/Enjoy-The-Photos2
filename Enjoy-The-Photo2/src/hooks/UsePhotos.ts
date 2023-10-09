@@ -2,7 +2,7 @@ import { useState , useEffect} from "react";
 import  apiClient from '../services/api-client'
 import { CanceledError } from "axios";
 
-interface Photos {
+export interface Photo {
   id: string;
   urls: {
     full: string;
@@ -14,20 +14,30 @@ interface Photos {
   };
   alt_description: string;
   userId: string;
+  height: number;
+  width: number;
 }
 
-interface fetchPhotosResponse {
-  results: Photos[];
+interface UsePhotosProps {
+  pageNo: number;
+  query: string;
 }
 
-const UsePhotos = () => {
-  const [photos, setPhotos] = useState<Photos[]>([]);
+interface FetchPhotosResponse {
+  results: Photo[];
+}
+
+const UsePhotos = ({pageNo, query}: UsePhotosProps) => {
+
+  const [photos, setPhotos] = useState<Photo[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
+
+
     const controller = new AbortController();
     apiClient
-      .get<fetchPhotosResponse>("1&per_page=10&query=love",{ signal: controller.signal })
+      .get<FetchPhotosResponse>(`photos?page=${pageNo}&per_page=31&query=${query}`,{ signal: controller.signal })
       .then((res) => setPhotos(res.data.results))
       .catch((err) => {
         if (err instanceof CanceledError) return;

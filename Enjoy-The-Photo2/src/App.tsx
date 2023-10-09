@@ -1,9 +1,17 @@
 import "./styles.css";
 import UsePhotos from "./hooks/UsePhotos";
+import { useState } from "react";
+import PhotosGrid from "./components/PhotosGrid";
 
+const DEFAULT_QUERY = 'space';
+const DEFAULT_PAGE_NO = 2;
 
 const App = () => {
-  const { photos, error }  = UsePhotos();
+  const [pageNo, setPageNo] = useState(DEFAULT_PAGE_NO)
+  const [query, setQuery] = useState(DEFAULT_QUERY)
+
+  const { photos, error } = UsePhotos({ pageNo, query });
+
   console.log("photos" ,photos);
 
 
@@ -40,13 +48,7 @@ const App = () => {
         <button className="btn ">Search</button>
         <button className="btn ">next</button>
       </section>
-      <main className="grid-container-masonri">
-       {photos.map((photo) => (
-        <div className="img-container tall wide">
-        <img className="img " src={photo.urls.regular} />
-      </div>
-       ))}
-      </main>
+      <PhotosGrid photos={photos} />
       <footer className="footer">
         <span>
           Created by <a href="#">MikeXd</a> 2023

@@ -21,6 +21,10 @@ export interface PhotoType {
 interface PhotosContext {
     results: PhotoType[];
     error: string;
+    query: string;
+    setQuery: (query: string) => void;
+    pageNo: number;
+    setPageNo: (pageNo: number) => void;
 
 }
 
@@ -38,7 +42,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     
     const [results, setResults] = useState<PhotoType[]>([]);
       const [error, setError] = useState("");
-      const [query, setQuery] = useState("energy");
+      const [query, setQuery] = useState("enjoy");
       const [pageNo, setPageNo] = useState(1);
     
     
@@ -62,7 +66,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
 
 
 
-    return <Context.Provider value={{results, error }}>{children}</Context.Provider>;
+    return <Context.Provider value={{results, error, query, setQuery, pageNo, setPageNo }}>{children}</Context.Provider>;
     }
 
 export function UsePhotos() {

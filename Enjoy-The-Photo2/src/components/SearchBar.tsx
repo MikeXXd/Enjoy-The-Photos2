@@ -1,33 +1,58 @@
-import { useState } from "react"
+import { FormEvent, MouseEvent } from "react";
+import { UsePhotos } from "../context/Photos";
 
-interface SearchBarProps {
-    query: string;
-    setQuery: (query: string) => void;
-}                      
+const SearchBar = () => {
+  const { query, setQuery, pageNo, setPageNo, results } = UsePhotos();
+  console.log("pageNo", pageNo)
+  console.log("query", query)
 
-const SearchBar = ({query, setQuery}: SearchBarProps) => {
-
-    const [search, setSearch]= useState("Search Photos")
-
-function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    (e.currentTarget.elements[0] as HTMLInputElement).blur();
+    setPageNo(1);
+    setQuery((e.currentTarget.elements[0] as HTMLInputElement).value);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  }
+
+  function handlePriorBtn(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    e.currentTarget.blur();
+    if (pageNo > 1) {
+      setPageNo(pageNo - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else return null;
+  }
+
+
+  function handleNextBtn(e : MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    e.currentTarget.blur();
+    if (results.length < 30) {
+      return null;
+    }
+    setPageNo(pageNo + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
-    <form onSubmit={handleSubmit} className="search-bar sticky">
-        {/* <button className="btn">previous</button> */}
-        <input 
-              id="inputQuery"
-              type="text"
-              name="photo"
-              placeholder={search}
-            onChange={(e) => setQuery(e.target.value)}
-            value={search}
-              aria-label="search photos" />
-        <button className="btn ">Search</button>
-        {/* <button className="btn ">next</button> */}
+    <div  className="search-bar sticky">
+      <button onClick={handlePriorBtn} className="btn">
+        prior
+      </button>
+      <form onSubmit={handleSubmit}>
+      <input
+        id="inputQuery"
+        type="search"
+        name="photo"
+        placeholder={query}
+        defaultValue={query}
+        aria-label="search photos"
+      />
       </form>
-  )
-}
+      <button onClick={handleNextBtn} className="btn ">next</button>
+    </div>
+  );
+};
 
-export default SearchBar
+export default SearchBar;

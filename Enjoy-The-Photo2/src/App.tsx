@@ -2,7 +2,7 @@ import "./styles.css";
 // import UsePhotos from "./hooks/UseFetch";
 // import { useState } from "react";
 import PhotosGrid from "./components/PhotosGrid";
-// import SearchBar from "./components/SearchBar";
+import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
 import { UsePhotos } from "./context/Photos";
 
@@ -30,7 +30,7 @@ const App = () => {
         </header>
         <NavBar />
       </div>
-      {/* <SearchBar  query={query} /> */}
+      <SearchBar />
       <PhotosGrid photos={results} />
       <footer className="footer">
         <span>

@@ -1,37 +1,37 @@
 import { useState } from "react";
-import { Photo } from "../hooks/UsePhotos"
+import { PhotoType } from "../context/Photos";
 
-
-interface PhotoContainerProps{
-    photo: Photo;
+interface PhotoContainerProps {
+  photo: PhotoType;
 }
 
 interface OrientationProps {
-    option: string;
-    apiSize: "regular" | "small" | "full";
-  }
-
-const PHOTO_ORIENTATION: OrientationProps[] = [
-    { option: "tall wide", apiSize: "regular" },
-    { option: "", apiSize: "small" },
-    { option: "", apiSize: "small" },
-    { option: "tall", apiSize: "regular" },
-    { option: "wide", apiSize: "regular" },
-  ];
-
-const PhotoContainer = ({photo}: PhotoContainerProps ) => {
-
-    const [photoOrientation, setPhotoOrientation] = useState(() => PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]);
-
-     
-
-    return (
-        <div className={`img-container ${photoOrientation.option}`}>
-                <img className="img" src={photo.urls[photoOrientation.apiSize]} />
-            </div>
-             )
-    
+  cssClass: string;
+  apiSize: "regular" | "small" | "full";
 }
 
-export default PhotoContainer;
+const PHOTO_ORIENTATION: OrientationProps[] = [
+  { cssClass: "tall wide", apiSize: "regular" },
+  { cssClass: "", apiSize: "small" },
+  { cssClass: "", apiSize: "small" },
+  { cssClass: "tall", apiSize: "regular" },
+  { cssClass: "wide", apiSize: "regular" },
+];
 
+const PhotoContainer = ({ photo }: PhotoContainerProps) => {
+  const [photoSize, setPhotoSize] = useState(
+    () =>
+      PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]
+  );
+
+  return (
+    <div
+      className={`img-container ${photoSize.cssClass}`}
+      style={{ backgroundImage: `url(${photo.urls.thumb})` }}
+    >
+      <img className="img" src={photo.urls[photoSize.apiSize]} />
+    </div>
+  );
+};
+
+export default PhotoContainer;

@@ -1,19 +1,22 @@
 import "./styles.css";
-import UsePhotos from "./hooks/UsePhotos";
-import { useState } from "react";
+// import UsePhotos from "./hooks/UseFetch";
+// import { useState } from "react";
 import PhotosGrid from "./components/PhotosGrid";
+// import SearchBar from "./components/SearchBar";
+import NavBar from "./components/NavBar";
+import { UsePhotos } from "./context/Photos";
 
-const DEFAULT_QUERY = 'space';
-const DEFAULT_PAGE_NO = 2;
+// const DEFAULT_QUERY = "energy";
+// const DEFAULT_PAGE_NO = 2;
 
 const App = () => {
-  const [pageNo, setPageNo] = useState(DEFAULT_PAGE_NO)
-  const [query, setQuery] = useState(DEFAULT_QUERY)
+  // const [pageNo, setPageNo] = useState(DEFAULT_PAGE_NO);
+  // const [query, setQuery] = useState(DEFAULT_QUERY);
+ const {results, error} = UsePhotos()
+  // const { photos, error } = UsePhotos({ pageNo, query });
 
-  const { photos, error } = UsePhotos({ pageNo, query });
-
-  console.log("photos" ,photos);
-
+  console.log("photos", results);
+  console.log("error", error);
 
   return (
     <div className="grid-container-home">
@@ -25,30 +28,10 @@ const App = () => {
         <header className="header">
           <h1>Enjoy the Photos2</h1>
         </header>
-        <nav className="nav-bar">
-          <ul>
-            <li>
-              <a href="#">Galery</a>
-            </li>
-            <li>
-              <a href="#"><em>u</em>Story</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Setting</a>
-            </li>
-          </ul>
-        </nav>
+        <NavBar />
       </div>
-      <section className="search-bar sticky">
-        <button className="btn">previous</button>
-        <input type="text" />
-        <button className="btn ">Search</button>
-        <button className="btn ">next</button>
-      </section>
-      <PhotosGrid photos={photos} />
+      {/* <SearchBar  query={query} /> */}
+      <PhotosGrid photos={results} />
       <footer className="footer">
         <span>
           Created by <a href="#">MikeXd</a> 2023

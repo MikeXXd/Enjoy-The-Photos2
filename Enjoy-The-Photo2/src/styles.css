@@ -12,6 +12,8 @@
   --yellow-color: rgb(227, 208, 80);
   --white-color: #fff;
 
+  --transfluent-background-color: rgba(0, 0, 0, 0.5);
+
   --sharp-radius: 0rem;
   --soft-radius--sharp-radius: 0.4rem;
 }
@@ -28,9 +30,11 @@
 #root {
   display: flex;
   justify-content: center;
+
   background-image: url("https://source.unsplash.com/eOpewngf68w");
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 a:hover,
@@ -41,29 +45,38 @@ a:focus {
 }
 
 .grid-container-home {
-  width: 100%;
-  max-width: 1200px;
-  min-height: 100vh;
-  padding: 0.5rem;
   position: relative;
+
+  width: 100%;
+  max-width: 2000px;
+  min-height: 100vh;
+
+  padding: 0.5rem;
 }
 
 /* Header */
 .header-and-nav-bar {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 0.3rem;
-  font-size: 1rem;
-  margin: 0;
-  padding: 0.5rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+
+  max-width: 1200px;
+
+  background-color: var(--transfluent-background-color);
+  border-radius: 0.3rem;
+  font-size: 1rem;
+
+  margin: 0;
+  padding: 0.5rem;
 }
 
 .pre-header {
-  font-size: 1rem;
   max-width: 14rem;
+  font-size: 1rem;
 }
 
 .header {
@@ -99,7 +112,7 @@ a:focus {
 
 .search-bar > * {
   border-radius: var(--sharp-radius);
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--transfluent-background-color);
 }
 
 .search-bar input {
@@ -109,7 +122,7 @@ a:focus {
   border-radius: 0.1rem;
   font-size: 1rem;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--transfluent-background-color);
   text-shadow: none;
   color: var(--white-color);
   outline: none;
@@ -130,22 +143,24 @@ a:focus {
   padding: 0.5rem 1rem;
   margin: 0.15rem;
   font-size: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--transfluent-background-color);
   text-shadow: none;
 }
 
 .search-bar :first-child {
-  border-radius: var(--soft-radius--sharp-radius) var(--sharp-radius) var(--sharp-radius) var(--soft-radius--sharp-radius);
+  border-radius: var(--soft-radius--sharp-radius) var(--sharp-radius)
+    var(--sharp-radius) var(--soft-radius--sharp-radius);
 }
 
 .search-bar :last-child {
-  border-radius: var(--sharp-radius) var(--soft-radius--sharp-radius) var(--soft-radius--sharp-radius) var(--sharp-radius);
+  border-radius: var(--sharp-radius) var(--soft-radius--sharp-radius)
+    var(--soft-radius--sharp-radius) var(--sharp-radius);
 }
 
 .search-bar.sticky {
   /* optional set in setting*/
   position: sticky;
-  top: -.85rem;
+  top: -0.85rem;
 }
 
 .grid-container-masonri {
@@ -213,7 +228,6 @@ a:focus {
   .search-bar :nth-child(1) {
     grid-area: previous;
     border-right: none;
-
   }
 
   .search-bar :nth-child(2) {
@@ -234,6 +248,5 @@ a:focus {
   .search-bar :nth-child(4) {
     grid-area: next;
     border-left: none;
-
   }
 }

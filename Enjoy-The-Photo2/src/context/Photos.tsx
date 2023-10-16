@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
@@ -25,6 +25,8 @@ interface PhotosContext {
     setQuery: (query: string) => void;
     pageNo: number;
     setPageNo: (pageNo: number) => void;
+    galery: PhotoType[];
+    setGalery: (Galery:PhotoType[]) => void;
 
 }
 
@@ -32,7 +34,7 @@ interface FetchPhotosResponse {
   results: PhotoType[];
 }
 
-const Context = createContext<PhotosContext | null>(null) 
+export const Context = createContext<PhotosContext | null>(null) 
  
 
 
@@ -44,6 +46,8 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
       const [error, setError] = useState("");
       const [query, setQuery] = useState("enjoy");
       const [pageNo, setPageNo] = useState(1);
+
+      const [galery, setGalery] = useState<PhotoType[]>([])
     
     
       useEffect(() => {
@@ -66,13 +70,6 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
 
 
 
-    return <Context.Provider value={{results, error, query, setQuery, pageNo, setPageNo }}>{children}</Context.Provider>;
+    return <Context.Provider value={{results, error, query, setQuery, pageNo, setPageNo, galery, setGalery}}>{children}</Context.Provider>;
     }
 
-export function UsePhotos() {
-    const value = useContext(Context);
-    if (!value) {
-      throw new Error("Please use this component inside PhotosProvider");
-    }
-    return value;
-}

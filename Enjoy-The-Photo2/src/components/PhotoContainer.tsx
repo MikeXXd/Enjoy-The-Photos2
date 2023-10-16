@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PhotoType } from "../context/Photos";
 import { cc } from "../utils/cc";
+// import usePhotos from "../hooks/usePhotos";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -24,8 +25,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
     () =>
       PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]
   );
-
   const [isLoaded, setIsLoaded] = useState(false);
+  // const {galery, setGalery} = usePhotos()
 
   return (
     <div

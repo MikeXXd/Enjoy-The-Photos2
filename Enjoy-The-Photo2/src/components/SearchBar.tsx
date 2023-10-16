@@ -1,8 +1,8 @@
 import { FormEvent, MouseEvent } from "react";
-import { UsePhotos } from "../context/Photos";
+import usePhotos from "../hooks/usePhotos";
 
 const SearchBar = () => {
-  const { query, setQuery, pageNo, setPageNo, results } = UsePhotos();
+  const { query, setQuery, pageNo, setPageNo, results } = usePhotos();
   console.log("pageNo", pageNo)
   console.log("query", query)
 

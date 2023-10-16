@@ -4,11 +4,11 @@ import "./styles.css";
 import PhotosGrid from "./components/PhotosGrid";
 import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
-import { UsePhotos } from "./context/Photos";
+import usePhotos from "./hooks/usePhotos";
 
 
 const App = () => {
- const {results, error} = UsePhotos()
+ const {results, error} = usePhotos()
 
   console.log("photos", results);
   console.log("error", error);

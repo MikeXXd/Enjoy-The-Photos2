@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PhotoType } from "../context/Photos";
+import { cc } from "../utils/cc";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -24,12 +25,18 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]
   );
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <div
-      className={`img-container ${photoSize.cssClass}`}
+      className={cc( 'img-container', 'blur-load',  photoSize.cssClass , isLoaded && 'loaded')}
       style={{ backgroundImage: `url(${photo.urls.thumb})` }}
     >
-      <img className="img" src={photo.urls[photoSize.apiSize]} />
+      <img
+        className='img'
+        src={photo.urls[photoSize.apiSize]}
+        onLoad={() => setIsLoaded(true)}
+      />
     </div>
   );
 };

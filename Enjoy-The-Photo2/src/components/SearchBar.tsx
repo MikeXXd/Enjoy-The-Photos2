@@ -24,6 +24,16 @@ const SearchBar = () => {
     } else return null;
   }
 
+  function submitQuery(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.currentTarget.blur();
+      const inputQuery = e.currentTarget.value;
+      setPageNo(1);
+      setQuery(inputQuery);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 
   function handleNextBtn(e : MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -40,7 +50,7 @@ const SearchBar = () => {
       <button onClick={handlePriorBtn} className="btn">
         prior
       </button>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}> */}
       <input
         id="inputQuery"
         type="search"
@@ -48,8 +58,9 @@ const SearchBar = () => {
         placeholder={query}
         defaultValue={query}
         aria-label="search photos"
+        onKeyDown={submitQuery}
       />
-      </form>
+      {/* </form> */}
       <button onClick={handleNextBtn} className="btn ">next</button>
     </div>
   );

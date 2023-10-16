@@ -6,14 +6,9 @@ import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
 import { UsePhotos } from "./context/Photos";
 
-// const DEFAULT_QUERY = "energy";
-// const DEFAULT_PAGE_NO = 2;
 
 const App = () => {
-  // const [pageNo, setPageNo] = useState(DEFAULT_PAGE_NO);
-  // const [query, setQuery] = useState(DEFAULT_QUERY);
  const {results, error} = UsePhotos()
-  // const { photos, error } = UsePhotos({ pageNo, query });
 
   console.log("photos", results);
   console.log("error", error);
@@ -31,10 +26,11 @@ const App = () => {
         <NavBar />
       </div>
       <SearchBar />
+      {error && <div className="error">{error}</div>} 
       <PhotosGrid photos={results} />
       <footer className="footer">
         <span>
-          Created by <a href="#">MikeXd</a> 2023
+          Created by<a href="#">MikeXd</a>2023
         </span>
       </footer>
     </div>

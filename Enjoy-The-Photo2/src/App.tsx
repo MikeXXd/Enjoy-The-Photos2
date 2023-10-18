@@ -1,6 +1,4 @@
 import "./styles.css";
-// import UsePhotos from "./hooks/UseFetch";
-// import { useState } from "react";
 import PhotosGrid from "./components/PhotosGrid";
 import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
@@ -8,10 +6,7 @@ import usePhotos from "./hooks/usePhotos";
 
 
 const App = () => {
- const {results, error} = usePhotos()
-
-  // console.log("photos", results);
-  // console.log("error", error);
+ const {actualPhotos, error} = usePhotos()
 
   return (
     <div className="grid-container-home">
@@ -27,10 +22,10 @@ const App = () => {
       </div>
       <SearchBar />
       {error && <div className="error">{error}</div>} 
-      <PhotosGrid photos={results} />
+      <PhotosGrid photos={actualPhotos} />
       <footer className="footer">
         <span>
-          Created by<a href="#">MikeXd</a>2023
+          Created by<a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">MikeXd</a>2023
         </span>
       </footer>
     </div>

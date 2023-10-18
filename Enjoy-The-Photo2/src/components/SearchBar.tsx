@@ -2,13 +2,15 @@ import { MouseEvent } from "react";
 import usePhotos from "../hooks/usePhotos";
 
 const SearchBar = () => {
-  const { query, setQuery, pageNo, setPageNo, results } = usePhotos();
-  console.log("pageNo", pageNo)
-  console.log("query", query)
+  const { query, setQuery, pageNo, setPageNo, actualPhotos } = usePhotos();
+  // useState()
+  console.log("SearchBarPageNo", pageNo)
+  console.log("searchBarQuery", query)
 
   function handlePriorBtn(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     e.currentTarget.blur();
+    console.log("ActivPRIORSearchBarPageNo", pageNo)
     if (pageNo > 1) {
       setPageNo(pageNo - 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -20,28 +22,31 @@ const SearchBar = () => {
       e.preventDefault();
       e.currentTarget.blur();
       const inputQuery = e.currentTarget.value;
+      console.log('activeSearchBar SEARCH with query', query)
       setPageNo(1);
       setQuery(inputQuery);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' }); 
     }
   }
 
   function handleNextBtn(e : MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     e.currentTarget.blur();
-    if (results.length < 30) {
-      return null;
+    console.log("ActivNEXTSearchBarPageNo", pageNo)
+
+    if (actualPhotos.length < 1) {
+      setPageNo(pageNo - 1)
     }
-    setPageNo(pageNo + 1);
+    else {
+    setPageNo(pageNo + 1)}
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
     <div  className="search-bar sticky">
-      <button onClick={handlePriorBtn} className="btn">
+      <button disabled={false} onClick={handlePriorBtn} className="btn">
         prior
       </button>
-      {/* <form onSubmit={handleSubmit}> */}
       <input
         id="inputQuery"
         type="search"
@@ -51,8 +56,7 @@ const SearchBar = () => {
         aria-label="search photos"
         onKeyDown={submitQuery}
       />
-      {/* </form> */}
-      <button onClick={handleNextBtn} className="btn ">next</button>
+      <button disabled={false} onClick={handleNextBtn} className="btn ">next</button>
     </div>
   );
 };

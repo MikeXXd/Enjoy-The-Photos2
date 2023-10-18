@@ -38,6 +38,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const [areIconsActive, setAreIconsActive] = useState(false);
   // const {gallery, setGalery} = usePhotos()
 
+
+  //handling  image interaction-----------------------------------------
   function handleMouseEnter() {
     if (isLoaded) {
       setAreIconsActive(true);
@@ -48,6 +50,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
     setAreIconsActive(false);
   }
 
+
+  //Heart Icon------------------------------------------
   function handleHeartIcon() {
     arrangeGallery(photo);
   }

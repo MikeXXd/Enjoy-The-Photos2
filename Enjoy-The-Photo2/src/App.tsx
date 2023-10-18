@@ -10,8 +10,8 @@ import usePhotos from "./hooks/usePhotos";
 const App = () => {
  const {results, error} = usePhotos()
 
-  console.log("photos", results);
-  console.log("error", error);
+  // console.log("photos", results);
+  // console.log("error", error);
 
   return (
     <div className="grid-container-home">

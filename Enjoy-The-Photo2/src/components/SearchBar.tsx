@@ -1,19 +1,10 @@
-import { FormEvent, MouseEvent } from "react";
+import { MouseEvent } from "react";
 import usePhotos from "../hooks/usePhotos";
 
 const SearchBar = () => {
   const { query, setQuery, pageNo, setPageNo, results } = usePhotos();
   console.log("pageNo", pageNo)
   console.log("query", query)
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    (e.currentTarget.elements[0] as HTMLInputElement).blur();
-    setPageNo(1);
-    setQuery((e.currentTarget.elements[0] as HTMLInputElement).value);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  }
 
   function handlePriorBtn(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();

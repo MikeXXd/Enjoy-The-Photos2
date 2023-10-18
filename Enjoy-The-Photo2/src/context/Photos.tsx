@@ -25,8 +25,8 @@ interface PhotosContext {
     setQuery: (query: string) => void;
     pageNo: number;
     setPageNo: (pageNo: number) => void;
-    galery: PhotoType[];
-    setGalery: (Galery:PhotoType[]) => void;
+    gallery: PhotoType[];
+    arrangeGallery: (Photo:PhotoType) => void;
 
 }
 
@@ -47,9 +47,10 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
       const [query, setQuery] = useState("enjoy");
       const [pageNo, setPageNo] = useState(1);
 
-      const [galery, setGalery] = useState<PhotoType[]>([])
+      const [gallery, setGallery] = useState<PhotoType[]>([])
     
-    
+    console.log('gallery', gallery)
+
       useEffect(() => {
         const controller = new AbortController();
     
@@ -67,9 +68,18 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         return () => controller.abort();
       }, [query, pageNo]);
 
+function arrangeGallery(photo: PhotoType) {
+  if (gallery.find((p) => p.id === photo.id)) {
+    setGallery(gallery.filter((item) => item.id !== photo.id));
+  } else {
+    setGallery([photo, ...gallery]);
+  }
+}
+
+// setGallery(gallery.filter((item) => item.id !== photo.id))}
 
 
 
-    return <Context.Provider value={{results, error, query, setQuery, pageNo, setPageNo, galery, setGalery}}>{children}</Context.Provider>;
+    return <Context.Provider value={{results, error, query, setQuery, pageNo, setPageNo, gallery, arrangeGallery}}>{children}</Context.Provider>;
     }
 

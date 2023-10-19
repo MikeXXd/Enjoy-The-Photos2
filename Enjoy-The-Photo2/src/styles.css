@@ -100,6 +100,12 @@ a:focus {
 .nav-bar a {
   margin: 0 0.5rem;
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-bar a.selected {
+  color: var(--orange-color);
+  font-weight: 900;
 }
 
 .search-bar {
@@ -154,10 +160,25 @@ a:focus {
   outline: none;
   padding: 0.5rem 1rem;
   margin: 0.15rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   background-color: var(--transfluent-background-color);
   text-shadow: none;
 }
+
+.btn.btn-disabled {
+  cursor: not-allowed;
+  color: var(--medium-color);
+}
+
+.btn.btn-disabled:hover,
+.btn.btn-disabled:focus {
+  color: var(--medium-color);
+  background-color: var(--transfluent-background-color);
+  border: 1px solid var(--transfluent-background-color);
+  box-shadow: none;
+  
+}
+
 
 .search-bar :first-child {
   border-radius: var(--soft-radius--sharp-radius) var(--sharp-radius)

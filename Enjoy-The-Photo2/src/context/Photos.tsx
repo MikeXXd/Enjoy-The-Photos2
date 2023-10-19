@@ -27,7 +27,8 @@ interface PhotosContext {
   setPageNo: (pageNo: number) => void;
   gallery: PhotoType[];
   arrangeGallery: (Photo: PhotoType) => void;
-  renderGalery: () => void;
+  renderGallery: () => void;
+  isGalleryRendered: boolean;
 }
 
 interface FetchPhotosResponse {
@@ -44,6 +45,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
   const [pageNo, setPageNo] = useState(1);
 
   const [gallery, setGallery] = useState<PhotoType[]>([]);
+  const [isGalleryRendered, setIsGalleryRendered] = useState(false);
 
   console.log("gallery", gallery);
   console.log("photos", actualPhotos);
@@ -52,6 +54,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
 
 
   useEffect(() => {
+    setIsGalleryRendered(false)
     const controller = new AbortController();
 
     apiClient
@@ -68,6 +71,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     return () => controller.abort();
   }, [query, pageNo]);
 
+
   function arrangeGallery(photo: PhotoType) {
     if (gallery.find((p) => p.id === photo.id)) {
       setGallery(gallery.filter((item) => item.id !== photo.id));
@@ -76,9 +80,11 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  function renderGalery() {
-    setActualPhotos(gallery);
-  }
+  function renderGallery() {
+    if (gallery.length < 1) return null
+    {setActualPhotos(gallery)
+    setIsGalleryRendered(true)}}
+
 
   return (
     <Context.Provider
@@ -91,7 +97,8 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         setPageNo,
         gallery,
         arrangeGallery,
-        renderGalery,
+        renderGallery,
+        isGalleryRendered,
       }}
     >
       {children}

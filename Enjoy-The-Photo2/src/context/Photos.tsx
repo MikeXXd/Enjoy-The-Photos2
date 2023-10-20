@@ -44,13 +44,18 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState("enjoy");
   const [pageNo, setPageNo] = useState(1);
 
-  const [gallery, setGallery] = useState<PhotoType[]>([]);
-  const [isGalleryRendered, setIsGalleryRendered] = useState(false);
+    const [gallery, setGallery] = useState<PhotoType[]>(
+      () => {
+        const getGalery = localStorage.getItem('ETP-galery');
+        if (getGalery == null ) return [];
+        return [...JSON.parse(getGalery)]
+      });
+      
+    const [isGalleryRendered, setIsGalleryRendered] = useState(false);
 
-  console.log("gallery", gallery);
-  console.log("photos", actualPhotos);
-  console.log("query", query);
-  console.log("pageNo", pageNo);
+    useEffect(() => {
+      localStorage.setItem('ETP-galery', JSON.stringify(gallery))
+    }, [gallery]);
 
 
   useEffect(() => {

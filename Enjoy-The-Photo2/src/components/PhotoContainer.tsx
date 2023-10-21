@@ -8,6 +8,7 @@ import { SlSizeFullscreen, SlSizeActual } from "react-icons/sl";
 import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
 import usePhotos from "../hooks/usePhotos";
+import { set } from "react-hook-form";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -28,8 +29,9 @@ const PHOTO_ORIENTATION: OrientationProps[] = [
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { gallery, arrangeGallery } = usePhotos();
-  const [isLiked, setIsLiked] = useState(false)
-  ;
+  const [isLiked, setIsLiked] = useState(false);
+  const [isInfoActive, setIsInfoActive] = useState(false);
+  
   const [photoSize, setPhotoSize] = useState(
     () =>
       PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]
@@ -48,6 +50,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
   function handleMouseLeave() {
     setAreIconsActive(false);
+    setIsInfoActive(false);
   }
 
 
@@ -85,10 +88,11 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           ) : (
             <AiOutlineHeart onClick={handleHeartIcon} fill="pink" />
           )}
-          <FaInfo onClick={() => console.log("info")} fill="pink" />
+          <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
           <IoOpen onClick={() => console.log("info")} fill="pink" />
         </div>
       )}
+      {isInfoActive && <div className='img-info'>{photo.alt_description}</div>}
     </div>
   );
 };

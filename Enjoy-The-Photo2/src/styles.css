@@ -1,7 +1,5 @@
 /* @starting-style not supported by FireFox and Safari 22/10/2023 but I still use them*/
 
-
-
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300;1,400&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300;1,400&family=Sedgwick+Ave+Display&display=swap");
@@ -20,6 +18,8 @@
 
   --sharp-radius: 0;
   --soft-radius: 0.4rem;
+
+  --icon-original-size: 2rem;
 }
 
 * {
@@ -219,7 +219,7 @@ a:focus {
   content: "";
   position: absolute;
   inset: 0;
-  animation: pulse 2s infinite;
+  animation: pulse-loading 2s infinite;
   backdrop-filter: blur(1px);
 }
 
@@ -228,7 +228,7 @@ a:focus {
   animation: none;
 }
 
-@keyframes pulse {
+@keyframes pulse-loading {
   0% {
     background-color: rgba(255, 255, 255, 0.1);
   }
@@ -266,9 +266,21 @@ a:focus {
 }
 
 .img-icons {
+  position : absolute;
+  right: 0.8em;
   display:none;
   opacity: 0;
   transition: opacity 500ms, transform 500ms;
+}
+
+.img-icons.img-top-icons {
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0.5em;
+}
+
+.img-icons.img-bottom-icons {
+  bottom: 0.5em;
 }
 
 .img-icons.show {
@@ -276,20 +288,19 @@ a:focus {
   opacity:0;
   transform: scale(0.8)
 }
-  display: block;
+  display: flex;
   opacity: 1;
   transform: scale(1);
 }
 
 .img-icons > svg {
+  --size: var(--icon-original-size);
   color: aqua;
-  height: 2rem;
-  width: 2rem;
+  height: var(--size);
+  width: var(--size);
   cursor: pointer;
   background-color: var(--transfluent-background-color);
   padding: 0.3rem;
-  margin: 0 0.5rem;
-  border-radius: 50%;
   transition-duration: 100ms;
   transition-property: background-color, transform;
   transition-timing-function: ease-in;
@@ -300,11 +311,19 @@ a:focus {
   transform: scale(1.2);
 }
 
-.img-icons.img-bottom-icons {
-  position: absolute;
-  bottom: 0.5em;
-  right: 0.5em;
+
+.img-top-icons > svg {
+  --size: calc(var(--icon-original-size) - 5%);
+  border-radius: var(--soft-radius);
+  margin-bottom: 0.5rem;
+  
+  
 }
+.img-bottom-icons > svg {
+  border-radius: 50%;
+  margin-left: 0.6rem;
+}
+
 
 .img-info {
   display:none;
@@ -326,7 +345,6 @@ a:focus {
   transition: opacity 500ms, transform 500ms;
 }
 
-
 .img-info.show { 
 @starting-style {
   opacity:0;
@@ -335,6 +353,24 @@ a:focus {
  display:block;
  opacity:1;
  transform: translateY(0);
+}
+
+.img.img-resize-here {
+animation: pulse-resize 2s 5 alternate ease-in-out;
+}
+
+@keyframes pulse-resize {
+  0% {
+    border: 1px solid var(--yellow-color);
+  }
+
+  50% {
+    border: 10px solid var(--orange-color);
+  }
+
+  100% {
+    border: 1px solid var(--yellow-color);
+  }
 }
 
 .footer > span {

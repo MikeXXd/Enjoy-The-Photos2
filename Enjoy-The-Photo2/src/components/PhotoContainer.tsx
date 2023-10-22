@@ -8,7 +8,6 @@ import { SlSizeFullscreen, SlSizeActual } from "react-icons/sl";
 import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
 import usePhotos from "../hooks/usePhotos";
-import { set } from "react-hook-form";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -20,7 +19,7 @@ interface OrientationProps {
 }
 
 const PHOTO_ORIENTATION: OrientationProps[] = [
-  { cssClass: "tall wide", apiSize: "regular" },
+  { cssClass: "tall wide", apiSize: "regular" }, // this array[0] is PRIVATE, DO NOT CHANGE!!!
   { cssClass: "", apiSize: "small" },
   { cssClass: "", apiSize: "small" },
   { cssClass: "tall", apiSize: "regular" },
@@ -36,15 +35,17 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
     () =>
       PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]
   );
+  const [isResizing, setIsResizing] = useState(false);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [areIconsActive, setAreIconsActive] = useState(false);
-  // const {gallery, setGalery} = usePhotos()
 
 
   //handling  image interaction-----------------------------------------
   function handleMouseEnter() {
     if (isLoaded) {
       setAreIconsActive(true);
+     setIsResizing(false)
     }
   }
 
@@ -53,6 +54,12 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
     setIsInfoActive(false);
   }
 
+  //Resize Icon------------------------------------------
+  function handleResizePhoto() {
+    setPhotoSize(PHOTO_ORIENTATION[0]);
+    setIsResizing(true);
+    handleMouseLeave() //serving the purpose of hiding icons
+  }
 
   //Heart Icon------------------------------------------
   function handleHeartIcon() {
@@ -69,18 +76,21 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cc(
-        "img-container",
-        "blur-load",
+        "img-container blur-load",
         photoSize.cssClass,
         isLoaded && "loaded"
       )}
       style={{ backgroundImage: `url(${photo.urls.thumb})` }}
     >
       <img
-        className="img"
+        className={cc("img", isResizing && "img-resize-here")}
         src={photo.urls[photoSize.apiSize]}
         onLoad={() => setIsLoaded(true)}
       />
+      <div className={cc('img-icons img-top-icons', areIconsActive && 'show' )}>
+        <SlSizeFullscreen fill="pink" />
+        {photoSize.cssClass === 'tall wide' || <IoIosResize onClick={handleResizePhoto} fill="pink" />}
+      </div>
       
         <div className={cc('img-icons img-bottom-icons', areIconsActive && 'show' )}>
           {isLiked ? (
@@ -89,7 +99,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
             <AiOutlineHeart onClick={handleHeartIcon} fill="pink" />
           )}
           <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
-          <IoOpen onClick={() => console.log("info")} fill="pink" />
+          <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" />
         </div>
       
       <div className={cc('img-info', isInfoActive && 'show')}>{photo.description? photo.description : photo.alt_description}</div>

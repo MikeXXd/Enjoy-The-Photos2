@@ -30,7 +30,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { gallery, arrangeGallery } = usePhotos();
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
-  
+
   const [photoSize, setPhotoSize] = useState(
     () =>
       PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]
@@ -40,12 +40,11 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [areIconsActive, setAreIconsActive] = useState(false);
 
-
   //handling  image interaction-----------------------------------------
   function handleMouseEnter() {
     if (isLoaded) {
       setAreIconsActive(true);
-     setIsResizing(false)
+      setIsResizing(false);
     }
   }
 
@@ -58,7 +57,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   function handleResizePhoto() {
     setPhotoSize(PHOTO_ORIENTATION[0]);
     setIsResizing(true);
-    handleMouseLeave() //serving the purpose of hiding icons
+    handleMouseLeave(); //serving the purpose of hiding icons
   }
 
   //Heart Icon------------------------------------------
@@ -67,9 +66,10 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   }
 
   useEffect(() => {
-    gallery.find((p) => p.id === photo.id) ? setIsLiked(true) : setIsLiked(false)
-  }, [gallery])
-  
+    gallery.find((p) => p.id === photo.id)
+      ? setIsLiked(true)
+      : setIsLiked(false);
+  }, [gallery]);
 
   return (
     <div
@@ -87,22 +87,28 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         src={photo.urls[photoSize.apiSize]}
         onLoad={() => setIsLoaded(true)}
       />
-      <div className={cc('img-icons img-top-icons', areIconsActive && 'show' )}>
+      <div className={cc("img-icons img-top-icons", areIconsActive && "show")}>
         <SlSizeFullscreen fill="pink" />
-        {photoSize.cssClass === 'tall wide' || <IoIosResize onClick={handleResizePhoto} fill="pink" />}
+        {photoSize.cssClass === "tall wide" || (
+          <IoIosResize onClick={handleResizePhoto} fill="pink" />
+        )}
       </div>
-      
-        <div className={cc('img-icons img-bottom-icons', areIconsActive && 'show' )}>
-          {isLiked ? (
-            <AiFillHeart onClick={handleHeartIcon} fill="red" />
-          ) : (
-            <AiOutlineHeart onClick={handleHeartIcon} fill="pink" />
-          )}
-          <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
-          <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" />
-        </div>
-      
-      <div className={cc('img-info', isInfoActive && 'show')}>{photo.description? photo.description : photo.alt_description}</div>
+
+      <div
+        className={cc("img-icons img-bottom-icons", areIconsActive && "show")}
+      >
+        {isLiked ? (
+          <AiFillHeart onClick={handleHeartIcon} fill="red" />
+        ) : (
+          <AiOutlineHeart onClick={handleHeartIcon} fill="pink" />
+        )}
+        <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
+        <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" />
+      </div>
+
+      <div className={cc("img-info", isInfoActive && "show")}>
+        {photo.description ? photo.description : photo.alt_description}
+      </div>
     </div>
   );
 };

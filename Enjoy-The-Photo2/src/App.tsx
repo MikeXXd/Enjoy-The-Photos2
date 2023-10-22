@@ -3,6 +3,7 @@ import PhotosGrid from "./components/PhotosGrid";
 import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
 import usePhotos from "./hooks/usePhotos";
+import imgTriangleUp from "./img/icons8-triangle-color-96.png";
 
 
 const App = () => {
@@ -16,7 +17,8 @@ const App = () => {
           <a href="#">Story</a>
         </span>
         <header className="header">
-          <h1>Enjoy the Photos2</h1>
+        <img src={imgTriangleUp} />
+        <h1>Enjoy the Photos2</h1>
         </header>
         <NavBar />
       </div>

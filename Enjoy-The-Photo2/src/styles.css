@@ -85,6 +85,9 @@ a:focus {
 
 .header {
   margin: 0 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header h1 {
@@ -92,6 +95,12 @@ a:focus {
   font-family: "Sedgwick Ave Display", cursive;
   font-size: 2rem;
   color: white;
+}
+
+.header > img {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 0.5rem;
 }
 
 .nav-bar ul {

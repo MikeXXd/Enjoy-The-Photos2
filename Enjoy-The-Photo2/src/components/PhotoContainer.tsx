@@ -81,8 +81,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         src={photo.urls[photoSize.apiSize]}
         onLoad={() => setIsLoaded(true)}
       />
-      {areIconsActive && (
-        <div className="image-icons image-bottom-icons">
+      
+        <div className={cc('img-icons img-bottom-icons', areIconsActive && 'show' )}>
           {isLiked ? (
             <AiFillHeart onClick={handleHeartIcon} fill="red" />
           ) : (
@@ -91,8 +91,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
           <IoOpen onClick={() => console.log("info")} fill="pink" />
         </div>
-      )}
-      {isInfoActive && <div className='img-info'>{photo.alt_description}</div>}
+      
+      <div className={cc('img-info', isInfoActive && 'show')}>{photo.description? photo.description : photo.alt_description}</div>
     </div>
   );
 };

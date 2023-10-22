@@ -12,6 +12,7 @@ export interface PhotoType {
     small_s3: string;
     thumb: string;
   };
+  description: string;
   alt_description: string;
   userId: string;
   height: number;
@@ -52,6 +53,8 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
 
   const [isGalleryRendered, setIsGalleryRendered] = useState(false);
 
+
+  console.log(actualPhotos)
   useEffect(() => {
     localStorage.setItem("ETP-galery", JSON.stringify(gallery));
   }, [gallery]);

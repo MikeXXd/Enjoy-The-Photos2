@@ -7,9 +7,6 @@ const SearchBar = () => {
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
 
-  console.log("SearchBarPageNo", pageNo);
-  console.log("searchBarQuery", query);
-
   useEffect(() => {
     if (pageNo > 1) {
       setIsPriorBtnActive(true);
@@ -18,7 +15,7 @@ const SearchBar = () => {
     }
   }, [pageNo]);
 
-  
+
   useEffect(() => {
     if (!isGalleryRendered && actualPhotos.length < 30) {
       setIsNextBtnDisabled(true);

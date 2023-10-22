@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+
 import { PhotoType } from "../context/Photos";
 import { cc } from "../utils/cc";
+import {CustomModal} from "./CustomModal";
 
 import { FaInfo } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -39,8 +41,11 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [areIconsActive, setAreIconsActive] = useState(false);
+  const [isPortalOpen, setIsPortalOpen] = useState(false);
 
-  //handling  image interaction-----------------------------------------
+  console.log('isPortalOpen', isPortalOpen)
+
+  //--handling image interaction-----------------------------------------
   function handleMouseEnter() {
     if (isLoaded) {
       setAreIconsActive(true);
@@ -53,23 +58,25 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
     setIsInfoActive(false);
   }
 
-  //Resize Icon------------------------------------------
+  //--Resize Icon------------------------------------------
   function handleResizePhoto() {
     setPhotoSize(PHOTO_ORIENTATION[0]);
     setIsResizing(true);
     handleMouseLeave(); //serving the purpose of hiding icons
   }
 
-  //Heart Icon------------------------------------------
+  //--Heart Icon------------------------------------------
   function handleHeartIcon() {
     arrangeGallery(photo);
   }
 
+  //--Galerry Icon------------------------------------------
   useEffect(() => {
     gallery.find((p) => p.id === photo.id)
       ? setIsLiked(true)
       : setIsLiked(false);
   }, [gallery]);
+
 
   return (
     <div
@@ -88,7 +95,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         onLoad={() => setIsLoaded(true)}
       />
       <div className={cc("img-icons img-top-icons", areIconsActive && "show")}>
-        <SlSizeFullscreen fill="pink" />
+        <SlSizeFullscreen onClick={() => setIsPortalOpen(true)} fill="pink" />
         {photoSize.cssClass === "tall wide" || (
           <IoIosResize onClick={handleResizePhoto} fill="pink" />
         )}
@@ -105,6 +112,9 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
         <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" />
       </div>
+      <CustomModal isOpen={isPortalOpen} onClose={() => setIsPortalOpen(false)}>
+        <img src={photo.urls.full} />
+      </ CustomModal>
 
       <div className={cc("img-info", isInfoActive && "show")}>
         {photo.description ? photo.description : photo.alt_description}
@@ -114,3 +124,5 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 };
 
 export default PhotoContainer;
+
+

@@ -382,6 +382,28 @@ animation: pulse-resize 2s 5 alternate ease-in-out;
   }
 }
 
+.modal *{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 95%;
+  max-height: 95%;
+  border: 0.1rem solid var(--white-color);
+  border-radius: calc(var(--soft-radius) * 2);
+  transform: translate(-50%, -50%); 
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
 .footer > span {
   position: relative;
   left: 50%;

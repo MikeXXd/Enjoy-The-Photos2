@@ -55,6 +55,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
 
 
   console.log(actualPhotos)
+  
   useEffect(() => {
     localStorage.setItem("ETP-galery", JSON.stringify(gallery));
   }, [gallery]);

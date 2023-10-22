@@ -1,6 +1,5 @@
 import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { cc } from "../utils/cc";
 
 interface PortalProps {
   children: ReactNode;

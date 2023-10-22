@@ -41,9 +41,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [areIconsActive, setAreIconsActive] = useState(false);
-  const [isPortalOpen, setIsPortalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log('isPortalOpen', isPortalOpen)
 
   //--handling image interaction-----------------------------------------
   function handleMouseEnter() {
@@ -95,7 +94,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         onLoad={() => setIsLoaded(true)}
       />
       <div className={cc("img-icons img-top-icons", areIconsActive && "show")}>
-        <SlSizeFullscreen onClick={() => setIsPortalOpen(true)} fill="pink" />
+        <SlSizeFullscreen onClick={() => setIsModalOpen(true)} fill="pink" />
         {photoSize.cssClass === "tall wide" || (
           <IoIosResize onClick={handleResizePhoto} fill="pink" />
         )}
@@ -112,8 +111,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
         <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" />
       </div>
-      <CustomModal isOpen={isPortalOpen} onClose={() => setIsPortalOpen(false)}>
-        <img src={photo.urls.full} />
+      <CustomModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} >
+        <img src={photo.urls.full} style={{backgroundImage: `url(${photo?.urls.small})`}} />
       </ CustomModal>
 
       <div className={cc("img-info", isInfoActive && "show")}>

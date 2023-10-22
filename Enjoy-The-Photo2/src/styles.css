@@ -382,7 +382,7 @@ animation: pulse-resize 2s 5 alternate ease-in-out;
   }
 }
 
-.modal *{
+.modal * {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -391,6 +391,9 @@ animation: pulse-resize 2s 5 alternate ease-in-out;
   border: 0.1rem solid var(--white-color);
   border-radius: calc(var(--soft-radius) * 2);
   transform: translate(-50%, -50%); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 

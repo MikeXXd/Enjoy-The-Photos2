@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { PhotoType } from "../context/Photos";
 import { cc } from "../utils/cc";
-import {CustomModal} from "./CustomModal";
+import { CustomModal } from "./CustomModal";
 
 import { FaInfo } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -41,8 +41,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [areIconsActive, setAreIconsActive] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
 
   //--handling image interaction-----------------------------------------
   function handleMouseEnter() {
@@ -76,7 +75,6 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       : setIsLiked(false);
   }, [gallery]);
 
-
   return (
     <div
       onMouseEnter={handleMouseEnter}
@@ -93,13 +91,17 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         src={photo.urls[photoSize.apiSize]}
         onLoad={() => setIsLoaded(true)}
       />
+      {/* ----Top Icons ---------------------------------- */}
       <div className={cc("img-icons img-top-icons", areIconsActive && "show")}>
-        <SlSizeFullscreen onClick={() => setIsModalOpen(true)} fill="pink" />
+        <SlSizeFullscreen
+          onClick={() => setIsPhotoModalOpen(true)}
+          fill="pink"
+        />
         {photoSize.cssClass === "tall wide" || (
           <IoIosResize onClick={handleResizePhoto} fill="pink" />
         )}
       </div>
-
+      {/* ----Bottom Icons ---------------------------------- */}
       <div
         className={cc("img-icons img-bottom-icons", areIconsActive && "show")}
       >
@@ -111,10 +113,19 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
         <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" />
       </div>
-      <CustomModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} >
-        <img src={photo.urls.full} style={{backgroundImage: `url(${photo?.urls.small})`}} />
-      </ CustomModal>
 
+      {/* ---Photo MODAL ------------------------------------ */}
+      <CustomModal
+        isOpen={isPhotoModalOpen}
+        onClose={() => setIsPhotoModalOpen(false)}
+      >
+        <img
+          src={photo.urls.full}
+          style={{ backgroundImage: `url(${photo?.urls.small})` }}
+        />
+      </CustomModal>
+
+      {/* ---Photo description ------------------------------------ */}
       <div className={cc("img-info", isInfoActive && "show")}>
         {photo.description ? photo.description : photo.alt_description}
       </div>
@@ -123,5 +134,3 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 };
 
 export default PhotoContainer;
-
-

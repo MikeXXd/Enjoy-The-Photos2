@@ -122,6 +122,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         <img
           src={photo.urls.full}
           style={{ backgroundImage: `url(${photo?.urls.small})` }}
+          onClick={() => setIsPhotoModalOpen(false)}
         />
       </CustomModal>
 

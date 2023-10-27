@@ -48,7 +48,7 @@ a:focus {
   transition: all 0.2s ease-in-out;
 }
 
-.grid-container-home {
+.main-container {
   position: relative;
 
   width: 100%;
@@ -58,7 +58,7 @@ a:focus {
   padding: 0.5rem;
 }
 
-/* Header */
+/* ----header-and-nav-bar------------------------------------------------------ */
 .header-and-nav-bar {
   position: relative;
   left: 50%;
@@ -91,7 +91,6 @@ a:focus {
 }
 
 .header h1 {
-  font-family: "Merriweather", serif;
   font-family: "Sedgwick Ave Display", cursive;
   font-size: 2rem;
   color: white;
@@ -103,6 +102,7 @@ a:focus {
   margin-right: 0.5rem;
 }
 
+/* ----nav-bar------------------------------------------------------ */
 .nav-bar ul {
   display: flex;
   list-style: none;
@@ -121,6 +121,7 @@ a:focus {
   font-weight: 900;
 }
 
+/* ----search-bar------------------------------------------------------ */
 .search-bar {
   z-index: 1;
   display: flex;
@@ -196,7 +197,7 @@ a:focus {
   position: sticky;
   top: -0.85rem;
 }
-
+/* ----GRID-masonri---------------------------------------------------------*/
 .grid-container-masonri {
   display: grid;
   grid-auto-flow: dense;
@@ -208,6 +209,8 @@ a:focus {
 
   min-height: 100vh;
 }
+
+/* ---GRID-image-------------------------------------------------------------*/
 
 .img-container {
   position: relative;
@@ -274,10 +277,11 @@ a:focus {
   grid-column: span 2;
 }
 
+/* ----icons-------------------------------------------------------------*/
 .img-icons {
-  position : absolute;
+  position: absolute;
   right: 0.8em;
-  display:none;
+  display: none;
   opacity: 0;
   transition: opacity 500ms, transform 500ms;
 }
@@ -293,10 +297,10 @@ a:focus {
 }
 
 .img-icons.show {
-@starting-style {
-  opacity:0;
-  transform: scale(0.8)
-}
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.8);
+  }
   display: flex;
   opacity: 1;
   transform: scale(1);
@@ -320,52 +324,51 @@ a:focus {
   transform: scale(1.2);
 }
 
-
 .img-top-icons > svg {
   --size: calc(var(--icon-original-size) - 5%);
   border-radius: var(--soft-radius);
   margin-bottom: 0.5rem;
-  
-  
 }
 .img-bottom-icons > svg {
   border-radius: 50%;
   margin-left: 0.6rem;
 }
 
-
+/* ----image-info------------------------------------------------------ */
 .img-info {
-  display:none;
+  display: none;
   position: absolute;
   top: 0.2rem;
   left: 0.2rem;
   max-width: 70%;
   max-height: 85%;
-  overflow-y:auto;
+  overflow-y: auto;
   padding: 0.5rem;
   background-color: var(--transfluent-background-color);
   border: 1px solid var(--white-color);
-  border-radius: calc(var(--soft-radius) - 0.2rem) var(--sharp-radius) var(--soft-radius)
-    var(--sharp-radius);
+  border-radius: calc(var(--soft-radius) - 0.2rem) var(--sharp-radius)
+    var(--soft-radius) var(--sharp-radius);
   font-size: 0.8rem;
   text-align: center;
 
-  opacity:0;
+  opacity: 0;
   transition: opacity 500ms, transform 500ms;
 }
 
-.img-info.show { 
-@starting-style {
-  opacity:0;
-  transform: translateY(-0.4rem);
-}
- display:block;
- opacity:1;
- transform: translateY(0);
+.img-info.show {
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-0.4rem);
+  }
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
+
+/*---image-Resize------------------------------------------------------ */
 .img.img-resize-here {
-animation: pulse-resize 2s 5 alternate ease-in-out;
+  animation: pulse-resize 2s 5 alternate ease-in-out;
 }
 
 @keyframes pulse-resize {
@@ -382,31 +385,98 @@ animation: pulse-resize 2s 5 alternate ease-in-out;
   }
 }
 
-.modal * {
+/* ----modal-------------------------------------------------------------*/
+.modal > * {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   max-width: 95%;
   max-height: 95%;
+  /* min-width: fit-content;
+ min-height: fit-content; */
   border: 0.1rem solid var(--white-color);
   border-radius: calc(var(--soft-radius) * 2);
-  transform: translate(-50%, -50%); 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-
 .modal-overlay {
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
 
+.modal-btn-close {
+  position: absolute;
+  top: -0.3rem;
+  right: -0.3rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+  outline: none;
+  color: var(--white-color);
+  background-color: black;
+  font-family: "Sedgwick Ave Display", cursive;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-shadow: none;
+  padding: 0.2em;
+  scale: 1;
+  border: 0.1rem solid var(--white-color);
+  border-radius: var(--soft-radius);
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-btn-close:hover,
+.modal-btn-close:focus {
+  scale: 1.1;
+  box-shadow: 0 0 10px 0 var(--white-color);
+}
+
+
+/*----about---------------------------------------------------------- */
+.about-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  max-width: 1200px;
+  min-height: 80%;
+  padding: 0.5rem;
+  background-color: var(--transfluent-background-color);
+  border-radius: var(--soft-radius);
+  font-size: 1rem;
+  text-align: center;
+  color: var(--white-color);
+  text-shadow: none;
+}
+
+.about-text {
+  position: relative;
+  align-items: center;
+  max-width: 900px;
+
+  max-height: 80%;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: var(--transfluent-background-color);
+  border: 1px solid var(--white-color);
+  border-radius: var(--soft-radius);
+  font-size: 1rem;
+  text-align: center;
+  color: var(--white-color);
+  text-shadow: none;
+}
+
+/*---footer------------------------------------------------------------- */
 .footer > span {
   position: relative;
   left: 50%;
@@ -421,6 +491,8 @@ animation: pulse-resize 2s 5 alternate ease-in-out;
 
   margin: 2rem 0.5rem 0.5rem 0.5rem;
 }
+
+/* ----media-queries------------------------------------------------------ */
 
 /* Hide certain elements on smaller screens */
 @media (max-width: 880px) {

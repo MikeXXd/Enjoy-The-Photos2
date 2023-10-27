@@ -30,7 +30,7 @@ export const CustomModal = ({ children, isOpen, onClose }: PortalProps) => {
 
   return createPortal(
     <div className="modal-overlay">
-      <div className="modal" onClick={onClose} >
+      <div className="modal" >
         {children}
       </div>
     </div>,

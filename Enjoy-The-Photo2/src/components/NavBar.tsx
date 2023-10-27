@@ -3,10 +3,14 @@ import usePhotos from "../hooks/usePhotos";
 import { cc } from "../utils/cc";
 import { CustomModal } from "./CustomModal";
 import About from "./About";
+import Setting from "./Setting";
+import UStoryTemporary from "./UStoryTemporary";
 
 const NavBar = () => {
   const { renderGallery, isGalleryRendered } = usePhotos();
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+  const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
+  const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
 
   function handleGalery(event: React.MouseEvent<HTMLAnchorElement>) {
     event.currentTarget.blur();
@@ -15,6 +19,7 @@ const NavBar = () => {
 
   function handleUStory(event: React.MouseEvent<HTMLAnchorElement>) {
     event.currentTarget.blur();
+    setIsUStoryModalOpen(true);
   }
 
   function handleAbout(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -24,6 +29,7 @@ const NavBar = () => {
 
   function handleSetting(event: React.MouseEvent<HTMLAnchorElement>) {
     event.currentTarget.blur();
+    setIsSettingModalOpen(true);
   }
 
   return (
@@ -65,6 +71,18 @@ const NavBar = () => {
           onClose={() => setIsAboutModalOpen(false)}
           handleUStory={() => handleUStory}
         />
+      </CustomModal>
+      <CustomModal
+        isOpen={isSettingModalOpen}
+        onClose={() => setIsSettingModalOpen(false)}
+      >
+        <Setting onClose={() => setIsSettingModalOpen(false)} />
+      </CustomModal>
+      <CustomModal
+        isOpen={isUStoryModalOpen}
+        onClose={() => setIsUStoryModalOpen(false)}
+      >
+        <UStoryTemporary onClose={() => setIsUStoryModalOpen(false)} />
       </CustomModal>
     </>
   );

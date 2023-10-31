@@ -9,14 +9,14 @@ export interface PhotoType {
     raw: string;
     regular: string;
     small: string;
-    small_s3: string;
+    // small_s3: string;
     thumb: string;
   };
   description: string;
   alt_description: string;
   userId: string;
-  height: number;
-  width: number;
+  // height: number;
+  // width: number;
 }
 
 interface PhotosContext {

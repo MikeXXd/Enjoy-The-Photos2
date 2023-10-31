@@ -5,84 +5,60 @@ import About from "./About";
 import Setting from "./Setting";
 import UStoryTemporary from "./UStoryTemporary";
 import Modal from "./Modal";
+import { BackgroundProps } from "../App";
 
-const NavBar = () => {
+const NavBar = ({}) => {
   const { renderGallery, isGalleryRendered } = usePhotos();
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
   const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
 
-  function handleGalery(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.currentTarget.blur();
-    renderGallery();
-  }
+  const handleModal = (setState: React.Dispatch<React.SetStateAction<boolean>>) => () => setState(true);
+  const handleCloseModal = (setState: React.Dispatch<React.SetStateAction<boolean>>) => () => setState(false);
 
-  function handleUStory(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.currentTarget.blur();
-    setIsUStoryModalOpen(true);
-  }
-
-  function handleAbout(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.currentTarget.blur();
-    setIsAboutModalOpen(true);
-  }
-
-  function handleSetting(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.currentTarget.blur();
-    setIsSettingModalOpen(true);
-  }
+  const NavItem = ({ label, onClick, isSelected }: { label: string, onClick: () => void, isSelected: boolean }) => (
+    <li>
+      <a
+        href="#"
+        role="button"
+        onClick={onClick}
+        className={cc(isSelected && "selected")}
+      >
+        {label}
+      </a>
+    </li>
+  );
 
   return (
     <>
       <nav className="nav-bar">
         <ul>
-          <li>
-            <a
-              href="#"
-              role="button"
-              onClick={handleGalery}
-              className={cc(isGalleryRendered && "selected")}
-            >
-              Galery
-            </a>
-          </li>
-          <li>
-            <a href="#" role="button" onClick={handleUStory}>
-              <em>u</em>Story
-            </a>
-          </li>
-          <li>
-            <a href="#" role="button" onClick={handleAbout}>
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#" role="button" onClick={handleSetting}>
-              Setting
-            </a>
-          </li>
+          <NavItem label="Galery" onClick={renderGallery} isSelected={isGalleryRendered} />
+          <NavItem label={"uStory"} onClick={handleModal(setIsUStoryModalOpen)} isSelected={false} />
+          <NavItem label="About" onClick={handleModal(setIsAboutModalOpen)} isSelected={false} />
+          <NavItem label="Setting" onClick={handleModal(setIsSettingModalOpen)} isSelected={false} />
         </ul>
       </nav>
       <Modal
         isOpen={isAboutModalOpen}
-        onClose={() => setIsAboutModalOpen(false)}
+        onClose={handleCloseModal(setIsAboutModalOpen)}
       >
         <About
-          onClose={() => setIsAboutModalOpen(false)}
-          handleUStory={() => handleUStory}
+          onClose={handleCloseModal(setIsAboutModalOpen)}
+          handleUStory={handleModal(setIsUStoryModalOpen)}
         />
       </Modal>
       <Modal
         isOpen={isSettingModalOpen}
-        onClose={() => setIsSettingModalOpen(false)}
+        onClose={handleCloseModal(setIsSettingModalOpen)}
       >
-        <Setting onClose={() => setIsSettingModalOpen(false)} />
+        <Setting onClose={handleCloseModal(setIsSettingModalOpen)} />
       </Modal>
       <Modal
         isOpen={isUStoryModalOpen}
-        onClose={() => setIsUStoryModalOpen(false)}
+        onClose={handleCloseModal(setIsUStoryModalOpen)}
       >
-        <UStoryTemporary onClose={() => setIsUStoryModalOpen(false)} />
+        <UStoryTemporary onClose={handleCloseModal(setIsUStoryModalOpen)} />
       </Modal>
     </>
   );

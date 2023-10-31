@@ -17,27 +17,26 @@ const About = ({ onClose, handleUStory }: AboutProps) => {
           X
         </button>
       </div>
+      <h1>About</h1>
       <div className="about-text">
         Hello User, <br />
-        first of all, enjoy the photos, an see the BEAUTY OF GEOMETRY as it is.
+        first of all, enjoy the photos and see the BEAUTY OF GEOMETRY as it is.
         Using the aplication is, I thing, preaty straight forward, you will
-        explore most of the features yourself, but just a few points. <br /> -
-        you can save your favorite photo into galery by clicking on the HEART
-        and remove it in the same way <br /> - you can create your uStory, you
-        can do so by clicking in the middle of a photo, it will offer you some
-        options , which can be seen as a crossroad in your story, choose one and
-        let yourself indulge by the geometry further and furt... then just
-        explore the story like watching movie, or just like remembering your
-        dream...sweet or sour, all within your power.
-      </div>
-      <div className="about-text">
-        <h6>minor hints for comfy usage</h6>
+        explore most of the features yourself, but just a few points. <br />
+        
         <ul>
-          <li>
-            escape all modals by <kbd>ecs</kbd> button
-          </li>
+          <li>you can save your favorite photo into gallery by clicking on the HEART
+        and remove it in the same way </li>
+        <li>if you unlike and again like photo in gallery and then refresh galery by clicking on 'gallery' button the photo will appear as the first one, unless you changed the order of saving photos in 'setting'</li>
+          <li>escape all modals by <kbd>ESC</kbd> button</li>
+          <li>the second main concept of this aplication will be uStory, which is currently under develepment. </li>
+          <li>explore options in setting to get better experience</li>
         </ul>
+        current version: 1.0 <br />
+        created by: <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">Michal Viliš</a> 2023
+
       </div>
+      
     </div>
   );
 };

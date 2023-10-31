@@ -21,8 +21,9 @@ interface OrientationProps {
   apiSize: "regular" | "small" | "full";
 }
 
+// -- adding or removing similar objects to this array will influence the randomization of PhotoContainer size
 const PHOTO_ORIENTATION: OrientationProps[] = [
-  { cssClass: "tall wide", apiSize: "regular" }, // this array[0] is PRIVATE, DO NOT CHANGE!!!
+  { cssClass: "tall wide", apiSize: "regular" }, // this array[0] is PRIVATE, DO NOT CHANGE NOR REMOVE!!!
   { cssClass: "", apiSize: "small" },
   { cssClass: "", apiSize: "small" },
   { cssClass: "tall", apiSize: "regular" },
@@ -31,6 +32,7 @@ const PHOTO_ORIENTATION: OrientationProps[] = [
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { gallery, arrangeGallery } = usePhotos();
+
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
 

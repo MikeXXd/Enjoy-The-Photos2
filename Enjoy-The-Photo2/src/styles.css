@@ -34,7 +34,7 @@
 #root {
   display: flex;
   justify-content: center;
-
+  background-color: var(--dark-color);
   background-image: url("https://source.unsplash.com/eOpewngf68w");
   background-repeat: no-repeat;
   background-size: cover;
@@ -434,6 +434,8 @@ a:focus {
   }
 }
 
+/* modal--extras--------------------------------------- */
+
 .modal-inside {
   position: absolute;
   top: 50%;
@@ -450,25 +452,29 @@ a:focus {
 .modal-inside.inside-img {
   max-width: 100%;
   max-height: 100%;
-
 }
 
 .modal-inside.inside-container {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
   width: auto;
   max-width: 1200px;
   min-height: 80%;
   font-size: 1rem;
+  background-blend-mode: darken;
   text-align: center;
   color: var(--white-color);
   text-shadow: none;
 }
 
-
-/* EXPERIMENT END-------------------------- */
+.modal-inside.inside-container h1 {
+  margin: 1rem;
+  color: var(--orange-color);
+  font-size: 4rem;
+  font-family: "Sedgwick Ave Display", cursive;
+}
 
 .modal-btn-close {
   position: absolute;
@@ -517,9 +523,9 @@ a:focus {
   text-shadow: none;
 }
 
-.about-text * {
+.about-text > * {
   color: var(--white-color);
-  font-size: 1rem;
+  margin: 1rem;
 }
 
 /*---footer------------------------------------------------------------- */

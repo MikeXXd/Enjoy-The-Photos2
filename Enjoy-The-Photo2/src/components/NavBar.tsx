@@ -1,10 +1,10 @@
 import { useState } from "react";
 import usePhotos from "../hooks/usePhotos";
 import { cc } from "../utils/cc";
-import { CustomModal } from "./CustomModal";
 import About from "./About";
 import Setting from "./Setting";
 import UStoryTemporary from "./UStoryTemporary";
+import Modal from "./Modal";
 
 const NavBar = () => {
   const { renderGallery, isGalleryRendered } = usePhotos();
@@ -63,7 +63,7 @@ const NavBar = () => {
           </li>
         </ul>
       </nav>
-      <CustomModal
+      <Modal
         isOpen={isAboutModalOpen}
         onClose={() => setIsAboutModalOpen(false)}
       >
@@ -71,19 +71,19 @@ const NavBar = () => {
           onClose={() => setIsAboutModalOpen(false)}
           handleUStory={() => handleUStory}
         />
-      </CustomModal>
-      <CustomModal
+      </Modal>
+      <Modal
         isOpen={isSettingModalOpen}
         onClose={() => setIsSettingModalOpen(false)}
       >
         <Setting onClose={() => setIsSettingModalOpen(false)} />
-      </CustomModal>
-      <CustomModal
+      </Modal>
+      <Modal
         isOpen={isUStoryModalOpen}
         onClose={() => setIsUStoryModalOpen(false)}
       >
         <UStoryTemporary onClose={() => setIsUStoryModalOpen(false)} />
-      </CustomModal>
+      </Modal>
     </>
   );
 };

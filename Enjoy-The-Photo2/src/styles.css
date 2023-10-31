@@ -365,8 +365,7 @@ a:focus {
   transform: translateY(0);
 }
 
-
-/*---image-Resize------------------------------------------------------ */
+/*---image-Resize--in case the photo moves at different grid place as a result of resizing and grid-auto-flow: dense; property, then is easy to see where it moved */
 .img.img-resize-here {
   animation: pulse-resize 2s 5 alternate ease-in-out;
 }
@@ -385,32 +384,91 @@ a:focus {
   }
 }
 
-/* ----modal-------------------------------------------------------------*/
-.modal > * {
+/* ----modal------------------------------------------------*/
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.modal .overlay {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  animation: fade-in 500ms forwards;
+}
+
+.modal.closing .overlay {
+  animation: fade-in 500ms forwards reverse;
+}
+
+@keyframes fade-in {
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.modal .modal-body {
+  position: relative;
+  min-width: 95%;
+  min-height: 95%;
+  transform: translateX(-200%);
+  animation: pop-in 500ms 500ms forwards;
+}
+
+.modal.closing .modal-body {
+  animation: pop-in 500ms forwards reverse;
+}
+
+@keyframes pop-in {
+  100% {
+    transform: translateX(0);
+    transform: translateY(0);
+  }
+}
+
+.modal-inside {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 95%;
-  max-height: 95%;
-  /* min-width: fit-content;
- min-height: fit-content; */
-  border: 0.1rem solid var(--white-color);
+  background-color: var(--transfluent-background-color);
   border-radius: calc(var(--soft-radius) * 2);
+  border: 0.1rem solid var(--white-color);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+.modal-inside.inside-img {
+  max-width: 100%;
+  max-height: 100%;
+
 }
+
+.modal-inside.inside-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: auto;
+  max-width: 1200px;
+  min-height: 80%;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--white-color);
+  text-shadow: none;
+}
+
+
+/* EXPERIMENT END-------------------------- */
 
 .modal-btn-close {
   position: absolute;
@@ -439,25 +497,7 @@ a:focus {
   box-shadow: 0 0 10px 0 var(--white-color);
 }
 
-
-/*----about---------------------------------------------------------- */
-.about-container {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 90%;
-  max-width: 1200px;
-  min-height: 80%;
-  padding: 0.5rem;
-  background-color: var(--transfluent-background-color);
-  border-radius: var(--soft-radius);
-  font-size: 1rem;
-  text-align: center;
-  color: var(--white-color);
-  text-shadow: none;
-}
+/*----about-&-settings-------------------------------------------------- */
 
 .about-text {
   position: relative;
@@ -470,10 +510,16 @@ a:focus {
   background-color: var(--transfluent-background-color);
   border: 1px solid var(--white-color);
   border-radius: var(--soft-radius);
-  font-size: 1rem;
-  text-align: center;
+  font-size: 1.3rem;
+  overflow-y: auto;
+  text-align: start;
   color: var(--white-color);
   text-shadow: none;
+}
+
+.about-text * {
+  color: var(--white-color);
+  font-size: 1rem;
 }
 
 /*---footer------------------------------------------------------------- */

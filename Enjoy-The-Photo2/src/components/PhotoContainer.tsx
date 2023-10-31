@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 import { PhotoType } from "../context/Photos";
 import { cc } from "../utils/cc";
-import { CustomModal } from "./CustomModal";
+// import { CustomModal } from "./CustomModal";
+import Modal from "./Modal";
 
 import { FaInfo } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -75,6 +76,10 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       : setIsLiked(false);
   }, [gallery]);
 
+  useEffect(() => {
+    handleMouseLeave();
+  }, [isPhotoModalOpen]);
+
   return (
     <div
       onMouseEnter={handleMouseEnter}
@@ -115,16 +120,17 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       </div>
 
       {/* ---Photo MODAL ------------------------------------ */}
-      <CustomModal
+      <Modal
         isOpen={isPhotoModalOpen}
         onClose={() => setIsPhotoModalOpen(false)}
       >
         <img
+          className="modal-inside inside-img"
           src={photo.urls.full}
           style={{ backgroundImage: `url(${photo?.urls.small})` }}
           onClick={() => setIsPhotoModalOpen(false)}
         />
-      </CustomModal>
+      </Modal>
 
       {/* ---Photo description ------------------------------------ */}
       <div className={cc("img-info", isInfoActive && "show")}>

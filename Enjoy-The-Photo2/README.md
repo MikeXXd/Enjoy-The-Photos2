@@ -2,3 +2,7 @@ use your intuition, no rationality when choosing another photo, just click the f
 
 
 we are creators, mighty creators, unaware of our power and having no clear instruction how to use it, still we use a fraction of it and it is more then enought to harm ourselves and others beings. we are more then just what we thing we are and more we know who we are the better for everything enjoy the photos and KNOW THYSELF
+
+
+Bugs and Issues:
+- in PhotoConteiner.tsx when opening Modal the icons should turn off, they do, but when closing the Modal, the ICONS TURN ON AGAIN. I tried to fix it, but I couldn't. I will try to fix it later.

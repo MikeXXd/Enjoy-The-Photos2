@@ -1,14 +1,11 @@
-import { PhotoType } from "../context/Photos";
+import usePhotos from "../context/usePhotos";
 import PhotoContainer from "./PhotoContainer";
 
-interface PhotosGridProps {
-  photos: PhotoType[];
-}
-
-const PhotosGrid = ({ photos }: PhotosGridProps) => {
+const PhotosGrid = () => {
+  const { actualPhotos } = usePhotos();
   return (
-    <main className="grid-container-masonri">
-      {photos.map((photo) => (
+    <main className="grid-container-masonri" >
+      {actualPhotos.map((photo) => (
         <PhotoContainer key={photo.id} photo={photo} />
       ))}
     </main>

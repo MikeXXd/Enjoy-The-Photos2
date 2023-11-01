@@ -19,7 +19,7 @@ export interface PhotoType {
   // width: number;
 }
 
-interface PhotosContext {
+export interface PhotosContext {
   actualPhotos: PhotoType[];
   error: string;
   query: string;

@@ -1,11 +1,16 @@
-import { useState } from "react";
-import usePhotos from "../hooks/usePhotos";
+import { useState, Dispatch, SetStateAction } from "react";
+import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 import About from "./About";
 import Setting from "./Setting";
 import UStoryTemporary from "./UStoryTemporary";
 import Modal from "./Modal";
-import { BackgroundProps } from "../App";
+
+interface NavItemsProps {
+  label: string;
+  onClick: () => void;
+  isSelected: boolean;
+}
 
 const NavBar = ({}) => {
   const { renderGallery, isGalleryRendered } = usePhotos();
@@ -13,10 +18,13 @@ const NavBar = ({}) => {
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
   const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
 
-  const handleModal = (setState: React.Dispatch<React.SetStateAction<boolean>>) => () => setState(true);
-  const handleCloseModal = (setState: React.Dispatch<React.SetStateAction<boolean>>) => () => setState(false);
+  const handleModal = (setState: Dispatch<SetStateAction<boolean>>) => () =>
+    setState(true);
+  const handleCloseModal =
+    (setState: Dispatch<SetStateAction<boolean>>) => () =>
+      setState(false);
 
-  const NavItem = ({ label, onClick, isSelected }: { label: string, onClick: () => void, isSelected: boolean }) => (
+  const NavItem = ({ label, onClick, isSelected }: NavItemsProps) => (
     <li>
       <a
         href="#"
@@ -33,10 +41,26 @@ const NavBar = ({}) => {
     <>
       <nav className="nav-bar">
         <ul>
-          <NavItem label="Galery" onClick={renderGallery} isSelected={isGalleryRendered} />
-          <NavItem label={"uStory"} onClick={handleModal(setIsUStoryModalOpen)} isSelected={false} />
-          <NavItem label="About" onClick={handleModal(setIsAboutModalOpen)} isSelected={false} />
-          <NavItem label="Setting" onClick={handleModal(setIsSettingModalOpen)} isSelected={false} />
+          <NavItem
+            label="Galery"
+            onClick={renderGallery}
+            isSelected={isGalleryRendered}
+          />
+          <NavItem
+            label={"uStory"}
+            onClick={handleModal(setIsUStoryModalOpen)}
+            isSelected={false}
+          />
+          <NavItem
+            label="About"
+            onClick={handleModal(setIsAboutModalOpen)}
+            isSelected={false}
+          />
+          <NavItem
+            label="Setting"
+            onClick={handleModal(setIsSettingModalOpen)}
+            isSelected={false}
+          />
         </ul>
       </nav>
       <Modal

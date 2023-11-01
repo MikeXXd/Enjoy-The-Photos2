@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-
 import { PhotoType } from "../context/Photos";
 import { cc } from "../utils/cc";
-// import { CustomModal } from "./CustomModal";
 import Modal from "./Modal";
-
 import { FaInfo } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { SlSizeFullscreen, SlSizeActual } from "react-icons/sl";
+import { SlSizeFullscreen } from "react-icons/sl";
 import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
-import usePhotos from "../hooks/usePhotos";
+import usePhotos from "../context/usePhotos";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -78,6 +75,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       : setIsLiked(false);
   }, [gallery]);
 
+  // this hook doest work properly - problem with reappearing icons
   useEffect(() => {
     handleMouseLeave();
   }, [isPhotoModalOpen]);
@@ -124,13 +122,17 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       {/* ---Photo MODAL ------------------------------------ */}
       <Modal
         isOpen={isPhotoModalOpen}
-        onClose={() => setIsPhotoModalOpen(false)}
+        onClose={() => {
+          setIsPhotoModalOpen(false);
+        }}
       >
         <img
           className="modal-inside inside-img"
           src={photo.urls.full}
           style={{ backgroundImage: `url(${photo?.urls.small})` }}
-          onClick={() => setIsPhotoModalOpen(false)}
+          onClick={() => {
+            setIsPhotoModalOpen(false);
+          }}
         />
       </Modal>
 

@@ -34,7 +34,7 @@
 #root {
   display: flex;
   justify-content: center;
-  background-color: var(--dark-color);
+  background-color: var(--medium-color);
   background-image: url("https://source.unsplash.com/eOpewngf68w");
   background-repeat: no-repeat;
   background-size: cover;

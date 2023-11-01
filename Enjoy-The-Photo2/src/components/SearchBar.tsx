@@ -1,9 +1,16 @@
 import { MouseEvent, useEffect, useState } from "react";
-import usePhotos from "../hooks/usePhotos";
+import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 
 const SearchBar = () => {
-  const { query, setQuery, pageNo, setPageNo, actualPhotos, isGalleryRendered } = usePhotos();
+  const {
+    query,
+    setQuery,
+    pageNo,
+    setPageNo,
+    actualPhotos,
+    isGalleryRendered,
+  } = usePhotos();
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
 
@@ -14,7 +21,6 @@ const SearchBar = () => {
       setIsPriorBtnActive(false);
     }
   }, [pageNo]);
-
 
   useEffect(() => {
     if (!isGalleryRendered && actualPhotos.length < 30) {

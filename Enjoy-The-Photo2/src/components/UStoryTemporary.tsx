@@ -19,7 +19,7 @@ const UStoryTemporary = ({ onClose}: UStoryTemporaryProps) => {
           </div>
 
           <h1>uStory</h1>
-          <div className="about-text">
+          <div className="nav-modal-text">
             Hello User :-&#41;
             This section is under development and will be available soon.
           </div>

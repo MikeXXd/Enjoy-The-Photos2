@@ -1,0 +1,148 @@
+/* rounded switch ------------------------------------------------------------------*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 3.75rem;
+  height: 2.125rem;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 2.125rem;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.62rem;
+  width: 1.62rem;
+  left: 0.3rem;
+  bottom: 0.3rem;
+  border-radius: 50%;
+  background-color: white;
+   border-radius: 50%;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--green-color)
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 6rem var(--green-color);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(1.62rem);
+  -ms-transform: translateX(1.62rem);
+  transform: translateX(1.62rem);
+}
+/* The container-radio -----------------------------------------------------------------*/
+
+.container-grid-size {
+ max-width: 10rem;
+}
+.container-radio {
+    display: block;
+    position: relative;
+    padding-left: 2.2rem;
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    font-size: 1.4rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark-radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.6rem;
+    width: 1.6rem;
+    background-color: #ccc ;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container-radio:hover input ~ .checkmark-radio {
+    background-color: var(--white-color);
+}
+
+/* When the radio button is checked, add a blue background */
+.container-radio input:checked ~ .checkmark-radio {
+    background-color: var(--green-color)
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark-radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container-radio input:checked ~ .checkmark-radio:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container-radio .checkmark-radio:after {
+       top: .565rem;
+      left: .565rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: white;
+  }
+
+
+  /* delete button------------------------------------------------------------------ */
+
+  .setting-delete-btn {
+    cursor: pointer;
+    outline: none;
+    padding: 1rem 1.4rem;
+    margin-top: .5rem;
+    font-size: 1.4rem;
+    border-radius: 50% .9rem;
+    border:2px solid var(--transfluent-background-color);
+    background-color: var(--transfluent-background-color);
+    text-shadow: none;
+ 
+  }
+
+  .setting-delete-btn:hover {
+    color: red;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid red;
+    box-shadow: 0 0 20px 0 red;
+    transition: all 0.5s ease-in-out;
+    outline: none;
+  }
+
+  

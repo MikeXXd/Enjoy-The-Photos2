@@ -18,7 +18,7 @@ const About = ({ onClose, handleUStory }: AboutProps) => {
         </button>
       </div>
       <h1>About</h1>
-      <div className="about-text">
+      <div className="nav-modal-text">
         Hello User, <br />
         first of all, enjoy the photos and see the BEAUTY OF GEOMETRY as it is.
         Using the aplication is, I thing, preaty straight forward, you will

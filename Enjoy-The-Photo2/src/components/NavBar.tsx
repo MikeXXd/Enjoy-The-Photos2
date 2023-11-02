@@ -2,18 +2,19 @@ import { useState, Dispatch, SetStateAction } from "react";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 import About from "./About";
-import Setting from "./Setting";
+import Setting from "./setting/Setting";
 import UStoryTemporary from "./UStoryTemporary";
 import Modal from "./Modal";
 
 interface NavItemsProps {
   label: string;
+  disabled?: boolean;
   onClick: () => void;
   isSelected: boolean;
 }
 
 const NavBar = ({}) => {
-  const { renderGallery, isGalleryRendered } = usePhotos();
+  const { renderGallery, isGalleryRendered, gallery } = usePhotos();
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
   const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
@@ -43,6 +44,7 @@ const NavBar = ({}) => {
         <ul>
           <NavItem
             label="Galery"
+            disabled={gallery.length === 0}
             onClick={renderGallery}
             isSelected={isGalleryRendered}
           />

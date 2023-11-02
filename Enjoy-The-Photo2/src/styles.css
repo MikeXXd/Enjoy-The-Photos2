@@ -12,6 +12,7 @@
   --light-color: #d1cab3;
   --orange-color: rgb(217, 122, 28);
   --yellow-color: rgb(227, 208, 80);
+  --green-color: #96d91c;
   --white-color: #fff;
 
   --transfluent-background-color: rgba(0, 0, 0, 0.5);
@@ -201,13 +202,26 @@ a:focus {
 .grid-container-masonri {
   display: grid;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-  grid-auto-rows: 13rem;
   align-items: stretch;
   justify-items: stretch;
   gap: 0.5rem;
 
   min-height: 100vh;
+}
+
+.grid-container-masonri.small {
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-auto-rows: 10rem;
+}
+
+.grid-container-masonri.medium {
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  grid-auto-rows: 13rem;
+}
+
+.grid-container-masonri.large {
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-auto-rows: 16rem;
 }
 
 /* ---GRID-image-------------------------------------------------------------*/
@@ -420,21 +434,21 @@ a:focus {
   min-width: 95%;
   min-height: 95%;
   transform: translateX(-200%);
-  animation: pop-in 500ms 500ms forwards;
+  animation: move-in 500ms 500ms forwards;
 }
 
 .modal.closing .modal-body {
-  animation: pop-in 500ms forwards reverse;
+  animation: move-in 500ms forwards reverse;
 }
 
-@keyframes pop-in {
+@keyframes move-in {
   100% {
     transform: translateX(0);
     transform: translateY(0);
   }
 }
 
-/* modal--extras--------------------------------------- */
+/* modal-extras--------------------------------------- */
 
 .modal-inside {
   position: absolute;
@@ -460,8 +474,9 @@ a:focus {
   align-items: center;
   flex-direction: column;
   width: auto;
-  max-width: 1200px;
+  width: 100%;
   min-height: 80%;
+  max-width: 1200px;
   font-size: 1rem;
   background-blend-mode: darken;
   text-align: center;
@@ -469,12 +484,22 @@ a:focus {
   text-shadow: none;
 }
 
-.modal-inside.inside-container h1 {
-  margin: 1rem;
+.modal-inside.inside-container h1,
+.modal-inside.inside-container h3 {
   color: var(--orange-color);
-  font-size: 4rem;
   font-family: "Sedgwick Ave Display", cursive;
+  margin: 1rem;
 }
+
+.modal-inside.inside-container h1 {
+  font-size: 4rem;
+}
+
+.modal-inside.inside-container h3 {
+  font-size: 2rem;
+}
+
+/* modal-extras-btn-close--------------------------------------- */ 
 
 .modal-btn-close {
   position: absolute;
@@ -503,13 +528,12 @@ a:focus {
   box-shadow: 0 0 10px 0 var(--white-color);
 }
 
-/*----about-&-settings-------------------------------------------------- */
+/*--modal-extras-nav--------------------------------------------------- */
 
-.about-text {
+.nav-modal-text {
   position: relative;
   align-items: center;
   max-width: 900px;
-
   max-height: 80%;
   padding: 1rem;
   margin: 1rem;
@@ -523,7 +547,7 @@ a:focus {
   text-shadow: none;
 }
 
-.about-text > * {
+.nav-modal-text > * {
   color: var(--white-color);
   margin: 1rem;
 }

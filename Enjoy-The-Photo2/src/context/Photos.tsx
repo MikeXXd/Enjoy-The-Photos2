@@ -30,6 +30,7 @@ export interface PhotosContext {
   arrangeGallery: (Photo: PhotoType) => void;
   renderGallery: () => void;
   isGalleryRendered: boolean;
+  clearGallery: () => void;
 }
 
 interface FetchPhotosResponse {
@@ -94,6 +95,11 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  function clearGallery() {
+    setGallery([]);
+  }
+
+
   return (
     <Context.Provider
       value={{
@@ -107,6 +113,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         arrangeGallery,
         renderGallery,
         isGalleryRendered,
+        clearGallery
       }}
     >
       {children}

@@ -12,21 +12,21 @@ interface AppContextProps {
   setIsDynamicBackground: (active: boolean) => void;
   gridSize: GridSize;
   setGridSize: (size: GridSize) => void;
+  resetApp: () => void;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
 
 type GridSize = "small" | "medium" | "large"
-  
-
 
 interface StorageSettingProps {
   dynamic_background: boolean;
   grig_size: GridSize;
 }
 
+// -----APP---------------------------------------------------------
 const App = () => {
-  const { actualPhotos, error } = usePhotos();
+  const { actualPhotos, error, clearGallery } = usePhotos();
   const [isDynamicBackground, setIsDynamicBackground] = useState(() => {
     const setting: string | null = localStorage.getItem("ETP-seting");
     if (setting == null) return false;
@@ -34,19 +34,13 @@ const App = () => {
     return parsedObject.dynamic_background;
   });
 
-  const [gridSize, setGridSize] = useState(() => {
+  const [gridSize, setGridSize] = useState<GridSize>(() => {
     const setting: string | null = localStorage.getItem("ETP-seting");
     if (setting == null) return "medium";
     const parsedObject: StorageSettingProps = JSON.parse(setting);
     console.log(parsedObject.grig_size);
     return parsedObject.grig_size;
   });
-
-  // dynamic-background-mechanism -----------------------------------------
-  useEffect(() => {
-    if (actualPhotos.length < 2 || !isDynamicBackground) return;
-    fetchBackgroundImage(actualPhotos[1]); //[1] as the second photo looks better
-  }, [actualPhotos, isDynamicBackground]);
 
   useEffect(() => {
     localStorage.setItem(
@@ -56,7 +50,20 @@ const App = () => {
         grig_size: gridSize,
       })
     );
-  }, [isDynamicBackground]);
+  }, [isDynamicBackground, gridSize]);
+
+  // dynamic-background-mechanism -----------------------------------------
+  useEffect(() => {
+    if (actualPhotos.length < 2 || !isDynamicBackground) return;
+    fetchBackgroundImage(actualPhotos[1]); //[1] as the second photo looks better
+  }, [actualPhotos, isDynamicBackground]);
+
+function resetApp() {
+  clearGallery();
+  setIsDynamicBackground(false);
+  setGridSize("medium");
+  window.location.reload();
+}
 
   return (
     <AppContext.Provider
@@ -65,6 +72,7 @@ const App = () => {
         setIsDynamicBackground,
         gridSize,
         setGridSize,
+        resetApp
       }}
     >
       <div className="main-container">

@@ -13,7 +13,7 @@ interface NavItemsProps {
   isSelected: boolean;
 }
 
-const NavBar = ({}) => {
+const NavBar = () => {
   const { renderGallery, isGalleryRendered, gallery } = usePhotos();
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);

@@ -1,7 +1,23 @@
-use your intuition, no rationality when choosing another photo, just click the first one you like at first glance, let yourself entirely drive by your inner quidence and allow the stream of choices to by self driven peacefully dynamic
+Enjoy The Photo2,
+
+is successor of Enjoy The Photo.
+
+The app allows you to view photos from the Unsplash API. 
+You can search for photos by entering a keyword in the search bar. 
+You can save "like" photos and see them in gallery.
+Basic setting allows you to customize the app to your liking.
+
+App is also in production mode, you can see it here: https://enjoy-the-photo2.herokuapp.com/
+The production mode is is not updated regularly, so it may not have the latest features.
+First production implementation:  November 6th 2023 the version 1.0 
+Last production update: November 6th 2023 the version 1.0 
 
 
-we are creators, mighty creators, unaware of our power and having no clear instruction how to use it, still we use a fraction of it and it is more then enought to harm ourselves and others beings. we are more then just what we thing we are and more we know who we are the better for everything enjoy the photos and KNOW THYSELF
+
+
+
+
+
 
 
 Bugs and Issues:

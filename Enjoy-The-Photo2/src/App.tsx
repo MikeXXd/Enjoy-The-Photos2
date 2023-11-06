@@ -4,8 +4,9 @@ import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
 import usePhotos from "./context/usePhotos";
 import imgTriangle from "./img/icons8-triangle-color-96.png";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useCallback } from "react";
 import { fetchBackgroundImage } from "./services/extFunctions";
+import React from "react";
 
 interface AppContextProps {
   isDynamicBackground: boolean;
@@ -17,30 +18,37 @@ interface AppContextProps {
 
 export const AppContext = createContext<AppContextProps | null>(null);
 
-type GridSize = "small" | "medium" | "large"
+type GridSize = "small" | "medium" | "large";
 
 interface StorageSettingProps {
   dynamic_background: boolean;
   grig_size: GridSize;
 }
 
+const DEFAULT_GRID_SIZE: GridSize = "medium";
+const DEFAULT_DYNAMIC_BACKGROUND: boolean = false;
+
+function getInitialSetting<T extends keyof StorageSettingProps>(
+  key: T,
+  defaultValue: StorageSettingProps[T]
+): StorageSettingProps[T] {
+  const setting: string | null = localStorage.getItem("ETP-seting");
+  if (setting == null) return defaultValue;
+  const parsedObject: StorageSettingProps = JSON.parse(setting);
+  return parsedObject[key];
+}
+
 // -----APP---------------------------------------------------------
 const App = () => {
   const { actualPhotos, error, clearGallery } = usePhotos();
-  const [isDynamicBackground, setIsDynamicBackground] = useState(() => {
-    const setting: string | null = localStorage.getItem("ETP-seting");
-    if (setting == null) return false;
-    const parsedObject: StorageSettingProps = JSON.parse(setting);
-    return parsedObject.dynamic_background;
-  });
+  const [isDynamicBackground, setIsDynamicBackground] = useState<boolean>(
+    () => getInitialSetting("dynamic_background", DEFAULT_DYNAMIC_BACKGROUND)
+  );
+  const [gridSize, setGridSize] = useState<GridSize>(() =>
+    getInitialSetting("grig_size", DEFAULT_GRID_SIZE)
+  );
 
-  const [gridSize, setGridSize] = useState<GridSize>(() => {
-    const setting: string | null = localStorage.getItem("ETP-seting");
-    if (setting == null) return "medium";
-    const parsedObject: StorageSettingProps = JSON.parse(setting);
-    console.log(parsedObject.grig_size);
-    return parsedObject.grig_size;
-  });
+  console.log('App Component')
 
   useEffect(() => {
     localStorage.setItem(
@@ -58,12 +66,12 @@ const App = () => {
     fetchBackgroundImage(actualPhotos[1]); //[1] as the second photo looks better
   }, [actualPhotos, isDynamicBackground]);
 
-function resetApp() {
-  clearGallery();
-  setIsDynamicBackground(false);
-  setGridSize("medium");
-  window.location.reload();
-}
+  const resetApp = useCallback(() => {
+    clearGallery();
+    setIsDynamicBackground(DEFAULT_DYNAMIC_BACKGROUND);
+    setGridSize(DEFAULT_GRID_SIZE);
+    window.location.reload();
+  }, [clearGallery, setIsDynamicBackground, setGridSize]);
 
   return (
     <AppContext.Provider
@@ -72,7 +80,7 @@ function resetApp() {
         setIsDynamicBackground,
         gridSize,
         setGridSize,
-        resetApp
+        resetApp,
       }}
     >
       <div className="main-container">
@@ -88,19 +96,18 @@ function resetApp() {
         </div>
         <SearchBar />
         {error && <div className="error">{error}</div>}
-        <PhotosGrid />
+        <PhotosGridMemoized />
         <footer className="footer">
           <span>
             Created by
-            <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">
-              MikeXd
-            </a>
-            2023
+            <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">MikeXd</a> 2023
           </span>
         </footer>
       </div>
     </AppContext.Provider>
   );
 };
+
+const PhotosGridMemoized = React.memo(PhotosGrid);
 
 export default App;

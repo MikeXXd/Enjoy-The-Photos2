@@ -1,9 +1,11 @@
 interface AboutProps {
   onClose: (isOpen: boolean) => void;
-  handleUStory: () => void;
 }
 
-const About = ({ onClose, handleUStory }: AboutProps) => {
+const About = ({ onClose }: AboutProps) => {
+
+  // console.log('About Rendered')
+
   return (
     <div
     className="modal-inside inside-container"

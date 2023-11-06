@@ -8,16 +8,17 @@ import Modal from "./Modal";
 
 interface NavItemsProps {
   label: string;
-  disabled?: boolean;
   onClick: () => void;
   isSelected: boolean;
 }
 
-const NavBar = () => {
-  const { renderGallery, isGalleryRendered, gallery } = usePhotos();
+const NavBar = ({}) => {
+  const { renderGallery, isGalleryRendered } = usePhotos();
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
   const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
+
+  // console.log('NavBar Rendered')
 
   const handleModal = (setState: Dispatch<SetStateAction<boolean>>) => () =>
     setState(true);
@@ -44,7 +45,6 @@ const NavBar = () => {
         <ul>
           <NavItem
             label="Galery"
-            disabled={gallery.length === 0}
             onClick={renderGallery}
             isSelected={isGalleryRendered}
           />
@@ -71,7 +71,6 @@ const NavBar = () => {
       >
         <About
           onClose={handleCloseModal(setIsAboutModalOpen)}
-          handleUStory={handleModal(setIsUStoryModalOpen)}
         />
       </Modal>
       <Modal

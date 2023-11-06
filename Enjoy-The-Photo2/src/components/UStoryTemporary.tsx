@@ -4,6 +4,9 @@ interface UStoryTemporaryProps {
   }
 
 const UStoryTemporary = ({ onClose}: UStoryTemporaryProps) => {
+
+    // console.log('UStoryTemporary Component')
+
     return (
         <div
           className="modal-inside inside-container ustory"

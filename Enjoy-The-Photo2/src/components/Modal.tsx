@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cc } from "../utils/cc";
+import { nullable } from "zod";
 
 export type ModalProps = {
   children: ReactNode;
@@ -11,6 +12,10 @@ export type ModalProps = {
 const Modal = ({ children, isOpen, onClose }: ModalProps) => {
   const [isClosing, setIsClosing] = useState(false);
   const prevIsOpen = useRef<boolean>();
+
+  // function returnChildren() {if (children !== null &&  children !== undefined) return children.type.name}
+  // console.log('Modal Component',returnChildren() )
+
 
   useEffect(() => {
     const handleEvent = (e: KeyboardEvent) => {

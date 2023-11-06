@@ -29,19 +29,18 @@ const PHOTO_ORIENTATION: OrientationProps[] = [
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { gallery, arrangeGallery } = usePhotos();
-
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
-
   const [photoSize, setPhotoSize] = useState(
     () =>
       PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]
   );
   const [isResizing, setIsResizing] = useState(false);
-
   const [isLoaded, setIsLoaded] = useState(false);
   const [areIconsActive, setAreIconsActive] = useState(false);
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+
+  // console.log("PhotoContainer Rendered");
 
   //--handling image interaction-----------------------------------------
   function handleMouseEnter() {

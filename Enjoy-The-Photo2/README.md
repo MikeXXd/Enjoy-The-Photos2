@@ -1,4 +1,4 @@
-Enjoy The Photo2, https://enjoy-the-photo-2.netlify.app/ , Vite_React_TS
+Enjoy The Photo2, https://enjoy-the-photos-2.netlify.app/ , Vite_React_TS
 
 is successor of Enjoy The Photo.
 
@@ -8,7 +8,7 @@ You can search for photos by entering a keyword in the search bar.
 You can save "like" photos and see them in gallery.
 Basic setting allows you to customize the app to your liking.
 
-App is also in production now, you can see it here: https://enjoy-the-photo-2.netlify.app/
+App is also in production now, you can see it here: https://enjoy-the-photos-2.netlify.app/
 The production mode is not updated regularly, so it may not have the latest features.
 First production implementation:  November 6th 2023 the version 1.0 
 Last production update: November 6th 2023 the version 1.0 

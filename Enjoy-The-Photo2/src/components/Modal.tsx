@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cc } from "../utils/cc";
-import { nullable } from "zod";
 
 export type ModalProps = {
   children: ReactNode;

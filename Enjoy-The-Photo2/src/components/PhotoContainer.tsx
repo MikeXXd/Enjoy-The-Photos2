@@ -8,6 +8,8 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
 import usePhotos from "../context/usePhotos";
+import nlp from "compromise";
+import { MdChangeHistory } from "react-icons/md";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -39,8 +41,28 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [areIconsActive, setAreIconsActive] = useState(false);
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+  const [uStoryWords, setUStoryWords] = useState<string[]>([]);
+  const [isUStoryIconSpread, setIsUStoryIconSpread] = useState(false);
 
-  // console.log("PhotoContainer Rendered");
+  // console.log("uStory", uStoryWords);
+
+  const photoDescription = (photo.description + photo.alt_description).replace(
+    /\./g,
+    ""
+  ); //removing dots from description
+
+  function extractVerbsAndNouns(text: string) {
+    // extracting verbs and nouns from photo description to use then for further search in uStory
+    if (text.length < 1) return;
+    const doc = nlp(text);
+    const verbs = doc.verbs().out("array");
+    const nouns = doc.nouns().out("array");
+    setUStoryWords([...verbs, ...nouns]);
+  }
+
+  useEffect(() => {
+    extractVerbsAndNouns(photoDescription);
+  }, []);
 
   //--handling image interaction-----------------------------------------
   function handleMouseEnter() {
@@ -53,6 +75,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   function handleMouseLeave() {
     setAreIconsActive(false);
     setIsInfoActive(false);
+    setIsUStoryIconSpread(false);
   }
 
   //--Resize Icon------------------------------------------
@@ -105,6 +128,18 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           <IoIosResize onClick={handleResizePhoto} fill="pink" />
         )}
       </div>
+      {/* ---uStory Icon---------------------------------------- */}
+      <div
+        className={cc("img-icons img-center-icon", areIconsActive && "show")}
+      >
+        {!isUStoryIconSpread ? <MdChangeHistory onClick={() => setIsUStoryIconSpread(s => !s)} /> :
+        <ul>
+          {uStoryWords.map((word) => (
+            <li key={word}>{word}</li>
+          ))}
+        </ul>}
+      </div>
+
       {/* ----Bottom Icons ---------------------------------- */}
       <div
         className={cc("img-icons img-bottom-icons", areIconsActive && "show")}

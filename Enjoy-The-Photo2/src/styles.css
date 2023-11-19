@@ -312,7 +312,6 @@ a:focus {
 
 .img-icons.img-bottom-icons {
   right: 0.8em;
-
   bottom: 0.5em;
 }
 
@@ -349,6 +348,12 @@ a:focus {
   border-radius: var(--soft-radius);
   margin-bottom: 0.5rem;
 }
+
+.img-center-icon > svg {
+  --size: calc(var(--icon-original-size) - 5%);
+  border-radius: var(--soft-radius);
+}
+
 .img-bottom-icons > svg {
   border-radius: 50%;
   margin-left: 0.6rem;
@@ -403,6 +408,21 @@ a:focus {
     border: 1px solid var(--yellow-color);
   }
 }
+
+  /* ------uStory--image options---------------------------------*/
+.u-story-options-container {
+  position: absolute;
+  /* display: flexbox; */
+  max-height: 98%;
+  overflow: auto;
+  border-radius: var(--soft-radius);
+
+}
+
+  .btn.u-story-option-btn {
+    border:none;
+border-radius: var(--soft-radius);
+  }
 
 /* ----modal------------------------------------------------*/
 .modal {
@@ -505,7 +525,7 @@ a:focus {
   font-size: 2rem;
 }
 
-/* modal-extras-btn-close--------------------------------------- */ 
+/* modal-extras-btn-close--------------------------------------- */
 
 .modal-btn-close {
   position: absolute;

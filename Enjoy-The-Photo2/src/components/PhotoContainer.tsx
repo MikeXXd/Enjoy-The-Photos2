@@ -119,7 +119,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         onLoad={() => setIsLoaded(true)}
       />
       {/* ----Top Icons ---------------------------------- */}
-      <div className={cc("img-icons img-top-icons", areIconsActive && "show")}>
+      <div className={cc("img-icons img-top-icons", areIconsActive && !isUStoryIconSpread && "show")}>
         <SlSizeFullscreen
           onClick={() => setIsPhotoModalOpen(true)}
           fill="pink"
@@ -128,21 +128,27 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           <IoIosResize onClick={handleResizePhoto} fill="pink" />
         )}
       </div>
-      {/* ---uStory Icon---------------------------------------- */}
+      {/* ---uStory Icon and spread options---------------------------------------- */}
       <div
         className={cc("img-icons img-center-icon", areIconsActive && "show")}
       >
-        {!isUStoryIconSpread ? <MdChangeHistory onClick={() => setIsUStoryIconSpread(s => !s)} /> :
-        <ul>
-          {uStoryWords.map((word) => (
-            <li key={word}>{word}</li>
-          ))}
-        </ul>}
+        {!isUStoryIconSpread && (
+          <MdChangeHistory onClick={() => setIsUStoryIconSpread((s) => !s)} />
+        )}
       </div>
+      {isUStoryIconSpread && (
+        <div className="u-story-options-container">
+          {uStoryWords.map((word) => (
+            <button className="btn u-story-option-btn" key={word}>
+              {word}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* ----Bottom Icons ---------------------------------- */}
       <div
-        className={cc("img-icons img-bottom-icons", areIconsActive && "show")}
+        className={cc("img-icons img-bottom-icons", areIconsActive && !isUStoryIconSpread && "show")}
       >
         {isLiked ? (
           <AiFillHeart onClick={handleHeartIcon} fill="red" />

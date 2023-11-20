@@ -1,11 +1,11 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, KeyboardEvent, useEffect, useState, useRef } from "react";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 
 const SearchBar = () => {
   const {
     query,
-    setQuery,
+    setNewQuery,
     pageNo,
     setPageNo,
     actualPhotos,
@@ -13,8 +13,14 @@ const SearchBar = () => {
   } = usePhotos();
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // console.log('SearchBar Rendered')
+  console.log('SearchBar', query)
+
+  useEffect(() => {
+    if (inputRef.current === null) return 
+    inputRef.current.value = query
+  }, [query])
 
   useEffect(() => {
     if (pageNo > 1) {
@@ -42,17 +48,14 @@ const SearchBar = () => {
     } else {
       setIsPriorBtnActive(false);
     }
-    // pokračovaní HERE----!!!!!!!!!!!!!!!!!!
   }
 
-  function submitQuery(e: React.KeyboardEvent<HTMLInputElement>) {
+  function submitQuery(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       e.preventDefault();
       e.currentTarget.blur();
       const inputQuery = e.currentTarget.value;
-      console.log("activeSearchBar SEARCH with query", query);
-      setPageNo(1);
-      setQuery(inputQuery);
+      setNewQuery(inputQuery);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
@@ -83,8 +86,8 @@ const SearchBar = () => {
         id="inputQuery"
         type="search"
         name="photo"
+        ref={inputRef}
         placeholder={query}
-        defaultValue={query}
         aria-label="search photos"
         onKeyDown={submitQuery}
       />

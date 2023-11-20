@@ -23,7 +23,7 @@ export interface PhotosContext {
   actualPhotos: PhotoType[];
   error: string;
   query: string;
-  setQuery: (query: string) => void;
+  setNewQuery: (query: string) => void;
   pageNo: number;
   setPageNo: (pageNo: number) => void;
   gallery: PhotoType[];
@@ -87,6 +87,12 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     }
   }
 
+
+  function setNewQuery(query: string) {
+    setQuery(query);
+    setPageNo(1);
+  }
+
   function renderGallery() {
     if (gallery.length < 1) return null;
     {
@@ -106,7 +112,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         actualPhotos,
         error,
         query,
-        setQuery,
+        setNewQuery,
         pageNo,
         setPageNo,
         gallery,

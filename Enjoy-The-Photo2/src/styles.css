@@ -409,20 +409,20 @@ a:focus {
   }
 }
 
-  /* ------uStory--image options---------------------------------*/
+/* ------uStory--image options---------------------------------*/
 .u-story-options-container {
   position: absolute;
   /* display: flexbox; */
   max-height: 98%;
+  max-width: 98%;
   overflow: auto;
   border-radius: var(--soft-radius);
-
 }
 
-  .btn.u-story-option-btn {
-    border:none;
-border-radius: var(--soft-radius);
-  }
+.btn.u-story-option-btn {
+  border: none;
+  border-radius: var(--soft-radius);
+}
 
 /* ----modal------------------------------------------------*/
 .modal {

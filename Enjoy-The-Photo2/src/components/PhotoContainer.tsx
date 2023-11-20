@@ -10,6 +10,7 @@ import { IoOpen } from "react-icons/io5";
 import usePhotos from "../context/usePhotos";
 import nlp from "compromise";
 import { MdChangeHistory } from "react-icons/md";
+import UStoryOptionBtn from "./UStoryOptionBtn";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -136,12 +137,11 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           <MdChangeHistory onClick={() => setIsUStoryIconSpread((s) => !s)} />
         )}
       </div>
+
       {isUStoryIconSpread && (
         <div className="u-story-options-container">
           {uStoryWords.map((word) => (
-            <button className="btn u-story-option-btn" key={word}>
-              {word}
-            </button>
+            <UStoryOptionBtn word={word} />
           ))}
         </div>
       )}

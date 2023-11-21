@@ -44,23 +44,10 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState("nature");
   const [pageNo, setPageNo] = useState(1);
 
-  // const [gallery, setGallery] = useState<PhotoType[]>(() => {
-  //   const getGalery = localStorage.getItem("ETP-galery");
-  //   if (getGalery == null) return [];
-  //   return [...JSON.parse(getGalery)];
-  // });
-
+  const [isGalleryRendered, setIsGalleryRendered] = useState(false);
   const [gallery, setGallery] = useLocalStorage<PhotoType[]>("ETP-galery", []);
 
-
-  const [isGalleryRendered, setIsGalleryRendered] = useState(false);
-
-
-  console.log(actualPhotos)
-  
-  // useEffect(() => {
-  //   localStorage.setItem("ETP-galery", JSON.stringify(gallery));
-  // }, [gallery]);
+  console.log(actualPhotos);
 
   useEffect(() => {
     setIsGalleryRendered(false);
@@ -88,7 +75,6 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     }
   }
 
-
   function setNewQuery(query: string) {
     setQuery(query);
     setPageNo(1);
@@ -106,7 +92,6 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     setGallery([]);
   }
 
-
   return (
     <Context.Provider
       value={{
@@ -120,7 +105,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         arrangeGallery,
         renderGallery,
         isGalleryRendered,
-        clearGallery
+        clearGallery,
       }}
     >
       {children}

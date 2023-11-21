@@ -21,48 +21,18 @@ export const AppContext = createContext<AppContextProps | null>(null);
 
 type GridSize = "small" | "medium" | "large";
 
-// interface StorageSettingProps {
-//   dynamic_background: boolean;
-//   grig_size: GridSize;
-// }
-
 const DEFAULT_GRID_SIZE: GridSize = "medium";
 const DEFAULT_DYNAMIC_BACKGROUND = false;
-
-// function getInitialSetting<T extends keyof StorageSettingProps>(
-//   key: T,
-//   defaultValue: StorageSettingProps[T]
-// ): StorageSettingProps[T] {
-//   const setting: string | null = localStorage.getItem("ETP-seting");
-//   if (setting == null) return defaultValue;
-//   const parsedObject: StorageSettingProps = JSON.parse(setting);
-//   return parsedObject[key];
-// }
 
 // -----APP---------------------------------------------------------
 export function App() {
   const { actualPhotos, error, clearGallery } = usePhotos();
-  // const [isDynamicBackground, setIsDynamicBackground] = useState<boolean>(
-  //   () => getInitialSetting("dynamic_background", DEFAULT_DYNAMIC_BACKGROUND)
-  // );
-
-  const [isDynamicBackground, setIsDynamicBackground] = useLocalStorage<boolean>("dynamic_background", DEFAULT_DYNAMIC_BACKGROUND);
-
-  const [gridSize, setGridSize] = useLocalStorage<GridSize>("dynamic_background", DEFAULT_GRID_SIZE);
-  
-  // const [gridSize, setGridSize] = useState<GridSize>(() =>
-  //   getInitialSetting("grig_size", DEFAULT_GRID_SIZE)
-  // );
-
-  // useEffect(() => {
-  //   localStorage.setItem(
-  //     "ETP-seting",
-  //     JSON.stringify({
-  //       dynamic_background: isDynamicBackground,
-  //       grig_size: gridSize,
-  //     })
-  //   );
-  // }, [isDynamicBackground, gridSize]);
+  const [isDynamicBackground, setIsDynamicBackground] =
+    useLocalStorage<boolean>("dynamic_background", DEFAULT_DYNAMIC_BACKGROUND);
+  const [gridSize, setGridSize] = useLocalStorage<GridSize>(
+    "grig_size",
+    DEFAULT_GRID_SIZE
+  );
 
   // dynamic-background-mechanism -----------------------------------------
   useEffect(() => {
@@ -104,14 +74,15 @@ export function App() {
         <footer className="footer">
           <span>
             Created by
-            <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">MikeXd</a> 2023
+            <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">
+              MikeXd
+            </a>{" "}
+            2023
           </span>
         </footer>
       </div>
     </AppContext.Provider>
   );
-};
+}
 
 const PhotosGridMemoized = React.memo(PhotosGrid);
-
-

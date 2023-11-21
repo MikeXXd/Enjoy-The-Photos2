@@ -6,11 +6,18 @@ interface Props {
 
 function UStoryOptionBtn({ word }: Props) {
    const {setNewQuery} = usePhotos()
+
+function handleOnClick() {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+    setNewQuery(word)
+}
+
+
   return (
     <button 
         className="btn u-story-option-btn" 
         key={word}
-        onClick={() => setNewQuery(word)} >
+        onClick={handleOnClick} >
               {word}
             </button>
   )

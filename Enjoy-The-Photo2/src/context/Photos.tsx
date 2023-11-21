@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export interface PhotoType {
   id: string;
@@ -9,14 +10,11 @@ export interface PhotoType {
     raw: string;
     regular: string;
     small: string;
-    // small_s3: string;
     thumb: string;
   };
   description: string;
   alt_description: string;
   userId: string;
-  // height: number;
-  // width: number;
 }
 
 export interface PhotosContext {
@@ -46,20 +44,23 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState("nature");
   const [pageNo, setPageNo] = useState(1);
 
-  const [gallery, setGallery] = useState<PhotoType[]>(() => {
-    const getGalery = localStorage.getItem("ETP-galery");
-    if (getGalery == null) return [];
-    return [...JSON.parse(getGalery)];
-  });
+  // const [gallery, setGallery] = useState<PhotoType[]>(() => {
+  //   const getGalery = localStorage.getItem("ETP-galery");
+  //   if (getGalery == null) return [];
+  //   return [...JSON.parse(getGalery)];
+  // });
+
+  const [gallery, setGallery] = useLocalStorage<PhotoType[]>("ETP-galery", []);
+
 
   const [isGalleryRendered, setIsGalleryRendered] = useState(false);
 
 
   console.log(actualPhotos)
   
-  useEffect(() => {
-    localStorage.setItem("ETP-galery", JSON.stringify(gallery));
-  }, [gallery]);
+  // useEffect(() => {
+  //   localStorage.setItem("ETP-galery", JSON.stringify(gallery));
+  // }, [gallery]);
 
   useEffect(() => {
     setIsGalleryRendered(false);

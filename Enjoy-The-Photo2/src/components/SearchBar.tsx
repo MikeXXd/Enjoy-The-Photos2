@@ -2,7 +2,8 @@ import { MouseEvent, KeyboardEvent, useEffect, useState, useRef } from "react";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 
-const SearchBar = () => {
+
+export default function SearchBar() {
   const {
     query,
     setNewQuery,
@@ -14,9 +15,9 @@ const SearchBar = () => {
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
   const inputRef = useRef<HTMLInputElement | null>(null);
-
+  
   console.log('SearchBar', query)
-
+  
   useEffect(() => {
     if (inputRef.current === null) return 
     inputRef.current.value = query
@@ -29,7 +30,7 @@ const SearchBar = () => {
       setIsPriorBtnActive(false);
     }
   }, [pageNo]);
-
+  
   useEffect(() => {
     if (!isGalleryRendered && actualPhotos.length < 30) {
       setIsNextBtnDisabled(true);
@@ -37,49 +38,41 @@ const SearchBar = () => {
       setIsNextBtnDisabled(false);
     }
   }, [actualPhotos, isGalleryRendered]);
-
+  
+  
   function handlePriorBtn(e: MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    e.currentTarget.blur();
-    console.log("ActivPRIORSearchBarPageNo", pageNo);
+    handleEntries(e);
     if (pageNo > 1) {
       setPageNo(pageNo - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setIsPriorBtnActive(false);
     }
   }
-
+  
   function submitQuery(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
-      e.preventDefault();
-      e.currentTarget.blur();
       const inputQuery = e.currentTarget.value;
       setNewQuery(inputQuery);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      handleEntries(e);
     }
   }
 
   function handleNextBtn(e: MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    e.currentTarget.blur();
-    console.log("ActivNEXTSearchBarPageNo", pageNo);
-
+    handleEntries(e);
     if (actualPhotos.length < 1) {
       setPageNo(pageNo - 1);
     } else {
       setPageNo(pageNo + 1);
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
-
+  
   return (
     <div className="search-bar sticky">
       <button
         disabled={false}
         onClick={handlePriorBtn}
         className={cc("btn", isPriorBtnActive || "btn-disabled")}
-      >
+        >
         prior
       </button>
       <input
@@ -95,11 +88,17 @@ const SearchBar = () => {
         disabled={isNextBtnDisabled}
         onClick={handleNextBtn}
         className={cc("btn", isNextBtnDisabled && "btn-disabled")}
-      >
+        >
         next
       </button>
     </div>
   );
 };
 
-export default SearchBar;
+
+
+function handleEntries(e: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>) {
+  e.preventDefault();
+  e.currentTarget.blur();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}

@@ -5,6 +5,7 @@ import About from "./About";
 import Setting from "./setting/Setting";
 import UStoryTemporary from "./UStoryTemporary";
 import Modal from "./Modal";
+import useApp from "../context/useApp";
 
 interface NavItemsProps {
   label: string;
@@ -14,6 +15,7 @@ interface NavItemsProps {
 
 const NavBar = ({}) => {
   const { renderGallery, isGalleryRendered } = usePhotos();
+   const {setIsUStoryCreating} = useApp()
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
   const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
@@ -45,7 +47,7 @@ const NavBar = ({}) => {
         <ul>
           <NavItem
             label="Galery"
-            onClick={renderGallery}
+            onClick={() => {renderGallery(); setIsUStoryCreating(false)}}
             isSelected={isGalleryRendered}
           />
           <NavItem

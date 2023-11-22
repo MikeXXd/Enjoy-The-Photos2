@@ -25,6 +25,10 @@ const UStoryTemporary = ({ onClose}: UStoryTemporaryProps) => {
           <div className="nav-modal-text">
             Hello User :-&#41;
             This section is under development and will be available soon.
+            <p>uStory is a created by searching new photos via uStory options which are buttons shown after clicking triangle icon in the middle of each photo
+              As long as you continue using only the uStory options buttons and buttons previous and next, you storying up!! </p>
+
+            <p>Each uStory ends by entering search bar or opening Gallery</p>
           </div>
         </div>
     )

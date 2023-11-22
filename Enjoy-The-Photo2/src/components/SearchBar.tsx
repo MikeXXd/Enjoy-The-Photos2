@@ -1,7 +1,7 @@
 import { MouseEvent, KeyboardEvent, useEffect, useState, useRef } from "react";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
-
+import useApp from "../context/useApp";
 
 export default function SearchBar() {
   const {
@@ -12,16 +12,15 @@ export default function SearchBar() {
     actualPhotos,
     isGalleryRendered,
   } = usePhotos();
+  const { isUStoryCreating, setIsUStoryCreating } = useApp();
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  
-  console.log('SearchBar', query)
-  
+
   useEffect(() => {
-    if (inputRef.current === null) return 
-    inputRef.current.value = query
-  }, [query])
+    if (inputRef.current === null) return;
+    inputRef.current.value = query;
+  }, [query]);
 
   useEffect(() => {
     if (pageNo > 1) {
@@ -30,7 +29,7 @@ export default function SearchBar() {
       setIsPriorBtnActive(false);
     }
   }, [pageNo]);
-  
+
   useEffect(() => {
     if (!isGalleryRendered && actualPhotos.length < 30) {
       setIsNextBtnDisabled(true);
@@ -38,8 +37,7 @@ export default function SearchBar() {
       setIsNextBtnDisabled(false);
     }
   }, [actualPhotos, isGalleryRendered]);
-  
-  
+
   function handlePriorBtn(e: MouseEvent<HTMLButtonElement>) {
     handleEntries(e);
     if (pageNo > 1) {
@@ -48,7 +46,7 @@ export default function SearchBar() {
       setIsPriorBtnActive(false);
     }
   }
-  
+
   function submitQuery(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       const inputQuery = e.currentTarget.value;
@@ -65,19 +63,25 @@ export default function SearchBar() {
       setPageNo(pageNo + 1);
     }
   }
-  
+
+  function handleFocus() {
+    if (isUStoryCreating) setIsUStoryCreating(false);
+    console.log("Ustory has been terminated");
+  }
+
   return (
     <div className="search-bar sticky">
       <button
         disabled={false}
         onClick={handlePriorBtn}
         className={cc("btn", isPriorBtnActive || "btn-disabled")}
-        >
+      >
         prior
       </button>
       <input
         id="inputQuery"
         type="search"
+        onFocus={handleFocus}
         name="photo"
         ref={inputRef}
         placeholder={query}
@@ -88,16 +92,16 @@ export default function SearchBar() {
         disabled={isNextBtnDisabled}
         onClick={handleNextBtn}
         className={cc("btn", isNextBtnDisabled && "btn-disabled")}
-        >
+      >
         next
       </button>
     </div>
   );
-};
+}
 
-
-
-function handleEntries(e: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>) {
+function handleEntries(
+  e: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>
+) {
   e.preventDefault();
   e.currentTarget.blur();
   window.scrollTo({ top: 0, behavior: "smooth" });

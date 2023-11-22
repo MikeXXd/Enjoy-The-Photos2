@@ -4,10 +4,25 @@ import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
 import usePhotos from "./context/usePhotos";
 import imgTriangle from "./img/icons8-triangle-color-96.png";
-import { createContext, useEffect, useState, useCallback } from "react";
+import { createContext, useEffect, useCallback, useState, memo } from "react";
 import { fetchBackgroundImage } from "./services/extFunctions";
-import React from "react";
 import useLocalStorage from "./hooks/useLocalStorage";
+import { PhotoType } from "./context/Photos";
+
+type GridSize = "small" | "medium" | "large";
+
+const DEFAULT_GRID_SIZE: GridSize = "medium";
+const DEFAULT_DYNAMIC_BACKGROUND = false;
+
+interface UStoryChain extends PhotoType {
+  photoQueryName: string;
+}
+
+interface UStoryType {
+  id: number;
+  name: string;
+  body: UStoryChain[];
+}
 
 interface AppContextProps {
   isDynamicBackground: boolean;
@@ -15,30 +30,35 @@ interface AppContextProps {
   gridSize: GridSize;
   setGridSize: (size: GridSize) => void;
   resetApp: () => void;
+  isUStoryCreating: boolean;
+  setIsUStoryCreating: (active:boolean) => void;
+  arrangeUStory: (photo:PhotoType) => void;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
 
-type GridSize = "small" | "medium" | "large";
-
-const DEFAULT_GRID_SIZE: GridSize = "medium";
-const DEFAULT_DYNAMIC_BACKGROUND = false;
-
 // -----APP---------------------------------------------------------
 export function App() {
-  const { actualPhotos, error, clearGallery } = usePhotos();
+  const [isUStoryRendered, setIsUStoryRendered] = useState(false);
+  const [isUStoryCreating, setIsUStoryCreating] = useState(false);
+  const { query, actualPhotos, error, clearGallery } = usePhotos();
   const [isDynamicBackground, setIsDynamicBackground] =
-    useLocalStorage<boolean>("dynamic_background", DEFAULT_DYNAMIC_BACKGROUND);
+    useLocalStorage<boolean>(
+      "ETP-dynamic_background",
+      DEFAULT_DYNAMIC_BACKGROUND
+    );
   const [gridSize, setGridSize] = useLocalStorage<GridSize>(
-    "grig_size",
+    "ETP-grig_size",
     DEFAULT_GRID_SIZE
   );
+  const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", []);
 
   // dynamic-background-mechanism -----------------------------------------
   useEffect(() => {
     if (actualPhotos.length < 2 || !isDynamicBackground) return;
     fetchBackgroundImage(actualPhotos[1]); //[1] as the second photo looks better
   }, [actualPhotos, isDynamicBackground]);
+  //--------------------------------------------------------------------------
 
   const resetApp = useCallback(() => {
     clearGallery();
@@ -47,6 +67,21 @@ export function App() {
     window.location.reload();
   }, [clearGallery, setIsDynamicBackground, setGridSize]);
 
+//---Arranging uStory--------------------------------------------------------
+  function arrangeUStory(photo: PhotoType) {
+      const newPhoto:UStoryChain = {...photo, photoQueryName: query}
+
+    if (!isUStoryCreating) {
+      setIsUStoryCreating(true)
+      const newUStory = {id: Math.random()*1000, name: query, body: [newPhoto]}
+      setUStory([...uStory, newUStory])
+    }
+    else {
+      const currentUStory = uStory[uStory.length - 1].id
+      setUStory(uStory.map(story => story.id === currentUStory ? {...story, body: [...story.body, newPhoto]} : story))
+    }
+  }
+//------------------------------------------------------------------------------
   return (
     <AppContext.Provider
       value={{
@@ -55,6 +90,9 @@ export function App() {
         gridSize,
         setGridSize,
         resetApp,
+        isUStoryCreating,
+        setIsUStoryCreating,
+        arrangeUStory
       }}
     >
       <div className="main-container">
@@ -85,4 +123,4 @@ export function App() {
   );
 }
 
-const PhotosGridMemoized = React.memo(PhotosGrid);
+const PhotosGridMemoized = memo(PhotosGrid);

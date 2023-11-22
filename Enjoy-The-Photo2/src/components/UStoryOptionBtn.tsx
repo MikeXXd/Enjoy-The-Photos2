@@ -1,26 +1,29 @@
+import { PhotoType } from "../context/Photos";
+import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 
 interface Props {
-    word: string;
+  word: string;
+  photo: PhotoType;
 }
 
-function UStoryOptionBtn({ word }: Props) {
-   const {setNewQuery} = usePhotos()
+export default function UStoryOptionBtn({ word, photo }: Props) {
+  const { setNewQuery } = usePhotos();
+  const { arrangeUStory } = useApp();
 
-function handleOnClick() {
-  window.scrollTo({ top: 0, behavior: "smooth" })
-    setNewQuery(word)
-}
-
+  function handleOnClick() {
+    arrangeUStory(photo);
+    setNewQuery(word);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
-    <button 
-        className="btn u-story-option-btn" 
-        key={word}
-        onClick={handleOnClick} >
-              {word}
-            </button>
-  )
+    <button
+      className="btn u-story-option-btn"
+      key={word}
+      onClick={handleOnClick}
+    >
+      {word}
+    </button>
+  );
 }
-
-export default UStoryOptionBtn

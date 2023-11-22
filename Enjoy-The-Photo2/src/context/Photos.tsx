@@ -28,6 +28,7 @@ export interface PhotosContext {
   arrangeGallery: (Photo: PhotoType) => void;
   renderGallery: () => void;
   isGalleryRendered: boolean;
+  setIsGalleryRendered: (active: boolean) => void;
   clearGallery: () => void;
 }
 
@@ -105,6 +106,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         arrangeGallery,
         renderGallery,
         isGalleryRendered,
+        setIsGalleryRendered,
         clearGallery,
       }}
     >

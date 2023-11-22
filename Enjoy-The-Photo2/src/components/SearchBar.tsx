@@ -12,16 +12,16 @@ export default function SearchBar() {
     actualPhotos,
     isGalleryRendered,
   } = usePhotos();
-  const { isUStoryCreating, setIsUStoryCreating } = useApp();
+  const { isUStoryCreating, setIsUStoryCreating, isUStoryRendered,setIsUStoryRendered } = useApp();
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
   const inputRef = useRef<HTMLInputElement | null>(null);
-
+  
   useEffect(() => {
     if (inputRef.current === null) return;
     inputRef.current.value = query;
   }, [query]);
-
+  
   useEffect(() => {
     if (pageNo > 1) {
       setIsPriorBtnActive(true);
@@ -37,6 +37,15 @@ export default function SearchBar() {
       setIsNextBtnDisabled(false);
     }
   }, [actualPhotos, isGalleryRendered]);
+
+  function handleEntries(
+    e: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>
+  ) {
+    e.preventDefault();
+    e.currentTarget.blur();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    isUStoryRendered && setIsUStoryRendered(false);
+  }
 
   function handlePriorBtn(e: MouseEvent<HTMLButtonElement>) {
     handleEntries(e);
@@ -99,10 +108,3 @@ export default function SearchBar() {
   );
 }
 
-function handleEntries(
-  e: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>
-) {
-  e.preventDefault();
-  e.currentTarget.blur();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}

@@ -14,11 +14,11 @@ interface NavItemsProps {
 }
 
 const NavBar = ({}) => {
-  const { renderGallery, isGalleryRendered } = usePhotos();
-   const {setIsUStoryCreating} = useApp()
+  const { renderGallery, isGalleryRendered, setIsGalleryRendered } = usePhotos();
+   const {setIsUStoryCreating, isUStoryRendered,setIsUStoryRendered} = useApp()
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
-  const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
+  // const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
 
   // console.log('NavBar Rendered')
 
@@ -47,13 +47,14 @@ const NavBar = ({}) => {
         <ul>
           <NavItem
             label="Galery"
-            onClick={() => {renderGallery(); setIsUStoryCreating(false)}}
+            onClick={() => {renderGallery(); setIsUStoryCreating(false); setIsUStoryRendered(false)}}
             isSelected={isGalleryRendered}
           />
           <NavItem
-            label={"uStory"}
-            onClick={handleModal(setIsUStoryModalOpen)}
-            isSelected={false}
+            label="uStory"
+            // onClick={handleModal(setIsUStoryModalOpen)}
+            onClick={() => {setIsUStoryCreating(false); setIsUStoryRendered(true); setIsGalleryRendered(false)}}
+            isSelected={isUStoryRendered}
           />
           <NavItem
             label="About"
@@ -81,12 +82,12 @@ const NavBar = ({}) => {
       >
         <Setting onClose={handleCloseModal(setIsSettingModalOpen)} />
       </Modal>
-      <Modal
+      {/* <Modal
         isOpen={isUStoryModalOpen}
         onClose={handleCloseModal(setIsUStoryModalOpen)}
       >
         <UStoryTemporary onClose={handleCloseModal(setIsUStoryModalOpen)} />
-      </Modal>
+      </Modal> */}
     </>
   );
 };

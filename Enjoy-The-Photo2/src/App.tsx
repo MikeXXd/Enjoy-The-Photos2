@@ -8,6 +8,8 @@ import { createContext, useEffect, useCallback, useState, memo } from "react";
 import { fetchBackgroundImage } from "./services/extFunctions";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { PhotoType } from "./context/Photos";
+import { cc } from "./utils/cc";
+import UStoryMain from "./components/UStoryMain";
 
 type GridSize = "small" | "medium" | "large";
 
@@ -33,6 +35,9 @@ interface AppContextProps {
   isUStoryCreating: boolean;
   setIsUStoryCreating: (active:boolean) => void;
   arrangeUStory: (photo:PhotoType) => void;
+  isUStoryRendered: boolean;
+  setIsUStoryRendered: (active:boolean) => void;
+  uStory: UStoryType[];
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
@@ -92,7 +97,10 @@ export function App() {
         resetApp,
         isUStoryCreating,
         setIsUStoryCreating,
-        arrangeUStory
+        arrangeUStory,
+        isUStoryRendered,
+        setIsUStoryRendered,
+        uStory
       }}
     >
       <div className="main-container">
@@ -101,14 +109,14 @@ export function App() {
             Breath in the depth of colors and geometry, jump in and enjoooooy!
           </span>
           <header className="header">
-            <img src={imgTriangle} />
+            <img className={cc("header-img",isUStoryCreating && "ustorying")} src={imgTriangle}  />
             <h1>Enjoy the Photos2</h1>
           </header>
           <NavBar />
         </div>
         <SearchBar />
         {error && <div className="error">{error}</div>}
-        <PhotosGridMemoized />
+        {isUStoryRendered ? <UStoryMain/> : <PhotosGrid />}
         <footer className="footer">
           <span>
             Created by
@@ -123,4 +131,4 @@ export function App() {
   );
 }
 
-const PhotosGridMemoized = memo(PhotosGrid);
+

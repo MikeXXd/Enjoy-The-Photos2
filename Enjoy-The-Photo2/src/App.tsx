@@ -10,6 +10,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import { PhotoType } from "./context/Photos";
 import { cc } from "./utils/cc";
 import UStoryMain from "./components/UStoryMain";
+import { set } from "react-hook-form";
 
 type GridSize = "small" | "medium" | "large";
 
@@ -67,6 +68,7 @@ export function App() {
 
   const resetApp = useCallback(() => {
     clearGallery();
+    setUStory([]);
     setIsDynamicBackground(DEFAULT_DYNAMIC_BACKGROUND);
     setGridSize(DEFAULT_GRID_SIZE);
     window.location.reload();

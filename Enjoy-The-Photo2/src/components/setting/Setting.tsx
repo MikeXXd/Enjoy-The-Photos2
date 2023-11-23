@@ -15,7 +15,7 @@ const Setting = ({ onClose }: SettingProps) => {
   } = useApp();
 
   function handleReset() {
-    alert("Are you sure you want to reset the application and delete Gallery?");
+    alert("Are you sure you want to reset the application, delete Gallery and uStories?");
     resetApp();
   }
 
@@ -76,7 +76,7 @@ const Setting = ({ onClose }: SettingProps) => {
         </label>
       </div>
 
-      <h3>Set Default and Delete Gallery</h3>
+      <h3>Set Default, delete Gallery and uStories</h3>
       <button onClick={handleReset} className="setting-delete-btn">
         ! Reset
       </button>

@@ -11,6 +11,7 @@
   --medium-color: #92825d;
   --light-color: #d1cab3;
   --orange-color: rgb(217, 122, 28);
+  --orange-light-color: rgb(194, 132, 0);
   --yellow-color: rgb(227, 208, 80);
   --green-color: #96d91c;
   --white-color: #fff;
@@ -447,9 +448,6 @@ a:focus {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 1px solid var(--white-color);
-  border-radius: var(--soft-radius);
-  background-color: var(--transfluent-background-color);
   padding: 0.5rem;
   margin: 0.5rem;
 }
@@ -460,21 +458,41 @@ a:focus {
   justify-content: center;
   align-items: center;
   max-height: min-content;
+  background-color: var(--transfluent-background-color);
+  border: 0px solid var(--medium-color);
+  margin-bottom: 1rem;
+  padding-left: .1rem;
+  padding-right: .1rem;
+  border-radius: var(--soft-radius);
 }
 
 .one-ustory-title {
+  color: var(--orange-light-color);
   writing-mode: vertical-lr;
   transform: rotate(180deg);
+}
+.one-ustory-title.last {
+  transform: none;
 }
 
 .one-ustory-body {
   display: flexbox;
   justify-content: center;
   align-items: center;
+  border: 2px solid var(--medium-color);
+  border-radius: var(--soft-radius);
+  padding: .6rem
+  
 }
 
 .one-ustory-body > img {
-  width: 15rem;
+  height: 15rem;
+  border-right: 1px solid var(--medium-color);
+  margin-top: 1px
+}
+
+.one-ustory-body > img:last-child {
+  border-right: none;
 }
 
 

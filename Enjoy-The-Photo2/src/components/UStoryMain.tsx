@@ -16,6 +16,8 @@ export default function UStoryMain() {
                             <img key={photo.id} src={photo.urls.small} alt={photo.alt_description} />
                         ))}
                     </div>
+                    <h2 className="one-ustory-title last">{story.name}</h2>
+
                 </div>
             ))}
         </main>

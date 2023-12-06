@@ -1,0 +1,22 @@
+/*------------------ Flickity carousel--------------------------------- */
+.ustories-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem;
+  border: 1px solid var(--orange-color);
+}
+
+.carousel {
+  padding: 0.5rem;
+  margin: 1rem;
+  margin-bottom: 2rem;
+  background-color: var(--transfluent-background-color);
+  border: 0px solid var(--medium-color);
+  border-radius: var(--soft-radius);
+}
+
+.ustory-photo {
+  height: 15rem;
+}

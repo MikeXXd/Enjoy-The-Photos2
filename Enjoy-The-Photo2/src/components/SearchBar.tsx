@@ -75,7 +75,6 @@ export default function SearchBar() {
 
   function handleFocus() {
     if (isUStoryCreating) setIsUStoryCreating(false);
-    console.log("Ustory has been terminated");
   }
 
   return (

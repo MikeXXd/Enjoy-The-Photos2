@@ -4,13 +4,12 @@ import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
 import usePhotos from "./context/usePhotos";
 import imgTriangle from "./img/icons8-triangle-color-96.png";
-import { createContext, useEffect, useCallback, useState, memo } from "react";
+import { createContext, useEffect, useState } from "react";
 import { fetchBackgroundImage } from "./services/extFunctions";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { PhotoType } from "./context/Photos";
 import { cc } from "./utils/cc";
-import UStoryMain from "./components/UStoryMain";
-import { set } from "react-hook-form";
+import UStoryMain from "./components/uStory/UStoryMain";
 
 type GridSize = "small" | "medium" | "large";
 
@@ -21,8 +20,8 @@ interface UStoryChain extends PhotoType {
   photoQueryName: string;
 }
 
-interface UStoryType {
-  id: number;
+export interface UStoryType {
+  id: string;
   name: string;
   body: UStoryChain[];
 }
@@ -34,10 +33,10 @@ interface AppContextProps {
   setGridSize: (size: GridSize) => void;
   resetApp: () => void;
   isUStoryCreating: boolean;
-  setIsUStoryCreating: (active:boolean) => void;
-  arrangeUStory: (photo:PhotoType) => void;
+  setIsUStoryCreating: (active: boolean) => void;
+  arrangeUStory: (photo: PhotoType) => void;
   isUStoryRendered: boolean;
-  setIsUStoryRendered: (active:boolean) => void;
+  setIsUStoryRendered: (active: boolean) => void;
   uStory: UStoryType[];
 }
 
@@ -59,6 +58,8 @@ export function App() {
   );
   const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", []);
 
+  console.log("App was rendered");
+
   // dynamic-background-mechanism -----------------------------------------
   useEffect(() => {
     if (actualPhotos.length < 2 || !isDynamicBackground) return;
@@ -66,29 +67,38 @@ export function App() {
   }, [actualPhotos, isDynamicBackground]);
   //--------------------------------------------------------------------------
 
-  const resetApp = useCallback(() => {
+  function resetApp() {
     clearGallery();
     setUStory([]);
     setIsDynamicBackground(DEFAULT_DYNAMIC_BACKGROUND);
     setGridSize(DEFAULT_GRID_SIZE);
     window.location.reload();
-  }, [clearGallery, setIsDynamicBackground, setGridSize]);
+  }
 
-//---Arranging uStory--------------------------------------------------------
+  //---Arranging uStory--------------------------------------------------------
   function arrangeUStory(photo: PhotoType) {
-      const newPhoto:UStoryChain = {...photo, photoQueryName: query}
-
+    const newPhoto: UStoryChain = { ...photo, photoQueryName: query };
+    console.log("function arrangeUStory was used");
     if (!isUStoryCreating) {
-      setIsUStoryCreating(true)
-      const newUStory = {id: Math.random()*1000, name: query, body: [newPhoto]}
-      setUStory([...uStory, newUStory])
-    }
-    else {
-      const currentUStory = uStory[uStory.length - 1].id
-      setUStory(uStory.map(story => story.id === currentUStory ? {...story, body: [...story.body, newPhoto]} : story))
+      setIsUStoryCreating(true);
+      const newUStory = {
+        id: crypto.randomUUID(),
+        name: query,
+        body: [newPhoto],
+      };
+      setUStory([...uStory, newUStory]);
+    } else {
+      const currentUStory = uStory[uStory.length - 1].id;
+      setUStory(
+        uStory.map((story) =>
+          story.id === currentUStory
+            ? { ...story, body: [...story.body, newPhoto] }
+            : story
+        )
+      );
     }
   }
-//------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
   return (
     <AppContext.Provider
       value={{
@@ -102,7 +112,7 @@ export function App() {
         arrangeUStory,
         isUStoryRendered,
         setIsUStoryRendered,
-        uStory
+        uStory,
       }}
     >
       <div className="main-container">
@@ -111,14 +121,17 @@ export function App() {
             Breath in the depth of colors and geometry, jump in and enjoooooy!
           </span>
           <header className="header">
-            <img className={cc("header-img",isUStoryCreating && "ustorying")} src={imgTriangle}  />
+            <img
+              className={cc("header-img", isUStoryCreating && "ustorying")}
+              src={imgTriangle}
+            />
             <h1>Enjoy the Photos2</h1>
           </header>
           <NavBar />
         </div>
         <SearchBar />
         {error && <div className="error">{error}</div>}
-        {isUStoryRendered ? <UStoryMain/> : <PhotosGrid />}
+        {isUStoryRendered ? <UStoryMain /> : <PhotosGrid />}
         <footer className="footer">
           <span>
             Created by
@@ -132,5 +145,3 @@ export function App() {
     </AppContext.Provider>
   );
 }
-
-

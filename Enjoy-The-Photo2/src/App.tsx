@@ -38,6 +38,8 @@ interface AppContextProps {
   isUStoryRendered: boolean;
   setIsUStoryRendered: (active: boolean) => void;
   uStory: UStoryType[];
+  changeUStoryTitle: (titleStory: Omit<UStoryType, "body">) => void;
+  deleteUStory: (id: Pick<UStoryType, "id">) => void;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
@@ -78,7 +80,6 @@ export function App() {
   //---Arranging uStory--------------------------------------------------------
   function arrangeUStory(photo: PhotoType) {
     const newPhoto: UStoryChain = { ...photo, photoQueryName: query };
-    console.log("function arrangeUStory was used");
     if (!isUStoryCreating) {
       setIsUStoryCreating(true);
       const newUStory = {
@@ -98,6 +99,22 @@ export function App() {
       );
     }
   }
+
+  function changeUStoryTitle({id, name}: Omit<UStoryType, "body">) {
+      setUStory(
+        uStory.map((story) =>
+          story.id === id
+            ? { ...story, name: name }
+            : story
+        )
+      );
+    }
+
+  function deleteUStory({id}: Pick<UStoryType, "id">) {
+    setUStory(uStory.filter((story) => story.id !== id));
+  }
+
+  
   //------------------------------------------------------------------------------
   return (
     <AppContext.Provider
@@ -113,6 +130,8 @@ export function App() {
         isUStoryRendered,
         setIsUStoryRendered,
         uStory,
+        changeUStoryTitle,
+        deleteUStory
       }}
     >
       <div className="main-container">

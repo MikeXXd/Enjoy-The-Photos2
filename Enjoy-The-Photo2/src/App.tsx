@@ -11,6 +11,7 @@ import { PhotoType } from "./context/Photos";
 import { cc } from "./utils/cc";
 import UStoryMain from "./components/uStory/UStoryMain";
 
+
 type GridSize = "small" | "medium" | "large";
 
 const DEFAULT_GRID_SIZE: GridSize = "medium";
@@ -34,7 +35,7 @@ interface AppContextProps {
   resetApp: () => void;
   isUStoryCreating: boolean;
   setIsUStoryCreating: (active: boolean) => void;
-  arrangeUStory: (photo: PhotoType) => void;
+  arrangeUStory: (photo: PhotoType, photoTitle: string ) => void;
   isUStoryRendered: boolean;
   setIsUStoryRendered: (active: boolean) => void;
   uStory: UStoryType[];
@@ -60,8 +61,6 @@ export function App() {
   );
   const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", []);
 
-  console.log("App was rendered");
-
   // dynamic-background-mechanism -----------------------------------------
   useEffect(() => {
     if (actualPhotos.length < 2 || !isDynamicBackground) return;
@@ -78,8 +77,9 @@ export function App() {
   }
 
   //---Arranging uStory--------------------------------------------------------
-  function arrangeUStory(photo: PhotoType) {
-    const newPhoto: UStoryChain = { ...photo, photoQueryName: query };
+  function arrangeUStory(photo: PhotoType, photoTitle: string) {
+    const title = photoTitle === query ? query : photoTitle // if photoTitle =  query, then photo is added but no new query search initiated 
+    const newPhoto: UStoryChain = { ...photo, photoQueryName: title };
     if (!isUStoryCreating) {
       setIsUStoryCreating(true);
       const newUStory = {

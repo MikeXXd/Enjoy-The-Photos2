@@ -31,7 +31,7 @@ const PHOTO_ORIENTATION: OrientationProps[] = [
 ];
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
-  const { gallery, arrangeGallery } = usePhotos();
+  const { gallery, arrangeGallery, query } = usePhotos();
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [photoSize, setPhotoSize] = useState(
@@ -45,29 +45,18 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const [uStoryWords, setUStoryWords] = useState<string[]>([]);
   const [isUStoryIconSpread, setIsUStoryIconSpread] = useState(false);
 
-  // console.log("uStory", uStoryWords);
+  console.log("uStory", uStoryWords);
 
-  const photoDescription = (photo.description + photo.alt_description).replace(
-    /\./g,
-    ""
-  ); //removing dots from description
-
-  function extractVerbsAndNouns(text: string) {
-    // extracting verbs and nouns from photo description to use then for further search in uStory
-    if (text.length < 1) return;
-    const doc = nlp(text);
-    const verbs = doc.verbs().out("array");
-    const nouns = doc.nouns().out("array");
-    setUStoryWords([...verbs, ...nouns]);
-  }
-
-  useEffect(() => {
-    extractVerbsAndNouns(photoDescription);
-  }, []);
+  // useEffect(() => {
+  //   const photoDescription = (photo.description + photo.alt_description)
+  //   setUStoryWords(extractVerbsAndNouns(photoDescription) as string[]);
+  // }, []);
 
   //--handling image interaction-----------------------------------------
   function handleMouseEnter() {
     if (isLoaded) {
+      const photoDescription = photo.description + photo.alt_description;
+      setUStoryWords(extractVerbsAndNouns(photoDescription) as string[]);
       setAreIconsActive(true);
       setIsResizing(false);
     }
@@ -120,7 +109,12 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         onLoad={() => setIsLoaded(true)}
       />
       {/* ----Top Icons ---------------------------------- */}
-      <div className={cc("img-icons img-top-icons", areIconsActive && !isUStoryIconSpread && "show")}>
+      <div
+        className={cc(
+          "img-icons img-top-icons",
+          areIconsActive && !isUStoryIconSpread && "show"
+        )}
+      >
         <SlSizeFullscreen
           onClick={() => setIsPhotoModalOpen(true)}
           fill="pink"
@@ -141,14 +135,18 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       {isUStoryIconSpread && (
         <div className="u-story-options-container">
           {uStoryWords.map((word) => (
-            <UStoryOptionBtn word={word} photo={photo}/>
-          ))}
+            <UStoryOptionBtn word={word} photo={photo} />
+            ))}
+            <UStoryOptionBtn word={query} photo={photo} />
         </div>
       )}
 
       {/* ----Bottom Icons ---------------------------------- */}
       <div
-        className={cc("img-icons img-bottom-icons", areIconsActive && !isUStoryIconSpread && "show")}
+        className={cc(
+          "img-icons img-bottom-icons",
+          areIconsActive && !isUStoryIconSpread && "show"
+        )}
       >
         {isLiked ? (
           <AiFillHeart onClick={handleHeartIcon} fill="red" />
@@ -185,3 +183,19 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 };
 
 export default PhotoContainer;
+
+function extractVerbsAndNouns(text: string) {
+  // extracting verbs and nouns from photo description to use then for further search in uStory
+  if (!text) return;
+  const doc = nlp(text);
+  const verbs = doc.verbs().out("array");
+  const nouns = doc.nouns().out("array");
+  const nullCleaner = (array: string[]) =>
+    array.map((word: string) =>
+      word.startsWith("null") ? word.slice(4) : word
+    );
+  // some words are poluted with word "null" prefix nullCleaner cleans it
+  const cleanedVerbs = nullCleaner(verbs);
+  const cleanedNouns = nullCleaner(nouns);
+  return [...cleanedVerbs, ...cleanedNouns];
+}

@@ -1,6 +1,7 @@
 
 /*! Flickity v2.1.2
 https://flickity.metafizzy.co
+flickity provided optional css features
 ---------------------------------------------- */
 
 .flickity-enabled {
@@ -119,7 +120,7 @@ https://flickity.metafizzy.co
   .flickity-page-dots {
     position: absolute;
     width: 100%;
-    bottom: -25px;
+    bottom: -1.6rem;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -133,12 +134,12 @@ https://flickity.metafizzy.co
   
   .flickity-page-dots .dot {
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0 8px;
-    background: #333;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 0 .3rem;
+    background: rgb(217, 122, 28);
     border-radius: 50%;
-    opacity: 0.25;
+    opacity: 0.5;
     cursor: pointer;
   }
   

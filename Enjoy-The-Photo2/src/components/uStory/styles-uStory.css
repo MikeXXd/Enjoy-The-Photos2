@@ -1,6 +1,8 @@
 /*------------------ Flickity carousel--my css------------------------------- */
 
-* {box-sizing: border-box;}
+* {
+  box-sizing: border-box;
+}
 .ustories-wrap {
   position: relative;
   width: 100%;
@@ -21,12 +23,20 @@
   border-radius: var(--soft-radius);
   cursor: pointer;
   scale: 1;
+  transition: all 0.5s linear;
 }
 
-.ustory-title-btn {
-  left: -3rem;
+.ustory-btn.ustory-title-btn {
+  left: -11.3rem;
   z-index: 1;
   transform: rotate(-10deg);
+  transition: all 0.5s linear;
+}
+.ustory-btn.ustory-title-btn.move-away {
+  top: 0rem;
+  left: -11.1rem;
+  transform: rotate(0deg);
+  transition: all 0.5s linear;
 }
 
 .ustory-delete-btn {
@@ -34,10 +44,18 @@
   transform: rotate(10deg);
 }
 
+.ustory-setting-btn {
+  top: 1.35rem;
+  left: calc(100% - 15.6rem);
+}
+
 .ustory-btn.ustory-title-btn:hover,
-.ustory-btn.ustory-delete-btn:hover {
+.ustory-btn.ustory-delete-btn:hover,
+.ustory-btn.ustory-setting-btn:hover {
   scale: 1.1;
   transition: all 0.5s linear;
+  background-color: black;
+  z-index: 1;
 }
 
 .ustory-btn.ustory-delete-btn:hover {
@@ -48,51 +66,81 @@
 
 .carousel {
   --story-wrapping-border: 0.3rem;
-  --carousel-height: 240px; /* I played with hight resizing, status: unresolved*/
+  --carousel-height: 15rem; /* I played with hight resizing, status: unresolved*/
   margin-bottom: 2rem;
   background-color: rgba(0, 0, 0, 0.7);
   border: var(--story-wrapping-border) solid var(--medium-color);
   border-radius: var(--soft-radius);
 }
 
-
-.ustory-photo-container{
+.ustory-photo-container {
   position: relative;
-  
 }
 
 .ustory-img {
   height: var(--carousel-height);
+  min-width: 10rem;
+  object-fit: cover;
 }
 
 .ustory-img:focus {
   transform: scale(1.1);
 }
 
+/* sdfs */
 .ustory-photo-container::before {
   content: attr(data-img);
   position: absolute;
-  display:block;
-  top: .5em;
-  left: .5em;
-  font-size: 1em;
+  display: block;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 1rem;
   color: var(--white-color);
   background-color: var(--transfluent-background-color);
   border-radius: var(--soft-radius);
-  padding: .5em;
-  margin: 0 .5em .5em 0;
-  opacity:0;
+  padding: 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
+  opacity: 0;
+  transition: all 0.5s linear;
+}
+
+.ustory-photo-container.on-setting::before {
+  top: 2.2rem;
+  opacity: 0.5;
+  transition: all 0.5s linear;
 }
 
 .ustory-photo-container.show-title::before {
-  opacity:1
+  opacity: 1;
 }
 
-.ustory-photo-container:hover::before{
-  opacity:1;
-  transition: 700ms opacity .5s linear;
+.ustory-photo-container.show-on-hover:hover::before {
+  opacity: 1;
+  transition: 700ms all 0.5s linear;
 }
 
-.show{
-  opacity:0;
+.story-photo-icons-wrap {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin: 0.1rem 0.8rem 0 0.3rem;
+}
+
+.story-photo-icons-wrap svg {
+  margin-right: 0.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.story-photo-icons-wrap svg:hover {
+  scale: 1.25;
+  transition: 100ms scale 150ms ease-in-out;
+}
+
+.delete-icon {
+  fill: rgb(128, 128, 128);
+}
+.delete-icon:hover {
+  fill: red;
+  transition: 100ms fill 150ms ease-in-out;
 }

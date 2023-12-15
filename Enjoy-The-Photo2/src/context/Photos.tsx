@@ -30,6 +30,7 @@ export interface PhotosContext {
   isGalleryRendered: boolean;
   setIsGalleryRendered: (active: boolean) => void;
   clearGallery: () => void;
+  isInGalery: (photo: PhotoType) => boolean;
 }
 
 interface FetchPhotosResponse {
@@ -93,6 +94,11 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     setGallery([]);
   }
 
+  function isInGalery(photo: PhotoType) {
+      const isOrNot = gallery.find((p) => p.id === photo.id);
+     return isOrNot ? true : false;
+  }
+
   return (
     <Context.Provider
       value={{
@@ -108,6 +114,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         isGalleryRendered,
         setIsGalleryRendered,
         clearGallery,
+        isInGalery
       }}
     >
       {children}

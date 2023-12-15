@@ -31,7 +31,7 @@ const PHOTO_ORIENTATION: OrientationProps[] = [
 ];
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
-  const { gallery, arrangeGallery, query } = usePhotos();
+  const { gallery, arrangeGallery, query, isInGalery } = usePhotos();
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [photoSize, setPhotoSize] = useState(
@@ -82,9 +82,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
   //--Galerry Icon------------------------------------------
   useEffect(() => {
-    gallery.find((p) => p.id === photo.id)
-      ? setIsLiked(true)
-      : setIsLiked(false);
+      setIsLiked(isInGalery(photo));
   }, [gallery]);
 
   // this hook doest work properly - problem with reappearing icons
@@ -149,7 +147,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         )}
       >
         {isLiked ? (
-          <AiFillHeart onClick={handleHeartIcon} fill="red" />
+          <AiFillHeart onClick={handleHeartIcon} fill={"rgb(238, 93, 93)"} />
         ) : (
           <AiOutlineHeart onClick={handleHeartIcon} fill="pink" />
         )}

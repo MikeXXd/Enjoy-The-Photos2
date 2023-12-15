@@ -11,20 +11,25 @@ import { PhotoType } from "./context/Photos";
 import { cc } from "./utils/cc";
 import UStoryMain from "./components/uStory/UStoryMain";
 
-
 type GridSize = "small" | "medium" | "large";
 
 const DEFAULT_GRID_SIZE: GridSize = "medium";
 const DEFAULT_DYNAMIC_BACKGROUND = false;
 
-interface UStoryChain extends PhotoType {
-  photoQueryName: string;
+export interface UStoryChain extends PhotoType {
+  photoInStoryName: string;
 }
 
 export interface UStoryType {
   id: string;
   name: string;
   body: UStoryChain[];
+}
+
+interface UStoryPhotoTitleType {
+  storyId: UStoryType["id"];
+  photoId: UStoryChain["id"];
+  name: UStoryChain["photoInStoryName"];
 }
 
 interface AppContextProps {
@@ -35,12 +40,15 @@ interface AppContextProps {
   resetApp: () => void;
   isUStoryCreating: boolean;
   setIsUStoryCreating: (active: boolean) => void;
-  arrangeUStory: (photo: PhotoType, photoTitle: string ) => void;
+  arrangeUStory: (photo: PhotoType, photoTitle: string) => void;
   isUStoryRendered: boolean;
   setIsUStoryRendered: (active: boolean) => void;
   uStory: UStoryType[];
   changeUStoryTitle: (titleStory: Omit<UStoryType, "body">) => void;
   deleteUStory: (id: Pick<UStoryType, "id">) => void;
+
+  changeUStoryPhotoTitle: (titlePhoto: UStoryPhotoTitleType) => void;
+  deleteUStoryPhoto: (id: Omit<UStoryPhotoTitleType, "name">) => void;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
@@ -78,8 +86,8 @@ export function App() {
 
   //---Arranging uStory--------------------------------------------------------
   function arrangeUStory(photo: PhotoType, photoTitle: string) {
-    const title = photoTitle === query ? query : photoTitle // if photoTitle =  query, then photo is added but no new query search initiated 
-    const newPhoto: UStoryChain = { ...photo, photoQueryName: title };
+    const title = photoTitle === query ? query : photoTitle; // if photoTitle =  query, then photo is added but no new query search initiated
+    const newPhoto: UStoryChain = { ...photo, photoInStoryName: title };
     if (!isUStoryCreating) {
       setIsUStoryCreating(true);
       const newUStory = {
@@ -100,21 +108,53 @@ export function App() {
     }
   }
 
-  function changeUStoryTitle({id, name}: Omit<UStoryType, "body">) {
-      setUStory(
-        uStory.map((story) =>
-          story.id === id
-            ? { ...story, name: name }
-            : story
-        )
-      );
-    }
+  function changeUStoryTitle({ id, name }: Omit<UStoryType, "body">) {
+    setUStory(
+      uStory.map((story) => (story.id === id ? { ...story, name } : story))
+    );
+  }
 
-  function deleteUStory({id}: Pick<UStoryType, "id">) {
+  function deleteUStory({ id }: Pick<UStoryType, "id">) {
     setUStory(uStory.filter((story) => story.id !== id));
   }
 
-  
+  function changeUStoryPhotoTitle({
+    storyId,
+    photoId,
+    name,
+  }: UStoryPhotoTitleType) {
+    setUStory((prevUStory) =>
+      prevUStory.map((story) =>
+        story.id === storyId
+          ? {
+              ...story,
+              body: story.body.map((photo) =>
+                photo.id === photoId
+                  ? { ...photo, photoInStoryName: name }
+                  : photo
+              ),
+            }
+          : story
+      )
+    );
+  }
+
+  function deleteUStoryPhoto({
+    storyId,
+    photoId,
+  }: Omit<UStoryPhotoTitleType, "name">) {
+    setUStory((prevUStory) =>
+      prevUStory.map((story) =>
+        story.id === storyId
+          ? {
+              ...story,
+              body: story.body.filter((photo) => photo.id !== photoId),
+            }
+          : story
+      )
+    );
+  }
+
   //------------------------------------------------------------------------------
   return (
     <AppContext.Provider
@@ -131,7 +171,9 @@ export function App() {
         setIsUStoryRendered,
         uStory,
         changeUStoryTitle,
-        deleteUStory
+        deleteUStory,
+        changeUStoryPhotoTitle,
+        deleteUStoryPhoto,
       }}
     >
       <div className="main-container">

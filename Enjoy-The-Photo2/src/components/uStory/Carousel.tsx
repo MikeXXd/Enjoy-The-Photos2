@@ -2,8 +2,9 @@ import Flickity from "react-flickity-component";
 import { UStoryType } from "../../App";
 import "./flickity.css";
 import useApp from "../../context/useApp";
-import { cc } from "../../utils/cc";
 import { useState } from "react";
+import UStoryOnePhoto from "./UStoryOnePhoto";
+import { cc } from "../../utils/cc";
 
 interface Props {
   story: UStoryType;
@@ -11,7 +12,9 @@ interface Props {
 
 export default function Carousel({ story }: Props) {
   const { changeUStoryTitle, deleteUStory } = useApp();
-  const [haveTitle, setHaveTitle] = useState(false);
+  const [showPhotoTitle, setShowPhotoTitle] = useState(false); //need to be connected with Setting component - doing later
+  const [defaultShowPhotoTitle, setDefaultShowPhotoTitle] = useState(false)
+  const [isSettingRendered, setIsSettingRendered] = useState(false)
 
   const flickityOptions = {
     initialIndex: 1,
@@ -38,46 +41,53 @@ export default function Carousel({ story }: Props) {
       deleteUStory({ id: story.id });
   }
 
+  function handleStorySetting() {
+    !isSettingRendered && setDefaultShowPhotoTitle(showPhotoTitle)
+    setIsSettingRendered(s => !s)
+    !isSettingRendered ? setShowPhotoTitle(true) : setShowPhotoTitle(defaultShowPhotoTitle)
+  }
+
   if (story.body.length < 4) {
     flickityOptions.autoPlay = false;
   }
 
   return (
     <>
+    {/* regarding elements .ustory-delete-btn and .ustory-setting-btn : changing text might debalanc their positions*/}
       <div
         className="ustory-btn ustory-delete-btn"
         onClick={() => handleStorydelete()}
       >
         X
       </div>
+    
       <div
-        className="ustory-btn ustory-title-btn"
+        className="ustory-btn ustory-setting-btn"
+        onClick={() => handleStorySetting()}
+      >
+        Setting
+      </div>
+      <div
+        className={cc("ustory-btn", "ustory-title-btn", isSettingRendered && "move-away")}
         onClick={() => handleStoryTitle()}
       >
         {story.name}
       </div>
+
       <Flickity
-        className="carousel" // default ''
-        elementType="div" // default 'div'
-        options={flickityOptions} // takes flickity options {}
-        disableImagesLoaded={false} // default false
-        reloadOnUpdate // default false
-        static // default false
+        className="carousel"
+        elementType="div" 
+        options={flickityOptions}
+        disableImagesLoaded={false}
       >
         {story.body.map((photo) => (
-          <div
-            className={cc("ustory-photo-container", haveTitle && "show-title")}
-            onClick={() => console.log("Clicked on", photo.id)}
-            data-img={photo.photoQueryName}
-          >
-            <img
-              className="ustory-img "
-              key={photo.id}
-              src={photo.urls.small}
-              alt={photo.alt_description}
-            />
-            {/* <div className="ustory-photo-title">{photo.alt_description}</div> */}
-          </div>
+          <UStoryOnePhoto
+            key={photo.id}
+            story={story}
+            photo={photo}
+            showPhotoTitle={showPhotoTitle}
+            isSettingRendered={isSettingRendered}
+          />
         ))}
       </Flickity>
     </>

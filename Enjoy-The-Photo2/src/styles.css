@@ -9,7 +9,7 @@
 :root {
   --dark-color: #48402e;
   --medium-color: #92825d;
-  --light-color: #d1cab3;
+  --light-color: rgb(209, 202, 179);
   --orange-color: rgb(217, 122, 28);
   --orange-light-color: rgb(194, 132, 0);
   --yellow-color: rgb(227, 208, 80);

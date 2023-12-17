@@ -82,7 +82,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
   //--Galerry Icon------------------------------------------
   useEffect(() => {
-      setIsLiked(isInGalery(photo));
+    setIsLiked(isInGalery(photo));
   }, [gallery]);
 
   // this hook doest work properly - problem with reappearing icons
@@ -134,8 +134,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         <div className="u-story-options-container">
           {uStoryWords.map((word) => (
             <UStoryOptionBtn word={word} photo={photo} />
-            ))}
-            <UStoryOptionBtn word={query} photo={photo} />
+          ))}
+          <UStoryOptionBtn word={query} photo={photo} />
         </div>
       )}
 
@@ -188,12 +188,26 @@ function extractVerbsAndNouns(text: string) {
   const doc = nlp(text);
   const verbs = doc.verbs().out("array");
   const nouns = doc.nouns().out("array");
+
   const nullCleaner = (array: string[]) =>
     array.map((word: string) =>
       word.startsWith("null") ? word.slice(4) : word
     );
-  // some words are poluted with word "null" prefix nullCleaner cleans it
+  // some words are poluted with word "null" prefix nullCleaner removes it
   const cleanedVerbs = nullCleaner(verbs);
   const cleanedNouns = nullCleaner(nouns);
-  return [...cleanedVerbs, ...cleanedNouns];
+
+  // slicing sentences into single words and adding them to original 
+  const sliceAndAdd = (originalArray: string[]) => {
+    const allSingleWords = originalArray
+      .map((item) => (item.includes(" ") ? item.split(" ") : item))
+      .flat();
+    const onlySentences = originalArray.filter((item) => item.includes(" ")).flat();
+    return [...allSingleWords, ...onlySentences];
+  };
+
+  console.log("original", cleanedNouns);
+  console.log(sliceAndAdd(cleanedNouns));
+
+  return [...sliceAndAdd(cleanedVerbs), ...sliceAndAdd(cleanedNouns)];
 }

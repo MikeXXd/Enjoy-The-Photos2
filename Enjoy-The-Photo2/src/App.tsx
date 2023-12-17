@@ -59,7 +59,8 @@ export const AppContext = createContext<AppContextProps | null>(null);
 export function App() {
   const [isUStoryRendered, setIsUStoryRendered] = useState(false);
   const [isUStoryCreating, setIsUStoryCreating] = useState(false);
-  const [isAllUStorySettingClosed, setIsAllUStorySettingClosed] = useState(false);
+  const [isAllUStorySettingClosed, setIsAllUStorySettingClosed] =
+    useState(false);
   const { query, actualPhotos, error, clearGallery } = usePhotos();
   const [isDynamicBackground, setIsDynamicBackground] =
     useLocalStorage<boolean>(
@@ -77,15 +78,15 @@ export function App() {
     if (actualPhotos.length < 2 || !isDynamicBackground) return;
     fetchBackgroundImage(actualPhotos[1]); //[1] as the second photo looks better
   }, [actualPhotos, isDynamicBackground]);
-  //--------------------------------------------------------------------------
 
+  //----ECS btn for closing opened setting in all uStory carousels------
   useEffect(() => {
-     if(!isUStoryRendered) return
+    if (!isUStoryRendered) return;
 
     const handleEvent = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setIsAllUStorySettingClosed(true)
-        console.log("Escape")
+        setIsAllUStorySettingClosed(true);
+        console.log("Escape");
       }
     };
 
@@ -103,8 +104,6 @@ export function App() {
     setGridSize(DEFAULT_GRID_SIZE);
     window.location.reload();
   }
-
-
 
   //---Arranging uStory--------------------------------------------------------
   function arrangeUStory(photo: PhotoType, photoTitle: string) {
@@ -178,7 +177,7 @@ export function App() {
   }
 
   function unblockAllUStorySettings() {
-    setIsAllUStorySettingClosed(false)
+    setIsAllUStorySettingClosed(false);
   }
 
   //------------------------------------------------------------------------------
@@ -201,7 +200,7 @@ export function App() {
         changeUStoryPhotoTitle,
         deleteUStoryPhoto,
         unblockAllUStorySettings,
-        isAllUStorySettingClosed
+        isAllUStorySettingClosed,
       }}
     >
       <div className="main-container">

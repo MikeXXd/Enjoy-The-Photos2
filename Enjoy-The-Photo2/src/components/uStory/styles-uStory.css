@@ -116,7 +116,7 @@
 
 .ustory-photo-container.show-on-hover:hover::before {
   opacity: 1;
-  transition: 700ms all 0.5s linear;
+  transition: 300ms all 200ms linear;
 }
 
 .story-photo-icons-wrap {

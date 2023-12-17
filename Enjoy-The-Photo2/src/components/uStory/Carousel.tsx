@@ -2,7 +2,7 @@ import Flickity from "react-flickity-component";
 import { UStoryType } from "../../App";
 import "./flickity.css";
 import useApp from "../../context/useApp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UStoryOnePhoto from "./UStoryOnePhoto";
 import { cc } from "../../utils/cc";
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function Carousel({ story }: Props) {
-  const { changeUStoryTitle, deleteUStory } = useApp();
+  const { changeUStoryTitle, deleteUStory, unblockAllUStorySettings,isAllUStorySettingClosed } = useApp();
   const [showPhotoTitle, setShowPhotoTitle] = useState(false); //need to be connected with Setting component - doing later
   const [defaultShowPhotoTitle, setDefaultShowPhotoTitle] = useState(false)
   const [isSettingRendered, setIsSettingRendered] = useState(false)
@@ -29,6 +29,13 @@ export default function Carousel({ story }: Props) {
     setGallerySize: true,
   }; // bound to flickity.css
 
+  useEffect(() => {
+    if (isAllUStorySettingClosed) {
+      setIsSettingRendered(false)
+      setShowPhotoTitle(defaultShowPhotoTitle)
+    }
+  }, [isAllUStorySettingClosed])
+
   function handleStoryTitle() {
     const newTitle = prompt("Enter new title");
     if (newTitle) {
@@ -42,6 +49,7 @@ export default function Carousel({ story }: Props) {
   }
 
   function handleStorySetting() {
+    unblockAllUStorySettings()
     !isSettingRendered && setDefaultShowPhotoTitle(showPhotoTitle)
     setIsSettingRendered(s => !s)
     !isSettingRendered ? setShowPhotoTitle(true) : setShowPhotoTitle(defaultShowPhotoTitle)

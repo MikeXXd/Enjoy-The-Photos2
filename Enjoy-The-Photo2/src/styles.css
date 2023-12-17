@@ -313,7 +313,7 @@ a:focus {
   position: absolute;
   display: none;
   opacity: 0;
-  transition: opacity 500ms, transform 500ms;
+  transition: 65ms all 0.3s linear;
 }
 
 .img-icons.img-center-icon {

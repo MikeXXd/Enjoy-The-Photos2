@@ -49,6 +49,8 @@ interface AppContextProps {
 
   changeUStoryPhotoTitle: (titlePhoto: UStoryPhotoTitleType) => void;
   deleteUStoryPhoto: (id: Omit<UStoryPhotoTitleType, "name">) => void;
+  unblockAllUStorySettings: () => void;
+  isAllUStorySettingClosed: boolean;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
@@ -57,6 +59,7 @@ export const AppContext = createContext<AppContextProps | null>(null);
 export function App() {
   const [isUStoryRendered, setIsUStoryRendered] = useState(false);
   const [isUStoryCreating, setIsUStoryCreating] = useState(false);
+  const [isAllUStorySettingClosed, setIsAllUStorySettingClosed] = useState(false);
   const { query, actualPhotos, error, clearGallery } = usePhotos();
   const [isDynamicBackground, setIsDynamicBackground] =
     useLocalStorage<boolean>(
@@ -76,6 +79,23 @@ export function App() {
   }, [actualPhotos, isDynamicBackground]);
   //--------------------------------------------------------------------------
 
+  useEffect(() => {
+     if(!isUStoryRendered) return
+
+    const handleEvent = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsAllUStorySettingClosed(true)
+        console.log("Escape")
+      }
+    };
+
+    document.addEventListener("keydown", handleEvent);
+
+    return () => {
+      document.removeEventListener("keydown", handleEvent);
+    };
+  }, [isUStoryRendered]);
+
   function resetApp() {
     clearGallery();
     setUStory([]);
@@ -83,6 +103,8 @@ export function App() {
     setGridSize(DEFAULT_GRID_SIZE);
     window.location.reload();
   }
+
+
 
   //---Arranging uStory--------------------------------------------------------
   function arrangeUStory(photo: PhotoType, photoTitle: string) {
@@ -155,6 +177,10 @@ export function App() {
     );
   }
 
+  function unblockAllUStorySettings() {
+    setIsAllUStorySettingClosed(false)
+  }
+
   //------------------------------------------------------------------------------
   return (
     <AppContext.Provider
@@ -174,6 +200,8 @@ export function App() {
         deleteUStory,
         changeUStoryPhotoTitle,
         deleteUStoryPhoto,
+        unblockAllUStorySettings,
+        isAllUStorySettingClosed
       }}
     >
       <div className="main-container">

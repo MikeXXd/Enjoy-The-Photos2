@@ -9,8 +9,9 @@ import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
 import usePhotos from "../context/usePhotos";
 import nlp from "compromise";
-import { MdChangeHistory } from "react-icons/md";
+import { CiPlay1 } from "react-icons/ci";
 import UStoryOptionBtn from "./UStoryOptionBtn";
+import useApp from "../context/useApp";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -32,6 +33,7 @@ const PHOTO_ORIENTATION: OrientationProps[] = [
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { gallery, arrangeGallery, query, isInGalery } = usePhotos();
+  const {isUStoryCreating } = useApp();
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [photoSize, setPhotoSize] = useState(
@@ -44,13 +46,6 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [uStoryWords, setUStoryWords] = useState<string[]>([]);
   const [isUStoryIconSpread, setIsUStoryIconSpread] = useState(false);
-
-  console.log("uStory", uStoryWords);
-
-  // useEffect(() => {
-  //   const photoDescription = (photo.description + photo.alt_description)
-  //   setUStoryWords(extractVerbsAndNouns(photoDescription) as string[]);
-  // }, []);
 
   //--handling image interaction-----------------------------------------
   function handleMouseEnter() {
@@ -123,10 +118,10 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       </div>
       {/* ---uStory Icon and spread options---------------------------------------- */}
       <div
-        className={cc("img-icons img-center-icon", areIconsActive && "show")}
+        className={cc("img-icons img-center-icon", areIconsActive && "show", isUStoryCreating && "ustory-on")}
       >
         {!isUStoryIconSpread && (
-          <MdChangeHistory onClick={() => setIsUStoryIconSpread((s) => !s)} />
+          <CiPlay1 onClick={() => setIsUStoryIconSpread((s) => !s) } fill="pink" />
         )}
       </div>
 
@@ -182,6 +177,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
 export default PhotoContainer;
 
+
+
 function extractVerbsAndNouns(text: string) {
   // extracting verbs and nouns from photo description to use then for further search in uStory
   if (!text) return;
@@ -205,9 +202,6 @@ function extractVerbsAndNouns(text: string) {
     const onlySentences = originalArray.filter((item) => item.includes(" ")).flat();
     return [...allSingleWords, ...onlySentences];
   };
-
-  console.log("original", cleanedNouns);
-  console.log(sliceAndAdd(cleanedNouns));
 
   return [...sliceAndAdd(cleanedVerbs), ...sliceAndAdd(cleanedNouns)];
 }

@@ -367,8 +367,25 @@ a:focus {
 }
 
 .img-center-icon > svg {
-  --size: calc(var(--icon-original-size) - 5%);
+  --size: var(--icon-original-size);
   border-radius: var(--soft-radius);
+}
+
+.img-icons.img-center-icon.ustory-on > svg {
+  --size: calc(var(--icon-original-size)  + .5rem );
+  animation: rotating 2s linear infinite;
+}
+
+@keyframes rotating {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .img-bottom-icons > svg {

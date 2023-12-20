@@ -12,9 +12,13 @@ import { cc } from "./utils/cc";
 import UStoryMain from "./components/uStory/UStoryMain";
 
 type GridSize = "small" | "medium" | "large";
+type UStorySize = GridSize
+
 
 const DEFAULT_GRID_SIZE: GridSize = "medium";
 const DEFAULT_DYNAMIC_BACKGROUND = false;
+const DEFAULT_USTORY_PHOTO_TITLE = false;
+const DEFAULT_USTORY_SIZE: UStorySize = "large";
 
 export interface UStoryChain extends PhotoType {
   photoInStoryName: string;
@@ -46,11 +50,14 @@ interface AppContextProps {
   uStory: UStoryType[];
   changeUStoryTitle: (titleStory: Omit<UStoryType, "body">) => void;
   deleteUStory: (id: Pick<UStoryType, "id">) => void;
-
   changeUStoryPhotoTitle: (titlePhoto: UStoryPhotoTitleType) => void;
   deleteUStoryPhoto: (id: Omit<UStoryPhotoTitleType, "name">) => void;
   unblockAllUStorySettings: () => void;
   isAllUStorySettingClosed: boolean;
+  uStorySize: UStorySize;
+  setUStorySize: (size: UStorySize) => void;
+  uStoryPhotoTitle: boolean;
+  setUStoryPhotoTitle: (active: boolean) => void;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
@@ -71,6 +78,16 @@ export function App() {
     "ETP-grig_size",
     DEFAULT_GRID_SIZE
   );
+  const [uStorySize, setUStorySize] = useLocalStorage<UStorySize>(
+    "ETP-uStory_size",
+    DEFAULT_USTORY_SIZE
+  );
+
+  const [uStoryPhotoTitle, setUStoryPhotoTitle] = useLocalStorage<boolean>(
+    "ETP-uStory_photo_title",
+    DEFAULT_USTORY_PHOTO_TITLE
+  );
+
   const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", []);
 
   // dynamic-background-mechanism -----------------------------------------
@@ -102,6 +119,7 @@ export function App() {
     setUStory([]);
     setIsDynamicBackground(DEFAULT_DYNAMIC_BACKGROUND);
     setGridSize(DEFAULT_GRID_SIZE);
+    setUStorySize(DEFAULT_GRID_SIZE)
     window.location.reload();
   }
 
@@ -201,6 +219,10 @@ export function App() {
         deleteUStoryPhoto,
         unblockAllUStorySettings,
         isAllUStorySettingClosed,
+        uStorySize,
+        setUStorySize,
+        uStoryPhotoTitle,
+        setUStoryPhotoTitle
       }}
     >
       <div className="main-container">

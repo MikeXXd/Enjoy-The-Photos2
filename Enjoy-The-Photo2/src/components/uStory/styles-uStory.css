@@ -2,7 +2,10 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 .ustories-wrap {
   position: relative;
   width: 100%;
@@ -64,22 +67,35 @@
   z-index: 1;
 }
 
+
 .carousel {
   --story-wrapping-border: 0.3rem;
-  --carousel-height: 15rem; /* I played with hight resizing, status: unresolved*/
+  /* --carousel-height: 20rem; */
   margin-bottom: 2rem;
   background-color: rgba(0, 0, 0, 0.7);
   border: var(--story-wrapping-border) solid var(--medium-color);
   border-radius: var(--soft-radius);
+  padding-bottom: -1rem;
+}
+
+.carousel.small {
+  --carousel-height: 15rem;
+}
+.carousel.medium {
+  --carousel-height: 20rem;
+}
+.carousel.large {
+  --carousel-height: 30rem;
 }
 
 .ustory-photo-container {
   position: relative;
+  height: var(--carousel-height);
 }
 
 .ustory-img {
   height: var(--carousel-height);
-  min-width: 10rem;
+  min-width: 10rem; /* so that the setting icons have enough space */
   object-fit: cover;
 }
 
@@ -134,7 +150,7 @@
 
 .story-photo-icons-wrap svg:hover {
   scale: 1.25;
-  transition: 100ms scale 150ms ease-in-out;
+  transition: 150ms scale 100ms ease-in-out;
 }
 
 .delete-icon {
@@ -142,5 +158,5 @@
 }
 .delete-icon:hover {
   fill: red;
-  transition: 100ms fill 150ms ease-in-out;
+  transition: 150ms fill 100ms ease-in-out;
 }

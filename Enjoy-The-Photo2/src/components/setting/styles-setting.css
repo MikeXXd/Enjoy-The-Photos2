@@ -54,8 +54,18 @@ input:checked + .slider:before {
 }
 /* The container-radio -----------------------------------------------------------------*/
 
-.container-grid-size {
- max-width: 10rem;
+.wrap-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.container-sizes {
+ max-width: 12rem;
 }
 .container-radio {
     display: block;

@@ -13,13 +13,13 @@ import useApp from "../../context/useApp";
 interface Props {
   story: UStoryType;
   photo: UStoryChain;
-  showPhotoTitle: boolean;
+  showPhotoTitlePermanently: boolean;
   isSettingRendered: boolean;
 }
 
 export default function UStoryOnePhoto({
   photo,
-  showPhotoTitle,
+  showPhotoTitlePermanently,
   isSettingRendered,
   story,
 }: Props) {
@@ -56,7 +56,7 @@ export default function UStoryOnePhoto({
       className={cc(
         "ustory-photo-container",
         !isSettingRendered && "show-on-hover",
-        showPhotoTitle && "show-title",
+        showPhotoTitlePermanently && "show-title",
         isSettingRendered && "on-setting"
       )}
       data-img={photo.photoInStoryName}
@@ -90,7 +90,7 @@ export default function UStoryOnePhoto({
       )}
       <img
         className="ustory-img "
-        src={photo.urls.small}
+        src={photo.urls.regular}
         alt={photo.alt_description}
       />
     </div>

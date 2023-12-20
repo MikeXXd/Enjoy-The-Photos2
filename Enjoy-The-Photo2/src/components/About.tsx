@@ -20,7 +20,11 @@ const About = ({ onClose }: AboutProps) => {
         </button>
       </div>
       <h1>About</h1>
-      <div className="nav-modal-text">
+      <div className="modal-text-container">     
+
+      {/* Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis quas maiores fuga rem asperiores blanditiis, quidem optio veniam aliquam quisquam, eum tempora ullam nesciunt et cum quia voluptatibus officia. Odit.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem odio culpa illo distinctio sunt placeat, facere ea autem maiores. Cupiditate fugiat tempora minus voluptatum totam eaque, ullam sapiente ex repudiandae.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda vitae asperiores sint quidem voluptas consequuntur est nobis nulla, adipisci aliquam? Dolor ab hic, ad autem fugiat fugit sunt ratione. */}
         Hello User, <br />
         first of all, enjoy the photos and see the BEAUTY OF GEOMETRY as it is.
         Using the aplication is, I thing, preaty straight forward, you will

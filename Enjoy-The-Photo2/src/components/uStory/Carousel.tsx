@@ -11,8 +11,7 @@ interface Props {
 }
 
 export default function Carousel({ story }: Props) {
-  const { changeUStoryTitle, deleteUStory, unblockAllUStorySettings,isAllUStorySettingClosed } = useApp();
-  const [showPhotoTitle, setShowPhotoTitle] = useState(false); //need to be connected with Setting component - doing later
+  const { changeUStoryTitle, deleteUStory, unblockAllUStorySettings,isAllUStorySettingClosed, uStorySize, uStoryPhotoTitle, setUStoryPhotoTitle } = useApp();
   const [defaultShowPhotoTitle, setDefaultShowPhotoTitle] = useState(false)
   const [isSettingRendered, setIsSettingRendered] = useState(false)
 
@@ -32,7 +31,7 @@ export default function Carousel({ story }: Props) {
   useEffect(() => {
     if (isAllUStorySettingClosed) {
       setIsSettingRendered(false)
-      setShowPhotoTitle(defaultShowPhotoTitle)
+      setUStoryPhotoTitle(defaultShowPhotoTitle)
     }
   }, [isAllUStorySettingClosed])
 
@@ -50,9 +49,9 @@ export default function Carousel({ story }: Props) {
 
   function handleStorySetting() {
     unblockAllUStorySettings()
-    !isSettingRendered && setDefaultShowPhotoTitle(showPhotoTitle)
+    !isSettingRendered && setDefaultShowPhotoTitle(uStoryPhotoTitle)
     setIsSettingRendered(s => !s)
-    !isSettingRendered ? setShowPhotoTitle(true) : setShowPhotoTitle(defaultShowPhotoTitle)
+    !isSettingRendered ? setUStoryPhotoTitle(true) : setUStoryPhotoTitle(defaultShowPhotoTitle)
   }
 
   if (story.body.length < 4) {
@@ -83,7 +82,8 @@ export default function Carousel({ story }: Props) {
       </div>
 
       <Flickity
-        className="carousel"
+        className={cc("carousel", uStorySize)}
+        
         elementType="div" 
         options={flickityOptions}
         disableImagesLoaded={false}
@@ -93,7 +93,7 @@ export default function Carousel({ story }: Props) {
             key={photo.id}
             story={story}
             photo={photo}
-            showPhotoTitle={showPhotoTitle}
+            showPhotoTitlePermanently={uStoryPhotoTitle}
             isSettingRendered={isSettingRendered}
           />
         ))}

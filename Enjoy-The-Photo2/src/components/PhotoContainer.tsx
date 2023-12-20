@@ -12,6 +12,7 @@ import nlp from "compromise";
 import { CiPlay1 } from "react-icons/ci";
 import UStoryOptionBtn from "./UStoryOptionBtn";
 import useApp from "../context/useApp";
+import { GiFlowerEmblem } from "react-icons/gi";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -121,7 +122,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         className={cc("img-icons img-center-icon", areIconsActive && "show", isUStoryCreating && "ustory-on")}
       >
         {!isUStoryIconSpread && (
-          <CiPlay1 onClick={() => setIsUStoryIconSpread((s) => !s) } fill="pink" />
+          <GiFlowerEmblem onClick={() => setIsUStoryIconSpread((s) => !s) } fill="pink" />
         )}
       </div>
 

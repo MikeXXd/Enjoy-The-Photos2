@@ -368,16 +368,17 @@ a:focus {
 
 .img-center-icon > svg {
   --size: var(--icon-original-size);
-  border-radius: var(--soft-radius);
+  border-radius: 50%;
+  /* border-radius: var(--soft-radius); */
 }
 
 .img-icons.img-center-icon.ustory-on > svg {
   --size: calc(var(--icon-original-size)  + .5rem );
-  animation: rotating 2s linear infinite;
+  animation: rotating 6s linear infinite;
 }
 
 @keyframes rotating {
-  0% {
+  /* 0% {
     transform: scale(1);
   }
   50% {
@@ -385,7 +386,11 @@ a:focus {
   }
   100% {
     transform: scale(1);
-  }
+  } */
+
+  100% {
+    transform: rotate(360deg);
+  } 
 }
 
 .img-bottom-icons > svg {
@@ -533,7 +538,6 @@ a:focus {
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  width: auto;
   width: 100%;
   min-height: 80%;
   max-width: 1200px;
@@ -590,24 +594,24 @@ a:focus {
 
 /*--modal-extras-nav--------------------------------------------------- */
 
-.nav-modal-text {
+.modal-text-container {
   position: relative;
   align-items: center;
   max-width: 900px;
-  max-height: 80%;
+  max-height: 500px;
   padding: 1rem;
   margin: 1rem;
   background-color: var(--transfluent-background-color);
   border: 1px solid var(--white-color);
   border-radius: var(--soft-radius);
   font-size: 1.3rem;
-  overflow-y: auto;
+  overflow-y: scroll;
   text-align: start;
   color: var(--white-color);
   text-shadow: none;
 }
 
-.nav-modal-text > * {
+.modal-text-container > * {
   color: var(--white-color);
   margin: 1rem;
 }

@@ -1,9 +1,13 @@
+import { GridSize, UStorySize } from "../../App";
 import useApp from "../../context/useApp";
 import "./styles-setting.css";
 
 interface SettingProps {
   onClose: (isOpen: boolean) => void;
 }
+
+const GRID_SIZE_ARRAY: GridSize[] = ["small", "medium", "large"];
+const USTORY_SIZE_ARRAY: UStorySize[] = ["small", "medium", "large"];
 
 const Setting = ({ onClose }: SettingProps) => {
   const {
@@ -22,7 +26,6 @@ const Setting = ({ onClose }: SettingProps) => {
     const confirmed = window.confirm(
       "Are you sure you want to reset the application, delete Gallery and uStories?"
     );
-
     if (confirmed) {
       resetApp();
     }
@@ -50,74 +53,38 @@ const Setting = ({ onClose }: SettingProps) => {
         />
         <span className="slider"></span>
       </label>
-
+      {/* ------------------------------ */}
       <div className="wrap-sizes">
         <div className="container-sizes">
           <h3>Grid Size</h3>
-          <label className="container-radio">
-            Small
-            <input
-              type="radio"
-              onChange={() => setGridSize("small")}
-              checked={gridSize === "small" && true}
-              name="radio_grid"
-            />
-            <span className="checkmark-radio"></span>
-          </label>
-          <label className="container-radio">
-            Medium
-            <input
-              type="radio"
-              onChange={() => setGridSize("medium")}
-              checked={gridSize === "medium" && true}
-              name="radio_grid"
-            />
-            <span className="checkmark-radio"></span>
-          </label>
-          <label className="container-radio">
-            Large
-            <input
-              type="radio"
-              onChange={() => setGridSize("large")}
-              checked={gridSize === "large" && true}
-              name="radio_grid"
-            />
-            <span className="checkmark-radio"></span>
-          </label>
+          {GRID_SIZE_ARRAY.map((i) => (
+            <label className="container-radio">
+              {i.charAt(0).toUpperCase() + i.slice(1)}
+              <input
+                type="radio"
+                onChange={() => setGridSize(i)}
+                checked={gridSize === i && true}
+                name="radio_grid"
+              />
+              <span className="checkmark-radio"></span>
+            </label>
+          ))}
         </div>
         {/* ------------------------------------------ */}
         <div className="container-sizes">
           <h3>uSTory Size</h3>
-          <label className="container-radio">
-            Small
-            <input
-              type="radio"
-              onChange={() => setUStorySize("small")}
-              checked={uStorySize === "small" && true}
-              name="radio_uStory"
-            />
-            <span className="checkmark-radio"></span>
-          </label>
-          <label className="container-radio">
-            Medium
-            <input
-              type="radio"
-              onChange={() => setUStorySize("medium")}
-              checked={uStorySize === "medium" && true}
-              name="radio_uStory"
-            />
-            <span className="checkmark-radio"></span>
-          </label>
-          <label className="container-radio">
-            Large
-            <input
-              type="radio"
-              onChange={() => setUStorySize("large")}
-              checked={uStorySize === "large" && true}
-              name="radio_uStory"
-            />
-            <span className="checkmark-radio"></span>
-          </label>
+          {USTORY_SIZE_ARRAY.map((i) => (
+            <label className="container-radio">
+              {i.charAt(0).toUpperCase() + i.slice(1)}
+              <input
+                type="radio"
+                onChange={() => setUStorySize(i)}
+                checked={uStorySize === i && true}
+                name="radio_uStory"
+              />
+              <span className="checkmark-radio"></span>
+            </label>
+          ))}
         </div>
       </div>
       {/* ------------------------------ */}
@@ -130,7 +97,7 @@ const Setting = ({ onClose }: SettingProps) => {
         />
         <span className="slider"></span>
       </label>
-
+      {/* ------------------------------ */}
       <h3>Set Default, delete Gallery and uStories</h3>
       <button onClick={handleReset} className="setting-delete-btn">
         ! Reset

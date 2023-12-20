@@ -11,8 +11,8 @@ import { PhotoType } from "./context/Photos";
 import { cc } from "./utils/cc";
 import UStoryMain from "./components/uStory/UStoryMain";
 
-type GridSize = "small" | "medium" | "large";
-type UStorySize = GridSize
+export type GridSize = "small" | "medium" | "large";
+export type UStorySize = GridSize
 
 
 const DEFAULT_GRID_SIZE: GridSize = "medium";

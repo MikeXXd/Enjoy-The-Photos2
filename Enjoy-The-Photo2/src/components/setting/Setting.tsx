@@ -30,6 +30,9 @@ const Setting = ({ onClose }: SettingProps) => {
       resetApp();
     }
   }
+  function toFirstLetterUpperCase(word: string) {
+    return word.charAt(0).toUpperCase() + word.slice(1)
+  }
 
   return (
     <div
@@ -58,8 +61,8 @@ const Setting = ({ onClose }: SettingProps) => {
         <div className="container-sizes">
           <h3>Grid Size</h3>
           {GRID_SIZE_ARRAY.map((i) => (
-            <label className="container-radio">
-              {i.charAt(0).toUpperCase() + i.slice(1)}
+            <label key={i} className="container-radio">
+              {toFirstLetterUpperCase(i)}
               <input
                 type="radio"
                 onChange={() => setGridSize(i)}
@@ -74,8 +77,8 @@ const Setting = ({ onClose }: SettingProps) => {
         <div className="container-sizes">
           <h3>uSTory Size</h3>
           {USTORY_SIZE_ARRAY.map((i) => (
-            <label className="container-radio">
-              {i.charAt(0).toUpperCase() + i.slice(1)}
+            <label key={i} className="container-radio">
+              {toFirstLetterUpperCase(i)}
               <input
                 type="radio"
                 onChange={() => setUStorySize(i)}

@@ -73,9 +73,9 @@ export default function SearchBar() {
     }
   }
 
-  function handleFocus() {
-    if (isUStoryCreating) setIsUStoryCreating(false);
-  }
+  // function handleFocus() {
+  //   if (isUStoryCreating) setIsUStoryCreating(false);
+  // }
 
   return (
     <div className="search-bar sticky">
@@ -89,7 +89,7 @@ export default function SearchBar() {
       <input
         id="inputQuery"
         type="search"
-        onFocus={handleFocus}
+        // onFocus={handleFocus}
         name="photo"
         ref={inputRef}
         placeholder={query}

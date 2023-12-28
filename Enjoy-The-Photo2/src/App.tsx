@@ -5,19 +5,18 @@ import NavBar from "./components/NavBar";
 import usePhotos from "./context/usePhotos";
 import imgTriangle from "./img/icons8-triangle-color-96.png";
 import { createContext, useEffect, useState } from "react";
-import { fetchBackgroundImage } from "./services/extFunctions";
+import { setBackgroundImage } from "./services/extFunctions";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { PhotoType } from "./context/Photos";
 import { cc } from "./utils/cc";
 import UStoryMain from "./components/uStory/UStoryMain";
 
 export type GridSize = "small" | "medium" | "large";
-export type UStorySize = GridSize
-
+export type UStorySize = GridSize;
 
 const DEFAULT_GRID_SIZE: GridSize = "medium";
-const DEFAULT_DYNAMIC_BACKGROUND = false;
-const DEFAULT_USTORY_PHOTO_TITLE = false;
+const DEFAULT_DYNAMIC_BACKGROUND: boolean = false;
+const DEFAULT_USTORY_PHOTO_TITLE: boolean = false;
 const DEFAULT_USTORY_SIZE: UStorySize = "large";
 
 export interface UStoryChain extends PhotoType {
@@ -93,7 +92,7 @@ export function App() {
   // dynamic-background-mechanism -----------------------------------------
   useEffect(() => {
     if (actualPhotos.length < 2 || !isDynamicBackground) return;
-    fetchBackgroundImage(actualPhotos[1]); //[1] as the second photo looks better
+    setBackgroundImage(actualPhotos[1]); //[1] the second photo looks better
   }, [actualPhotos, isDynamicBackground]);
 
   //----ECS btn for closing opened setting in all uStory carousels------
@@ -119,7 +118,7 @@ export function App() {
     setUStory([]);
     setIsDynamicBackground(DEFAULT_DYNAMIC_BACKGROUND);
     setGridSize(DEFAULT_GRID_SIZE);
-    setUStorySize(DEFAULT_GRID_SIZE)
+    setUStorySize(DEFAULT_GRID_SIZE);
     window.location.reload();
   }
 
@@ -222,7 +221,7 @@ export function App() {
         uStorySize,
         setUStorySize,
         uStoryPhotoTitle,
-        setUStoryPhotoTitle
+        setUStoryPhotoTitle,
       }}
     >
       <div className="main-container">

@@ -128,8 +128,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
       {isUStoryIconSpread && (
         <div className="u-story-options-container">
-          {uStoryWords.map((word) => (
-            <UStoryOptionBtn word={word} photo={photo} />
+          {uStoryWords.map((word, i) => (
+            <UStoryOptionBtn key={i} word={word} photo={photo} />
           ))}
           <UStoryOptionBtn word={query} photo={photo} />
         </div>

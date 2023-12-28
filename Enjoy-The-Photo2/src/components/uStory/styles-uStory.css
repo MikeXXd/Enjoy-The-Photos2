@@ -64,13 +64,13 @@
 .ustory-btn.ustory-delete-btn:hover {
   color: red;
   border-color: red;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 
 .carousel {
   --story-wrapping-border: 0.3rem;
-  /* --carousel-height: 20rem; */
+  --carousel-height: 20rem;
   margin-bottom: 2rem;
   background-color: rgba(0, 0, 0, 0.7);
   border: var(--story-wrapping-border) solid var(--medium-color);

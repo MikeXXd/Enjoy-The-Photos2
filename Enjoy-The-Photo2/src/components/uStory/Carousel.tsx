@@ -11,9 +11,17 @@ interface Props {
 }
 
 export default function Carousel({ story }: Props) {
-  const { changeUStoryTitle, deleteUStory, unblockAllUStorySettings,isAllUStorySettingClosed, uStorySize, uStoryPhotoTitle, setUStoryPhotoTitle } = useApp();
-  const [defaultShowPhotoTitle, setDefaultShowPhotoTitle] = useState(false)
-  const [isSettingRendered, setIsSettingRendered] = useState(false)
+  const {
+    changeUStoryTitle,
+    deleteUStory,
+    unblockAllUStorySettings,
+    isAllUStorySettingClosed,
+    uStorySize,
+    uStoryPhotoTitle,
+    setUStoryPhotoTitle,
+  } = useApp();
+  const [defaultShowPhotoTitle, setDefaultShowPhotoTitle] = useState(false);
+  const [isSettingRendered, setIsSettingRendered] = useState(false);
 
   const flickityOptions = {
     initialIndex: 1,
@@ -30,10 +38,10 @@ export default function Carousel({ story }: Props) {
 
   useEffect(() => {
     if (isAllUStorySettingClosed) {
-      setIsSettingRendered(false)
-      setUStoryPhotoTitle(defaultShowPhotoTitle)
+      setIsSettingRendered(false);
+      setUStoryPhotoTitle(defaultShowPhotoTitle);
     }
-  }, [isAllUStorySettingClosed])
+  }, [isAllUStorySettingClosed]);
 
   function handleStoryTitle() {
     const newTitle = prompt("Enter new title");
@@ -48,10 +56,12 @@ export default function Carousel({ story }: Props) {
   }
 
   function handleStorySetting() {
-    unblockAllUStorySettings()
-    !isSettingRendered && setDefaultShowPhotoTitle(uStoryPhotoTitle)
-    setIsSettingRendered(s => !s)
-    !isSettingRendered ? setUStoryPhotoTitle(true) : setUStoryPhotoTitle(defaultShowPhotoTitle)
+    unblockAllUStorySettings();
+    !isSettingRendered && setDefaultShowPhotoTitle(uStoryPhotoTitle);
+    setIsSettingRendered((s) => !s);
+    !isSettingRendered
+      ? setUStoryPhotoTitle(true)
+      : setUStoryPhotoTitle(defaultShowPhotoTitle);
   }
 
   if (story.body.length < 4) {
@@ -60,14 +70,14 @@ export default function Carousel({ story }: Props) {
 
   return (
     <>
-    {/* regarding elements .ustory-delete-btn and .ustory-setting-btn : changing text might debalanc their positions*/}
+      {/* regarding elements .ustory-delete-btn and .ustory-setting-btn : changing text might debalanc their positions*/}
       <div
         className="ustory-btn ustory-delete-btn"
         onClick={() => handleStorydelete()}
       >
         X
       </div>
-    
+
       <div
         className="ustory-btn ustory-setting-btn"
         onClick={() => handleStorySetting()}
@@ -75,7 +85,11 @@ export default function Carousel({ story }: Props) {
         Setting
       </div>
       <div
-        className={cc("ustory-btn", "ustory-title-btn", isSettingRendered && "move-away")}
+        className={cc(
+          "ustory-btn",
+          "ustory-title-btn",
+          isSettingRendered && "move-away"
+        )}
         onClick={() => handleStoryTitle()}
       >
         {story.name}
@@ -83,8 +97,7 @@ export default function Carousel({ story }: Props) {
 
       <Flickity
         className={cc("carousel", uStorySize)}
-        
-        elementType="div" 
+        elementType="div"
         options={flickityOptions}
         disableImagesLoaded={false}
       >

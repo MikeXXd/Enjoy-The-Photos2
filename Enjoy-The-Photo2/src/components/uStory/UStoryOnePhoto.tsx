@@ -7,7 +7,7 @@ import {
   MdDelete,
 } from "react-icons/md";
 import usePhotos from "../../context/usePhotos";
-import { fetchBackgroundImage } from "../../services/extFunctions";
+import { setBackgroundImage } from "../../services/extFunctions";
 import useApp from "../../context/useApp";
 
 interface Props {
@@ -31,7 +31,7 @@ export default function UStoryOnePhoto({
   }
 
   function handleSetBackground() {
-    fetchBackgroundImage(photo);
+    setBackgroundImage(photo);
   }
 
   function handleRenamePhoto() {

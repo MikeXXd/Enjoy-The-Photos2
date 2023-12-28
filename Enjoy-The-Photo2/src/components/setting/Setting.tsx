@@ -18,8 +18,8 @@ const Setting = ({ onClose }: SettingProps) => {
     resetApp,
     uStorySize,
     setUStorySize,
-    uStoryPhotoTitle,
-    setUStoryPhotoTitle,
+    isSeenUStoryPhotoTitle,
+    setIsSeenUStoryPhotoTitle,
   } = useApp();
 
   function handleReset() {
@@ -95,8 +95,8 @@ const Setting = ({ onClose }: SettingProps) => {
       <label className="switch">
         <input
           type="checkbox"
-          onChange={() => setUStoryPhotoTitle(!uStoryPhotoTitle)}
-          checked={uStoryPhotoTitle}
+          onChange={() => setIsSeenUStoryPhotoTitle(!isSeenUStoryPhotoTitle)}
+          checked={isSeenUStoryPhotoTitle}
         />
         <span className="slider"></span>
       </label>

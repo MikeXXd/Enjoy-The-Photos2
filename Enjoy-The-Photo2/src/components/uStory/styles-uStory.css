@@ -14,59 +14,37 @@
 }
 
 .ustory-btn {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
-  top: 1.5rem;
-  font-size: 2rem;
-  font-weight: 700;
-  color: white;
-  padding: 0 0.5rem;
-  background-color: rgba(0, 0, 0, 0.7);
-  border: 3px solid var(--orange-color);
-  border-radius: var(--soft-radius);
+  top: 0;
+  min-height: 2rem;
+  margin: 0 0.5rem;
+  padding: 0.4em;
+  font-size: 1.2rem;
+  font-weight: 200;
+  background-color: rgba(8, 6, 6, 0.7);
+  border: 0.2rem solid var(--medium-color);
+  border-bottom: none;
+  border-radius: var(--soft-radius) var(--soft-radius) 0 0;
   cursor: pointer;
-  scale: 1;
-  transition: all 0.5s linear;
-}
-
-.ustory-btn.ustory-title-btn {
-  left: -11.3rem;
   z-index: 1;
-  transform: rotate(-10deg);
-  transition: all 0.5s linear;
-}
-.ustory-btn.ustory-title-btn.move-away {
-  top: 0rem;
-  left: -11.1rem;
-  transform: rotate(0deg);
   transition: all 0.5s linear;
 }
 
-.ustory-delete-btn {
-  left: calc(100% - 2.6rem);
-  transform: rotate(10deg);
-}
-
-.ustory-setting-btn {
-  top: 1.35rem;
-  left: calc(100% - 15.6rem);
-}
-
-.ustory-btn.ustory-title-btn:hover,
-.ustory-btn.ustory-delete-btn:hover,
-.ustory-btn.ustory-setting-btn:hover {
-  scale: 1.1;
-  transition: all 0.5s linear;
+.ustory-btn:hover,
+.show-ustory-setting-options {
+  border-color: var(--orange-color);
+  border-bottom: none;
+  color: white;
   background-color: black;
-  z-index: 1;
+  transition: all 0.1s linear;
 }
 
-.ustory-btn.ustory-delete-btn:hover {
-  color: red;
-  border-color: red;
-  /* z-index: 1; */
+.show-ustory-setting-options {
+  display: flex;
 }
-
 
 .carousel {
   --story-wrapping-border: 0.3rem;
@@ -156,7 +134,30 @@
 .delete-icon {
   fill: rgb(128, 128, 128);
 }
+
+.ustory-btn svg {
+  height: 1.2rem;
+  width: 1.2rem;
+  scale: 1;
+}
+
+.ustory-btn svg:hover {
+  scale: 1.25;
+  transition: 150ms all 100ms ease-in-out;
+}
+
+.rename-whole-ustory-icon {
+  fill: rgb(227, 208, 80)
+}
+
+.delete-whole-story-icon {
+  fill: white;
+}
+.delete-whole-story-icon:hover {
+  fill: red;
+}
+
 .delete-icon:hover {
   fill: red;
-  transition: 150ms fill 100ms ease-in-out;
+  transition: 150ms all 100ms ease-in-out;
 }

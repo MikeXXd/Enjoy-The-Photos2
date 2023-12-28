@@ -13,18 +13,16 @@ import useApp from "../../context/useApp";
 interface Props {
   story: UStoryType;
   photo: UStoryChain;
-  showPhotoTitlePermanently: boolean;
   isSettingRendered: boolean;
 }
 
 export default function UStoryOnePhoto({
   photo,
-  showPhotoTitlePermanently,
   isSettingRendered,
   story,
 }: Props) {
   const { isInGalery, arrangeGallery } = usePhotos();
-  const { changeUStoryPhotoTitle, deleteUStoryPhoto } = useApp();
+  const { changeUStoryPhotoTitle, deleteUStoryPhoto, isSeenUStoryPhotoTitle } = useApp();
 
   function handleHeartIcon() {
     arrangeGallery(photo);
@@ -56,7 +54,7 @@ export default function UStoryOnePhoto({
       className={cc(
         "ustory-photo-container",
         !isSettingRendered && "show-on-hover",
-        showPhotoTitlePermanently && "show-title",
+        (isSeenUStoryPhotoTitle || isSettingRendered) && "show-title",
         isSettingRendered && "on-setting"
       )}
       data-img={photo.photoInStoryName}

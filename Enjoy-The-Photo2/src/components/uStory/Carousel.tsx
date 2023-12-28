@@ -5,6 +5,7 @@ import useApp from "../../context/useApp";
 import { useEffect, useState } from "react";
 import UStoryOnePhoto from "./UStoryOnePhoto";
 import { cc } from "../../utils/cc";
+import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
 
 interface Props {
   story: UStoryType;
@@ -17,10 +18,7 @@ export default function Carousel({ story }: Props) {
     unblockAllUStorySettings,
     isAllUStorySettingClosed,
     uStorySize,
-    uStoryPhotoTitle,
-    setUStoryPhotoTitle,
   } = useApp();
-  const [defaultShowPhotoTitle, setDefaultShowPhotoTitle] = useState(false);
   const [isSettingRendered, setIsSettingRendered] = useState(false);
 
   const flickityOptions = {
@@ -39,7 +37,6 @@ export default function Carousel({ story }: Props) {
   useEffect(() => {
     if (isAllUStorySettingClosed) {
       setIsSettingRendered(false);
-      setUStoryPhotoTitle(defaultShowPhotoTitle);
     }
   }, [isAllUStorySettingClosed]);
 
@@ -57,11 +54,7 @@ export default function Carousel({ story }: Props) {
 
   function handleStorySetting() {
     unblockAllUStorySettings();
-    !isSettingRendered && setDefaultShowPhotoTitle(uStoryPhotoTitle);
     setIsSettingRendered((s) => !s);
-    !isSettingRendered
-      ? setUStoryPhotoTitle(true)
-      : setUStoryPhotoTitle(defaultShowPhotoTitle);
   }
 
   if (story.body.length < 4) {
@@ -70,29 +63,30 @@ export default function Carousel({ story }: Props) {
 
   return (
     <>
-      {/* regarding elements .ustory-delete-btn and .ustory-setting-btn : changing text might debalanc their positions*/}
-      <div
-        className="ustory-btn ustory-delete-btn"
-        onClick={() => handleStorydelete()}
-      >
-        X
-      </div>
-
-      <div
-        className="ustory-btn ustory-setting-btn"
-        onClick={() => handleStorySetting()}
-      >
-        Setting
-      </div>
       <div
         className={cc(
           "ustory-btn",
-          "ustory-title-btn",
-          isSettingRendered && "move-away"
+          isSettingRendered && "show-ustory-setting-options"
         )}
-        onClick={() => handleStoryTitle()}
+        onClick={() => handleStorySetting()}
       >
-        {story.name}
+        {
+          <div>
+            {story.name}
+            {isSettingRendered && (
+              <MdDriveFileRenameOutline
+                onClick={handleStoryTitle}
+                className="rename-whole-ustory-icon"
+              />
+            )}
+          </div>
+        }
+        {isSettingRendered && (
+          <MdDelete
+            className="delete-whole-story-icon"
+            onClick={() => handleStorydelete()}
+          />
+        )}
       </div>
 
       <Flickity
@@ -106,7 +100,6 @@ export default function Carousel({ story }: Props) {
             key={photo.id}
             story={story}
             photo={photo}
-            showPhotoTitlePermanently={uStoryPhotoTitle}
             isSettingRendered={isSettingRendered}
           />
         ))}

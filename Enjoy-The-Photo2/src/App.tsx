@@ -55,8 +55,8 @@ interface AppContextProps {
   isAllUStorySettingClosed: boolean;
   uStorySize: UStorySize;
   setUStorySize: (size: UStorySize) => void;
-  uStoryPhotoTitle: boolean;
-  setUStoryPhotoTitle: (active: boolean) => void;
+  isSeenUStoryPhotoTitle: boolean;
+  setIsSeenUStoryPhotoTitle: (active: boolean) => void;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
@@ -82,13 +82,14 @@ export function App() {
     DEFAULT_USTORY_SIZE
   );
 
-  const [uStoryPhotoTitle, setUStoryPhotoTitle] = useLocalStorage<boolean>(
+  const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", []);
+
+  const [isSeenUStoryPhotoTitle, setIsSeenUStoryPhotoTitle] = useLocalStorage<boolean>(
     "ETP-uStory_photo_title",
     DEFAULT_USTORY_PHOTO_TITLE
   );
 
-  const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", []);
-
+console.log('isSeenUStoryPhotoTitle' ,isSeenUStoryPhotoTitle)
   // dynamic-background-mechanism -----------------------------------------
   useEffect(() => {
     if (actualPhotos.length < 2 || !isDynamicBackground) return;
@@ -220,8 +221,8 @@ export function App() {
         isAllUStorySettingClosed,
         uStorySize,
         setUStorySize,
-        uStoryPhotoTitle,
-        setUStoryPhotoTitle,
+        isSeenUStoryPhotoTitle,
+        setIsSeenUStoryPhotoTitle,
       }}
     >
       <div className="main-container">

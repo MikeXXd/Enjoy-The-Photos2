@@ -10,6 +10,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import { PhotoType } from "./context/Photos";
 import { cc } from "./utils/cc";
 import UStoryMain from "./components/uStory/UStoryMain";
+import OnStoryView from "./components/onStoryView";
 
 export type GridSize = "small" | "medium" | "large";
 export type UStorySize = GridSize;
@@ -252,6 +253,7 @@ console.log('isSeenUStoryPhotoTitle' ,isSeenUStoryPhotoTitle)
           </span>
         </footer>
       </div>
+      {isUStoryCreating && <OnStoryView uStory={uStory[uStory.length - 1]}/>}
     </AppContext.Provider>
   );
 }

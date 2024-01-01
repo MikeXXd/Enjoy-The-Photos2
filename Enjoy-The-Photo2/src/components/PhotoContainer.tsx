@@ -9,7 +9,6 @@ import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
 import usePhotos from "../context/usePhotos";
 import nlp from "compromise";
-import { CiPlay1 } from "react-icons/ci";
 import UStoryOptionBtn from "./UStoryOptionBtn";
 import useApp from "../context/useApp";
 import { GiFlowerEmblem } from "react-icons/gi";
@@ -112,9 +111,10 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         <SlSizeFullscreen
           onClick={() => setIsPhotoModalOpen(true)}
           fill="pink"
+          title="Show full size"
         />
         {photoSize.cssClass === "tall wide" || (
-          <IoIosResize onClick={handleResizePhoto} fill="pink" />
+          <IoIosResize onClick={handleResizePhoto} fill="pink" title="Size up"/>
         )}
       </div>
       {/* ---uStory Icon and spread options---------------------------------------- */}
@@ -122,7 +122,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         className={cc("img-icons img-center-icon", areIconsActive && "show", isUStoryCreating && "ustory-on")}
       >
         {!isUStoryIconSpread && (
-          <GiFlowerEmblem onClick={() => setIsUStoryIconSpread((s) => !s) } fill="pink" />
+          <GiFlowerEmblem onClick={() => setIsUStoryIconSpread((s) => !s) } fill="pink"  title={ isUStoryCreating ? "Continue in uStory creation" : "Start uStory creation"} />
         )}
       </div>
 
@@ -143,12 +143,12 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         )}
       >
         {isLiked ? (
-          <AiFillHeart onClick={handleHeartIcon} fill={"rgb(238, 93, 93)"} />
+          <AiFillHeart onClick={handleHeartIcon} fill={"rgb(238, 93, 93)"} title="In Gallery"/>
         ) : (
-          <AiOutlineHeart onClick={handleHeartIcon} fill="pink" />
+          <AiOutlineHeart onClick={handleHeartIcon} fill="pink" title="Save to Gallery"/>
         )}
-        <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" />
-        <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" />
+        <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" title="Show info" />
+        <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" title="Open photo in new window"/>
       </div>
 
       {/* ---Photo MODAL ------------------------------------ */}
@@ -160,8 +160,11 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       >
         <img
           className="modal-inside inside-img"
-          src={photo.urls.full}
-          style={{ backgroundImage: `url(${photo?.urls.small})` }}
+          src={photo.urls.regular}
+          // style={photoBlob ? { backgroundImage: `url(${URL.createObjectURL(
+          //   photoBlob
+          // )})` } :{ backgroundImage: `url(${photo.urls.thumb})` } }
+          style={{ backgroundImage: `url(${photo.urls.thumb})` }}
           onClick={() => {
             setIsPhotoModalOpen(false);
           }}

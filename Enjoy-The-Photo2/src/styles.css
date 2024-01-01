@@ -98,26 +98,33 @@ a:focus {
   color: white;
 }
 
-.header-img {
-  width: 4rem;
-  height: 4rem;
+.symbol {
+  --size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--size);
+  width: var(--size);
+}
+
+.symbol > svg {
+  --size: 4rem;
+  height: var(--size);
+  width: var(--size);
+  fill: var(--orange-light-color);
+  transition: all 0.2s ease-in-out;
+  animation: rotating 6s linear infinite;
+}
+
+.symbol > svg:hover {
+  scale: 0.8;
+}
+
+.symbol > img {
+  --size: 5rem;
+  width: var(--size);
+  height: var(--size);
   margin-right: 0.5rem;
-}
-
-.header-img.ustorying {
-  animation: pulse-uStorying 3s infinite;
-}
-
-@keyframes pulse-uStorying {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
 
 /* ----nav-bar------------------------------------------------------ */
@@ -344,15 +351,12 @@ a:focus {
 
 .img-icons > svg {
   --size: var(--icon-original-size);
-  color: aqua;
   height: var(--size);
   width: var(--size);
   cursor: pointer;
   background-color: var(--transfluent-background-color);
   padding: 0.3rem;
-  transition-duration: 100ms;
-  transition-property: background-color, transform;
-  transition-timing-function: ease-in;
+  transition: all 100ms ease-in-out;
 }
 
 .img-icons > svg:hover {
@@ -368,26 +372,22 @@ a:focus {
 
 .img-center-icon > svg {
   --size: var(--icon-original-size);
+  fill: var(--orange-light-color);
   border-radius: 50%;
-  /* border-radius: var(--soft-radius); */
 }
 
 .img-icons.img-center-icon.ustory-on > svg {
   --size: calc(var(--icon-original-size) + 0.5rem);
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: all 100ms ease-in-out;
   animation: rotating 6s linear infinite;
 }
 
-@keyframes rotating {
-  /* 0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  } */
+.img-icons.img-center-icon.ustory-on > svg:hover {
+  scale: 1.2;
+}
 
+@keyframes rotating {
   100% {
     transform: rotate(360deg);
   }
@@ -472,7 +472,7 @@ a:focus {
   align-items: center;
   left: 0;
   width: 30%;
-  max-width: 20rem;
+  max-width: 15rem;
   margin: 0.5rem;
   background-color: red;
   border: 3px solid white;
@@ -480,6 +480,7 @@ a:focus {
   overflow: hidden;
   z-index: 10;
   animation: colorFlow 3s infinite;
+  cursor: pointer;
 }
 
 @keyframes colorFlow {
@@ -528,15 +529,25 @@ a:focus {
   font-weight: 200;
 }
 
-.on-story-view-container > .arrow {
+.on-story-view-container > .arrows {
   position: absolute;
-
   padding: 0.3em;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 0 0 var(--soft-radius) 0;
   text-align: center;
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   font-weight: 200;
+}
+
+.arrows > svg {
+  --size: 2.5em;
+  color: var(--white-color);
+  height: var(--size);
+  width: var(--size);
+  background-color: var(--transfluent-background-color);
+  border-radius: var(--soft-radius);
+  padding: 0.3rem;
+  transition-duration: 100ms;
+  transition-property: background-color, transform;
+  transition-timing-function: ease-in;
 }
 
 /* ----modal------------------------------------------------*/

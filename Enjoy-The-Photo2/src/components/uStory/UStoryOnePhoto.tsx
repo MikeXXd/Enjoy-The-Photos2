@@ -66,29 +66,33 @@ export default function UStoryOnePhoto({
               <AiFillHeart
                 onClick={handleHeartIcon}
                 fill={"rgb(238, 93, 93)"}
+                title="In Gallery"
               />
             ) : (
               <AiOutlineHeart
                 onClick={handleHeartIcon}
                 fill={"rgb(238, 93, 93)"}
+                title="Save to Gallery"
               />
             )}
             <MdOutlineFlipToBack
               onClick={handleSetBackground}
               fill={"rgb(209, 202, 179)"}
+              title="Set photo to background"
             />
             <MdDriveFileRenameOutline
               onClick={handleRenamePhoto}
               fill={"rgb(227, 208, 80)"}
+              title="Rename photo"
             />
           </div>
-          <MdDelete className="delete-icon"  onClick={handleDeletePhoto} 
+          <MdDelete className="delete-icon"  onClick={handleDeletePhoto} title="Delete photo"
           />
         </div>
       )}
       <img
         className="ustory-img "
-        src={photo.urls.regular}
+        src={photo.urls.raw + "&h=480&dpr=2"}
         alt={photo.alt_description}
       />
     </div>

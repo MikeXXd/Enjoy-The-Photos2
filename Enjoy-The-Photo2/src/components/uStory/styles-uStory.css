@@ -21,10 +21,10 @@
   top: 0;
   min-height: 2rem;
   margin: 0 0.5rem;
-  padding: 0.4em;
-  font-size: 1.2rem;
+  padding: 0.2em;
+  font-size: 1.4rem;
   font-weight: 200;
-  background-color: rgba(8, 6, 6, 0.7);
+  background-color: var(--transfluent-background-color);
   border: 0.2rem solid var(--medium-color);
   border-bottom: none;
   border-radius: var(--soft-radius) var(--soft-radius) 0 0;
@@ -136,8 +136,9 @@
 }
 
 .ustory-btn svg {
-  height: 1.2rem;
-  width: 1.2rem;
+  --size: 1.4rem;
+  height: var(--size);
+  width: var(--size);
   scale: 1;
 }
 
@@ -147,7 +148,8 @@
 }
 
 .rename-whole-ustory-icon {
-  fill: rgb(227, 208, 80)
+  fill: rgb(227, 208, 80);
+  margin-left: 0.5rem;
 }
 
 .delete-whole-story-icon {

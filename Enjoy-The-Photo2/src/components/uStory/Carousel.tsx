@@ -47,11 +47,6 @@ export default function Carousel({ story }: Props) {
     }
   }
 
-  function handleStorydelete() {
-    if (window.confirm("Do you really want to DELETE ! this uStory?"))
-      deleteUStory({ id: story.id });
-  }
-
   function handleStorySetting() {
     unblockAllUStorySettings();
     setIsSettingRendered((s) => !s);
@@ -69,6 +64,7 @@ export default function Carousel({ story }: Props) {
           isSettingRendered && "show-ustory-setting-options"
         )}
         onClick={() => handleStorySetting()}
+        title="uStory settimg"
       >
         {
           <div>
@@ -77,6 +73,7 @@ export default function Carousel({ story }: Props) {
               <MdDriveFileRenameOutline
                 onClick={handleStoryTitle}
                 className="rename-whole-ustory-icon"
+                title="Rename uStory"
               />
             )}
           </div>
@@ -84,7 +81,8 @@ export default function Carousel({ story }: Props) {
         {isSettingRendered && (
           <MdDelete
             className="delete-whole-story-icon"
-            onClick={() => handleStorydelete()}
+            onClick={() => deleteUStory({ id: story.id })}
+            title="Delete uStory"
           />
         )}
       </div>

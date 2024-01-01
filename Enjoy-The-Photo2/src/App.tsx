@@ -11,6 +11,8 @@ import { PhotoType } from "./context/Photos";
 import { cc } from "./utils/cc";
 import UStoryMain from "./components/uStory/UStoryMain";
 import OnStoryView from "./components/onStoryView";
+import { GiFlowerEmblem } from "react-icons/gi";
+
 
 export type GridSize = "small" | "medium" | "large";
 export type UStorySize = GridSize;
@@ -232,10 +234,12 @@ console.log('isSeenUStoryPhotoTitle' ,isSeenUStoryPhotoTitle)
             Breath in the depth of colors and geometry, jump in and enjoooooy!
           </span>
           <header className="header">
+          <div className="symbol">
+          { isUStoryCreating ? <GiFlowerEmblem onClick={() => setIsUStoryCreating(false)} title="STOP uStory creation" /> :
             <img
-              className={cc("header-img", isUStoryCreating && "ustorying")}
               src={imgTriangle}
-            />
+            />}
+          </div>
             <h1>Enjoy the Photos2</h1>
           </header>
           <NavBar />

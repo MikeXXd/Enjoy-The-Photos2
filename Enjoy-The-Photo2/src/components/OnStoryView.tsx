@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { UStoryType } from "../App";
 import { cc } from "../utils/cc";
+import { FiArrowDownCircle, FiArrowUpCircle } from "react-icons/fi";
 
 interface Props {
   uStory: UStoryType;
@@ -24,12 +25,15 @@ export default function OnStoryView({ uStory }: Props) {
       onMouseLeave={handleMouseLeave}
       onClick={() => setTopPosition((s) => !s)}
       className={cc("on-story-view-container", topPosition ? "top" : "bottom")}
+      title="Click to move it up or down"
     >
       <img src={uStory.body[uStory.body.length - 1].urls.small} />
-      <div className="counter">{uStory.body.length}</div>
+      <div className="counter" title="Number of photos in current uStory">
+        {uStory.body.length}
+      </div>
       {showArrow && (
-        <div className="arrow">
-          {topPosition ? "move it down" : "move it up"}
+        <div className="arrows">
+          {topPosition ? <FiArrowDownCircle /> : <FiArrowUpCircle />}
         </div>
       )}
     </div>

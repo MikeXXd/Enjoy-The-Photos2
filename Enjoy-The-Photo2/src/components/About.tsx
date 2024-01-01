@@ -3,7 +3,6 @@ interface AboutProps {
 }
 
 const About = ({ onClose }: AboutProps) => {
-  // console.log('About Rendered')
 
   return (
     <div

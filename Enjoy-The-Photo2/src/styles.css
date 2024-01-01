@@ -479,7 +479,7 @@ scale: 1.2;
   width: 30%;
   max-width: 15rem;
   margin: 0.5rem;
-  background-color: red;
+  background-color: var(--transfluent-background-color);
   border: 3px solid white;
   border-radius: var(--soft-radius);
   overflow: hidden;

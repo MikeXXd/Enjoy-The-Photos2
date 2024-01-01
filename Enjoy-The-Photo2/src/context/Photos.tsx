@@ -43,7 +43,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
   const [actualPhotos, setActualPhotos] = useState<PhotoType[]>([]);
 
   const [error, setError] = useState("");
-  const [query, setQuery] = useState("winter time");
+  const [query, setQuery] = useState("scenery rock");
   const [pageNo, setPageNo] = useState(1);
 
   const [isGalleryRendered, setIsGalleryRendered] = useState(false);

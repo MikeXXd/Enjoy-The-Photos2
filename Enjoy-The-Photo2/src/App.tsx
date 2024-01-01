@@ -17,9 +17,9 @@ export type GridSize = "small" | "medium" | "large";
 export type UStorySize = GridSize;
 
 const DEFAULT_GRID_SIZE: GridSize = "medium";
-const DEFAULT_DYNAMIC_BACKGROUND: boolean = false;
+const DEFAULT_DYNAMIC_BACKGROUND: boolean = true;
 const DEFAULT_USTORY_PHOTO_TITLE: boolean = false;
-const DEFAULT_USTORY_SIZE: UStorySize = "large";
+const DEFAULT_USTORY_SIZE: UStorySize = "medium";
 
 export interface UStoryChain extends PhotoType {
   photoInStoryName: string;
@@ -91,7 +91,6 @@ export function App() {
     DEFAULT_USTORY_PHOTO_TITLE
   );
 
-console.log('isSeenUStoryPhotoTitle' ,isSeenUStoryPhotoTitle)
   // dynamic-background-mechanism -----------------------------------------
   useEffect(() => {
     if (actualPhotos.length < 2 || !isDynamicBackground) return;

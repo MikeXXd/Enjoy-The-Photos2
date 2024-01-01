@@ -12,16 +12,16 @@ export default function SearchBar() {
     actualPhotos,
     isGalleryRendered,
   } = usePhotos();
-  const { isUStoryCreating, setIsUStoryCreating, isUStoryRendered,setIsUStoryRendered } = useApp();
+  const { isUStoryRendered, setIsUStoryRendered } = useApp();
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  
+
   useEffect(() => {
     if (inputRef.current === null) return;
     inputRef.current.value = query;
   }, [query]);
-  
+
   useEffect(() => {
     if (pageNo > 1) {
       setIsPriorBtnActive(true);
@@ -73,10 +73,6 @@ export default function SearchBar() {
     }
   }
 
-  // function handleFocus() {
-  //   if (isUStoryCreating) setIsUStoryCreating(false);
-  // }
-
   return (
     <div className="search-bar sticky">
       <button
@@ -89,7 +85,6 @@ export default function SearchBar() {
       <input
         id="inputQuery"
         type="search"
-        // onFocus={handleFocus}
         name="photo"
         ref={inputRef}
         placeholder={query}
@@ -106,4 +101,3 @@ export default function SearchBar() {
     </div>
   );
 }
-

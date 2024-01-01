@@ -44,7 +44,6 @@ export default function UStoryOnePhoto({
   }
 
   function handleDeletePhoto() {
-    if (window.confirm("Do you really want to DELETE ! this photo?"))
       deleteUStoryPhoto({storyId: story.id,
         photoId: photo.id});
     }

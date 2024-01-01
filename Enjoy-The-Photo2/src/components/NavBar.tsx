@@ -13,13 +13,30 @@ interface NavItemsProps {
 }
 
 const NavBar = ({}) => {
-  const { renderGallery, isGalleryRendered, setIsGalleryRendered } = usePhotos();
-   const {setIsUStoryCreating, isUStoryRendered,setIsUStoryRendered} = useApp()
+  const { renderGallery, isGalleryRendered, setIsGalleryRendered, gallery } =
+    usePhotos();
+  const { setIsUStoryCreating, isUStoryRendered, setIsUStoryRendered, uStory } =
+    useApp();
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
-  // const [isUStoryModalOpen, setIsUStoryModalOpen] = useState(false);
 
-  // console.log('NavBar Rendered')
+  function handleGallery() {
+    if (gallery.length) {
+      renderGallery();
+      setIsUStoryCreating(false);
+      setIsUStoryRendered(false);
+    }
+    return;
+  }
+
+  function handleUStories() {
+    if (uStory.length) {
+      setIsUStoryCreating(false);
+      setIsUStoryRendered(true);
+      setIsGalleryRendered(false);
+    }
+    return;
+  }
 
   const handleModal = (setState: Dispatch<SetStateAction<boolean>>) => () =>
     setState(true);
@@ -46,13 +63,13 @@ const NavBar = ({}) => {
         <ul>
           <NavItem
             label="Gallery"
-            onClick={() => {renderGallery(); setIsUStoryCreating(false); setIsUStoryRendered(false)}}
+            onClick={handleGallery}
             isSelected={isGalleryRendered}
           />
           <NavItem
             label="uStories"
             // onClick={handleModal(setIsUStoryModalOpen)}
-            onClick={() => {setIsUStoryCreating(false); setIsUStoryRendered(true); setIsGalleryRendered(false)}}
+            onClick={handleUStories}
             isSelected={isUStoryRendered}
           />
           <NavItem
@@ -71,9 +88,7 @@ const NavBar = ({}) => {
         isOpen={isAboutModalOpen}
         onClose={handleCloseModal(setIsAboutModalOpen)}
       >
-        <About
-          onClose={handleCloseModal(setIsAboutModalOpen)}
-        />
+        <About onClose={handleCloseModal(setIsAboutModalOpen)} />
       </Modal>
       <Modal
         isOpen={isSettingModalOpen}

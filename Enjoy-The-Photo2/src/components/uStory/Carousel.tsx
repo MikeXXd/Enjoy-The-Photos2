@@ -63,7 +63,7 @@ export default function Carousel({ story }: Props) {
           "ustory-btn",
           isSettingRendered && "show-ustory-setting-options"
         )}
-        onClick={() => handleStorySetting()}
+        onClick={handleStorySetting}
         title="uStory settimg"
       >
         {

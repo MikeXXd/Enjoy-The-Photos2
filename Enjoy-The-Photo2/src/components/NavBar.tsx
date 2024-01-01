@@ -3,7 +3,6 @@ import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 import About from "./About";
 import Setting from "./setting/Setting";
-import UStoryTemporary from "./UStoryTemporary";
 import Modal from "./Modal";
 import useApp from "../context/useApp";
 
@@ -46,12 +45,12 @@ const NavBar = ({}) => {
       <nav className="nav-bar">
         <ul>
           <NavItem
-            label="Galery"
+            label="Gallery"
             onClick={() => {renderGallery(); setIsUStoryCreating(false); setIsUStoryRendered(false)}}
             isSelected={isGalleryRendered}
           />
           <NavItem
-            label="uStory"
+            label="uStories"
             // onClick={handleModal(setIsUStoryModalOpen)}
             onClick={() => {setIsUStoryCreating(false); setIsUStoryRendered(true); setIsGalleryRendered(false)}}
             isSelected={isUStoryRendered}

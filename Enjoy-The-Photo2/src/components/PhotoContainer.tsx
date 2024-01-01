@@ -161,9 +161,6 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         <img
           className="modal-inside inside-img"
           src={photo.urls.regular}
-          // style={photoBlob ? { backgroundImage: `url(${URL.createObjectURL(
-          //   photoBlob
-          // )})` } :{ backgroundImage: `url(${photo.urls.thumb})` } }
           style={{ backgroundImage: `url(${photo.urls.thumb})` }}
           onClick={() => {
             setIsPhotoModalOpen(false);

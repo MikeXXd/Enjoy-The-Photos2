@@ -31,11 +31,7 @@ export default function UStoryOptionBtn({ word, photo }: Props) {
       key={crypto.randomUUID()}
       onClick={handleOnClick}
     >
-      {word !== query
-        ? word
-        : addedToStory
-        ? "ADDED to uStory"
-        : "add to USTORY"}
+      {word !== query ? word : addedToStory ? "ADDED to uStory" : "ONLY ADD"}
     </button>
   );
 }

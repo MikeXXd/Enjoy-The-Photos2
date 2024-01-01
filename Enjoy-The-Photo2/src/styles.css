@@ -379,15 +379,20 @@ a:focus {
 .img-icons.img-center-icon.ustory-on > svg {
   --size: calc(var(--icon-original-size) + 0.5rem);
   background-color: rgba(0, 0, 0, 0.8);
-  transition: all 100ms ease-in-out;
-  animation: rotating 6s linear infinite;
+  transition: all 200ms ease-in-out;
+  animation: rotating 4s linear infinite;
 }
 
 .img-icons.img-center-icon.ustory-on > svg:hover {
-  scale: 1.2;
+scale: 1.2;
+  animation: rotating 2s linear infinite;
 }
 
+
 @keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
   100% {
     transform: rotate(360deg);
   }
@@ -692,7 +697,7 @@ a:focus {
   border: 1px solid var(--white-color);
   border-radius: var(--soft-radius);
   font-size: 1.3rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-align: start;
   color: var(--white-color);
   text-shadow: none;

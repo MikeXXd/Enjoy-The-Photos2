@@ -8,9 +8,8 @@ import { createContext, useEffect, useState } from "react";
 import { setBackgroundImage } from "./services/extFunctions";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { PhotoType } from "./context/Photos";
-import { cc } from "./utils/cc";
 import UStoryMain from "./components/uStory/UStoryMain";
-import OnStoryView from "./components/onStoryView";
+import OnStoryView from "./components/OnStoryView";
 import { GiFlowerEmblem } from "react-icons/gi";
 
 

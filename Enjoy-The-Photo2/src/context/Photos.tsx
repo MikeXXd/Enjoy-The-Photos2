@@ -2,6 +2,7 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { GALERY_DEFAULT_PHOTOS } from "../data/defaultData";
 
 export interface PhotoType {
   id: string;
@@ -14,7 +15,6 @@ export interface PhotoType {
   };
   description: string;
   alt_description: string;
-  userId: string;
 }
 
 export interface PhotosContext {
@@ -37,46 +37,47 @@ interface FetchPhotosResponse {
   results: PhotoType[];
 }
 
+
 export const Context = createContext<PhotosContext | null>(null);
 
 export function PhotosProvider({ children }: { children: ReactNode }) {
   const [actualPhotos, setActualPhotos] = useState<PhotoType[]>([]);
-
+  
   const [error, setError] = useState("");
   const [query, setQuery] = useState("scenery rock");
   const [pageNo, setPageNo] = useState(1);
-
+  
   const [isGalleryRendered, setIsGalleryRendered] = useState(false);
-  const [gallery, setGallery] = useLocalStorage<PhotoType[]>("ETP-galery", []);
-
+  const [gallery, setGallery] = useLocalStorage<PhotoType[]>("ETP-galery", GALERY_DEFAULT_PHOTOS);
+  
   console.log(actualPhotos);
 
   useEffect(() => {
     setIsGalleryRendered(false);
     const controller = new AbortController();
-
+    
     apiClient
-      .get<FetchPhotosResponse>(
-        `photos?page=${pageNo}&per_page=31&query=${query}`,
-        { signal: controller.signal }
+    .get<FetchPhotosResponse>(
+      `photos?page=${pageNo}&per_page=31&query=${query}`,
+      { signal: controller.signal }
       )
       .then((res) => setActualPhotos(res.data.results))
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
       });
-
-    return () => controller.abort();
-  }, [query, pageNo]);
-
-  function arrangeGallery(photo: PhotoType) {
-    if (gallery.find((p) => p.id === photo.id)) {
+      
+      return () => controller.abort();
+    }, [query, pageNo]);
+    
+    function arrangeGallery(photo: PhotoType) {
+      if (gallery.find((p) => p.id === photo.id)) {
       setGallery(gallery.filter((item) => item.id !== photo.id));
     } else {
       setGallery([photo, ...gallery]);
     }
   }
-
+  
   function setNewQuery(query: string) {
     setQuery(query);
     setPageNo(1);
@@ -89,18 +90,18 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
       setIsGalleryRendered(true);
     }
   }
-
+  
   function clearGallery() {
-    setGallery([]);
+    setGallery(GALERY_DEFAULT_PHOTOS);
   }
-
+  
   function isInGalery(photo: PhotoType) {
       const isOrNot = gallery.find((p) => p.id === photo.id);
-     return isOrNot ? true : false;
-  }
-
-  return (
-    <Context.Provider
+      return isOrNot ? true : false;
+    }
+    
+    return (
+      <Context.Provider
       value={{
         actualPhotos,
         error,
@@ -116,8 +117,9 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         clearGallery,
         isInGalery
       }}
-    >
+      >
       {children}
     </Context.Provider>
   );
 }
+

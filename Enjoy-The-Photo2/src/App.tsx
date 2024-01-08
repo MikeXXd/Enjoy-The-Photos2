@@ -11,6 +11,7 @@ import { PhotoType } from "./context/Photos";
 import UStoryMain from "./components/uStory/UStoryMain";
 import OnStoryView from "./components/OnStoryView";
 import { GiFlowerEmblem } from "react-icons/gi";
+import { USTORY_DEFAULT_PHOTOS } from "./data/defaultData";
 
 
 export type GridSize = "small" | "medium" | "large";
@@ -84,7 +85,7 @@ export function App() {
     DEFAULT_USTORY_SIZE
   );
 
-  const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", []);
+  const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", USTORY_DEFAULT_PHOTOS);
 
   const [isSeenUStoryPhotoTitle, setIsSeenUStoryPhotoTitle] = useLocalStorage<boolean>(
     "ETP-uStory_photo_title",
@@ -117,7 +118,7 @@ export function App() {
 
   function resetApp() {
     clearGallery();
-    setUStory([]);
+    setUStory(USTORY_DEFAULT_PHOTOS);
     setIsDynamicBackground(DEFAULT_DYNAMIC_BACKGROUND);
     setGridSize(DEFAULT_GRID_SIZE);
     setUStorySize(DEFAULT_GRID_SIZE);

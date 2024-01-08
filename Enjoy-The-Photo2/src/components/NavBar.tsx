@@ -1,10 +1,11 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
-import About from "./About";
+// import About from "./About";
 import Setting from "./setting/Setting";
 import Modal from "./Modal";
 import useApp from "../context/useApp";
+import { set } from "react-hook-form";
 
 interface NavItemsProps {
   label: string;
@@ -12,19 +13,20 @@ interface NavItemsProps {
   isSelected: boolean;
 }
 
-const NavBar = ({}) => {
+const NavBar = () => {
   const { renderGallery, isGalleryRendered, setIsGalleryRendered, gallery } =
     usePhotos();
-  const { setIsUStoryCreating, isUStoryRendered, setIsUStoryRendered, uStory } =
+  const { setIsUStoryCreating, isUStoryRendered, setIsUStoryRendered, uStory, isAboutRendered, setIsAboutRendered,
+    isSettingRendered, setIsSettingRendered} =
     useApp();
-  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
-  const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
 
   function handleGallery() {
     if (gallery.length) {
       renderGallery();
       setIsUStoryCreating(false);
       setIsUStoryRendered(false);
+      setIsSettingRendered(false);
+      setIsAboutRendered(false);
     }
     return;
   }
@@ -32,17 +34,23 @@ const NavBar = ({}) => {
   function handleUStories() {
     if (uStory.length) {
       setIsUStoryCreating(false);
-      setIsUStoryRendered(true);
+      setIsUStoryRendered(!isUStoryRendered);
       setIsGalleryRendered(false);
+      setIsSettingRendered(false);
+      setIsAboutRendered(false);
     }
     return;
   }
 
-  const handleModal = (setState: Dispatch<SetStateAction<boolean>>) => () =>
-    setState(true);
-  const handleCloseModal =
-    (setState: Dispatch<SetStateAction<boolean>>) => () =>
-      setState(false);
+  function handleAbout() {
+    setIsSettingRendered(false);
+    setIsAboutRendered(!isAboutRendered);
+  }
+
+  function handleSetting() {
+    setIsAboutRendered(false);
+    setIsSettingRendered(!isSettingRendered);
+  }
 
   const NavItem = ({ label, onClick, isSelected }: NavItemsProps) => (
     <li>
@@ -64,44 +72,25 @@ const NavBar = ({}) => {
           <NavItem
             label="Gallery"
             onClick={handleGallery}
-            isSelected={isGalleryRendered}
+            isSelected={!isSettingRendered && !isAboutRendered && isGalleryRendered}
           />
           <NavItem
             label="uStories"
-            // onClick={handleModal(setIsUStoryModalOpen)}
             onClick={handleUStories}
-            isSelected={isUStoryRendered}
+            isSelected={!isSettingRendered && !isAboutRendered && isUStoryRendered}
           />
           <NavItem
             label="About"
-            onClick={handleModal(setIsAboutModalOpen)}
-            isSelected={false}
+            onClick={handleAbout}
+            isSelected={isAboutRendered}
           />
           <NavItem
             label="Setting"
-            onClick={handleModal(setIsSettingModalOpen)}
-            isSelected={false}
+            onClick={handleSetting}
+            isSelected={isSettingRendered}
           />
         </ul>
       </nav>
-      <Modal
-        isOpen={isAboutModalOpen}
-        onClose={handleCloseModal(setIsAboutModalOpen)}
-      >
-        <About onClose={handleCloseModal(setIsAboutModalOpen)} />
-      </Modal>
-      <Modal
-        isOpen={isSettingModalOpen}
-        onClose={handleCloseModal(setIsSettingModalOpen)}
-      >
-        <Setting onClose={handleCloseModal(setIsSettingModalOpen)} />
-      </Modal>
-      {/* <Modal
-        isOpen={isUStoryModalOpen}
-        onClose={handleCloseModal(setIsUStoryModalOpen)}
-      >
-        <UStoryTemporary onClose={handleCloseModal(setIsUStoryModalOpen)} />
-      </Modal> */}
     </>
   );
 };

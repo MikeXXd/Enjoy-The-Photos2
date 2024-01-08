@@ -1,12 +1,9 @@
 import { PhotoType } from "../context/Photos";
 
-
-
-export const setBackgroundImage = async (photo: PhotoType) => {
-    let currentBackground = document.getElementById("root") as HTMLElement;
-    const response = await fetch(photo.urls.regular);
-    const blob = await response.blob();
-    currentBackground.style.backgroundImage = `url(${URL.createObjectURL(
-      blob
-    )})`;
-  };
+export const setBackgroundImage = async (photo: PhotoType | string) => {
+  const source = typeof photo === "string" ? photo : photo.urls.regular;
+  let HTMLBase = document.getElementById("root") as HTMLElement;
+  const response = await fetch(source);
+  const blob = await response.blob();
+  HTMLBase.style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
+};

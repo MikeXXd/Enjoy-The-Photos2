@@ -384,10 +384,9 @@ a:focus {
 }
 
 .img-icons.img-center-icon.ustory-on > svg:hover {
-scale: 1.2;
+  scale: 1.2;
   animation: rotating 2s linear infinite;
 }
-
 
 @keyframes rotating {
   0% {
@@ -607,7 +606,7 @@ scale: 1.2;
 
 /* modal-extras--------------------------------------- */
 
-.modal-inside {
+/* .modal-inside {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -653,14 +652,61 @@ scale: 1.2;
 
 .modal-inside.inside-container h3 {
   font-size: 2rem;
-}
+} */
 
 /* modal-extras-btn-close--------------------------------------- */
 
-.modal-btn-close {
+.wrap-about-and-setting {
+  position: relative;
+  margin: 0 auto;
+  max-width: 50rem;
+}
+
+.about-and-setting {
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--white-color);
+  border-radius: var(--soft-radius);
+  padding: 1rem;
+  margin: 0.1rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 1.3rem;
+  text-align: center;
+  color: var(--white-color);
+  text-shadow: none;
+  overflow-y: auto;
+}
+
+.about-and-setting h1,
+.about-and-setting h3 {
+  color: var(--light-color);
+  font-family: "Sedgwick Ave Display", cursive;
+  margin: 1rem;
+}
+
+.about-and-setting h1 {
+  font-size: 4rem;
+}
+
+.about-and-setting h3 {
+  font-size: 2rem;
+}
+
+.about-text {
+  position: relative;
+  color: var(--white-color);
+  text-shadow: none;
+}
+
+.close-btn {
   position: absolute;
-  top: -0.3rem;
-  right: -0.3rem;
+  top: -0.2rem;
+  right: -0.1rem;
   width: 2.4rem;
   height: 2.4rem;
   cursor: pointer;
@@ -673,20 +719,21 @@ scale: 1.2;
   text-shadow: none;
   padding: 0.2em;
   scale: 1;
+  z-index: 1;
   border: 0.1rem solid var(--white-color);
   border-radius: var(--soft-radius);
   transition: all 0.2s ease-in-out;
 }
 
-.modal-btn-close:hover,
-.modal-btn-close:focus {
+.close-btn:hover,
+.close-btn:focus {
   scale: 1.1;
   box-shadow: 0 0 10px 0 var(--white-color);
 }
 
 /*--modal-extras-nav--------------------------------------------------- */
 
-.modal-text-container {
+/* .modal-text-container {
   position: relative;
   align-items: center;
   max-width: 900px;
@@ -706,7 +753,7 @@ scale: 1.2;
 .modal-text-container > * {
   color: var(--white-color);
   margin: 1rem;
-}
+} */
 
 /*---footer------------------------------------------------------------- */
 .footer > span {

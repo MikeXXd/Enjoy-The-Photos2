@@ -12,7 +12,8 @@ import UStoryMain from "./components/uStory/UStoryMain";
 import OnStoryView from "./components/OnStoryView";
 import { GiFlowerEmblem } from "react-icons/gi";
 import { USTORY_DEFAULT_PHOTOS } from "./data/defaultData";
-
+import About from "./components/About";
+import Setting from "./components/setting/Setting";
 
 export type GridSize = "small" | "medium" | "large";
 export type UStorySize = GridSize;
@@ -60,6 +61,10 @@ interface AppContextProps {
   setUStorySize: (size: UStorySize) => void;
   isSeenUStoryPhotoTitle: boolean;
   setIsSeenUStoryPhotoTitle: (active: boolean) => void;
+  isAboutRendered: boolean;
+  setIsAboutRendered: (active: boolean) => void;
+  isSettingRendered: boolean;
+  setIsSettingRendered: (active: boolean) => void;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
@@ -70,6 +75,8 @@ export function App() {
   const [isUStoryCreating, setIsUStoryCreating] = useState(false);
   const [isAllUStorySettingClosed, setIsAllUStorySettingClosed] =
     useState(false);
+  const [isAboutRendered, setIsAboutRendered] = useState(false);
+  const [isSettingRendered, setIsSettingRendered] = useState(false);
   const { query, actualPhotos, error, clearGallery } = usePhotos();
   const [isDynamicBackground, setIsDynamicBackground] =
     useLocalStorage<boolean>(
@@ -85,18 +92,27 @@ export function App() {
     DEFAULT_USTORY_SIZE
   );
 
-  const [uStory, setUStory] = useLocalStorage<UStoryType[]>("ETP-uStory", USTORY_DEFAULT_PHOTOS);
-
-  const [isSeenUStoryPhotoTitle, setIsSeenUStoryPhotoTitle] = useLocalStorage<boolean>(
-    "ETP-uStory_photo_title",
-    DEFAULT_USTORY_PHOTO_TITLE
+  const [uStory, setUStory] = useLocalStorage<UStoryType[]>(
+    "ETP-uStory",
+    USTORY_DEFAULT_PHOTOS
   );
+
+  const [isSeenUStoryPhotoTitle, setIsSeenUStoryPhotoTitle] =
+    useLocalStorage<boolean>(
+      "ETP-uStory_photo_title",
+      DEFAULT_USTORY_PHOTO_TITLE
+    );
 
   // dynamic-background-mechanism -----------------------------------------
   useEffect(() => {
     if (actualPhotos.length < 2 || !isDynamicBackground) return;
     setBackgroundImage(actualPhotos[1]); //[1] the second photo looks better
   }, [actualPhotos, isDynamicBackground]);
+
+  useEffect(() => {
+    setIsSettingRendered(false);
+    setIsAboutRendered(false);
+    }, [actualPhotos]);
 
   //----ECS btn for closing opened setting in all uStory carousels------
   useEffect(() => {
@@ -225,6 +241,10 @@ export function App() {
         setUStorySize,
         isSeenUStoryPhotoTitle,
         setIsSeenUStoryPhotoTitle,
+        isAboutRendered,
+        setIsAboutRendered,
+        isSettingRendered,
+        setIsSettingRendered,
       }}
     >
       <div className="main-container">
@@ -233,19 +253,31 @@ export function App() {
             Breath in the depth of colors and geometry, jump in and enjoooooy!
           </span>
           <header className="header">
-          <div className="symbol">
-          { isUStoryCreating ? <GiFlowerEmblem onClick={() => setIsUStoryCreating(false)} title="STOP uStory creation" /> :
-            <img
-              src={imgTriangle}
-            />}
-          </div>
+            <div className="symbol">
+              {isUStoryCreating ? (
+                <GiFlowerEmblem
+                  onClick={() => setIsUStoryCreating(false)}
+                  title="STOP uStory creation"
+                />
+              ) : (
+                <img src={imgTriangle} />
+              )}
+            </div>
             <h1>Enjoy the Photos2</h1>
           </header>
           <NavBar />
         </div>
         <SearchBar />
         {error && <div className="error">{error}</div>}
-        {isUStoryRendered ? <UStoryMain /> : <PhotosGrid />}
+        {isAboutRendered ? (
+          <About />
+        ) : isSettingRendered ? (
+          <Setting />
+        ) : isUStoryRendered ? (
+          <UStoryMain />
+        ) : (
+          <PhotosGrid />
+        )}
         <footer className="footer">
           <span>
             Created by
@@ -256,7 +288,7 @@ export function App() {
           </span>
         </footer>
       </div>
-      {isUStoryCreating && <OnStoryView uStory={uStory[uStory.length - 1]}/>}
+      {isUStoryCreating && <OnStoryView uStory={uStory[uStory.length - 1]} />}
     </AppContext.Provider>
   );
 }

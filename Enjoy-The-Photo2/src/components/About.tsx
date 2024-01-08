@@ -1,29 +1,41 @@
-interface AboutProps {
-  onClose: (isOpen: boolean) => void;
-}
+import { useState } from "react";
+import useApp from "../context/useApp";
+import { setBackgroundImage } from "../services/extFunctions";
 
-const About = ({ onClose }: AboutProps) => {
+const About = () => {
+  const { setIsAboutRendered } = useApp();
+  // const [backgroundBefore, setBackgroundBefore] = useState("");
+// >
+
+setBackgroundImage("https://images.unsplash.com/photo-1630334979993-dc4bf603b121?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHwlMjBzZWElMjBwYXRlcm5zfGVufDB8fHx8MTcwNDc1MDgxMHww&ixlib=rb-4.0.3&q=80&w=1080")
 
   return (
-    <div
-      className="modal-inside inside-container"
-      style={{
-        backgroundImage:
-          'url("https://images.unsplash.com/photo-1501761095094-94d36f57edbb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMXx8d2F0ZXJmYWxsfGVufDB8fHx8MTY5ODI2NTIxOHww&ixlib=rb-4.0.3&q=80&w=1080")',
-      }}
-    >
+    <div className="wrap-about-and-setting">
       <div>
-        <button onClick={() => onClose(false)} className="modal-btn-close">
+        <button
+          onClick={() => setIsAboutRendered(false)}
+          className="close-btn"
+        >
           X
         </button>
       </div>
+    <div
+      className="about-and-setting"
+      style={{
+        backgroundImage:
+          'url("https://images.unsplash.com/photo-1524802414218-3983cd08ed53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxN3x8c3RyZWFrc3xlbnwwfHx8fDE3MDQ3NTA4Mjl8MA&ixlib=rb-4.0.3&q=80&w=1080")', 
+      }}
+    >
       <h1>About</h1>
-      <div className="modal-text-container">
+
+        <div className="about-text">
+        <p>
         Hello User, <br />
         First of all, enjoy the photos and appreciate the BEAUTY OF GEOMETRY as
         it is. Using the application is, I believe, pretty straightforward. You
         will explore most of the features yourself, but here are just a few
         points. <br />
+        </p>
         <ul>
           <li>
             The most amazing feature of this app is uStory.
@@ -64,7 +76,7 @@ const About = ({ onClose }: AboutProps) => {
         <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">
           Michal Viliš
         </a>{" "}
-        2024
+        2024 </div>
       </div>
     </div>
   );

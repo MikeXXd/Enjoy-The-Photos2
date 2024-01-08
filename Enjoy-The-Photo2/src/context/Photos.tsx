@@ -69,7 +69,15 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
       
       return () => controller.abort();
     }, [query, pageNo]);
-    
+
+    useEffect(() => {
+      if (gallery.length >= 1 || !isGalleryRendered) return;
+        setGallery([])
+        setIsGalleryRendered(false)
+        setQuery("empty gallery");
+      
+    }, [gallery])
+
     function arrangeGallery(photo: PhotoType) {
       if (gallery.find((p) => p.id === photo.id)) {
       setGallery(gallery.filter((item) => item.id !== photo.id));

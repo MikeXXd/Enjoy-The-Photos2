@@ -2,14 +2,10 @@ import { GridSize, UStorySize } from "../../App";
 import useApp from "../../context/useApp";
 import "./styles-setting.css";
 
-interface SettingProps {
-  onClose: (isOpen: boolean) => void;
-}
-
 const GRID_SIZE_ARRAY: GridSize[] = ["small", "medium", "large"];
 const USTORY_SIZE_ARRAY: UStorySize[] = ["small", "medium", "large"];
 
-const Setting = ({ onClose }: SettingProps) => {
+const Setting = () => {
   const {
     isDynamicBackground,
     setIsDynamicBackground,
@@ -20,6 +16,7 @@ const Setting = ({ onClose }: SettingProps) => {
     setUStorySize,
     isSeenUStoryPhotoTitle,
     setIsSeenUStoryPhotoTitle,
+    setIsSettingRendered,
   } = useApp();
 
   function handleReset() {
@@ -35,20 +32,23 @@ const Setting = ({ onClose }: SettingProps) => {
   }
 
   return (
-    <div
-      className="modal-inside inside-container"
-      style={{
-        backgroundImage:
-          'url("https://images.unsplash.com/photo-1587408811730-1a978e6c407d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxhaXJjcmFmdHxlbnwwfHx8fDE2OTc4MTA5NDV8MA&ixlib=rb-4.0.3&q=80&w=1080")',
-      }}
-    >
+    <div className="wrap-about-and-setting">
       <div>
-        <button onClick={() => onClose(false)} className="modal-btn-close">
+        <button
+          onClick={() => setIsSettingRendered(false)}
+          className="close-btn"
+        >
           X
         </button>
       </div>
-      <h1>Setting</h1>
-      <div className="modal-text-container">
+      <div
+        className="about-and-setting"
+        style={{
+          backgroundImage:
+            'url("https://images.unsplash.com/photo-1587408811730-1a978e6c407d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxhaXJjcmFmdHxlbnwwfHx8fDE2OTc4MTA5NDV8MA&ixlib=rb-4.0.3&q=80&w=1080")',
+        }}
+      >
+        <h1>Setting</h1>
         <h3>Dynamic Background</h3>
         <label className="switch">
           <input

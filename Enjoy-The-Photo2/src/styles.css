@@ -606,7 +606,7 @@ a:focus {
 
 /* modal-extras--------------------------------------- */
 
-/* .modal-inside {
+.modal-inside {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -624,7 +624,7 @@ a:focus {
   max-height: 100%;
 }
 
-.modal-inside.inside-container {
+/* .modal-inside.inside-container {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -654,7 +654,7 @@ a:focus {
   font-size: 2rem;
 } */
 
-/* modal-extras-btn-close--------------------------------------- */
+/* about and about--------------------------------------- */
 
 .wrap-about-and-setting {
   position: relative;
@@ -672,36 +672,54 @@ a:focus {
   border-radius: var(--soft-radius);
   padding: 1rem;
   margin: 0.1rem;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.8);
   font-size: 1.3rem;
-  text-align: center;
-  color: var(--white-color);
+  color: var(--medium-color);
   text-shadow: none;
-  overflow-y: auto;
+}
+
+.about-text ol,
+.about-text ul {
+  margin: 0 1rem ;
+  padding: 1rem;
 }
 
 .about-and-setting h1,
-.about-and-setting h3 {
+.about-and-setting h2,
+.about-and-setting h3,
+.about-text h4 {
   color: var(--light-color);
-  font-family: "Sedgwick Ave Display", cursive;
   margin: 1rem;
+
 }
 
 .about-and-setting h1 {
+  color: var(--orange-color);
   font-size: 4rem;
+  font-family: "Sedgwick Ave Display", cursive;
 }
 
-.about-and-setting h3 {
-  font-size: 2rem;
+.about-text h2 {
+  color: var(--orange-light-color);
+  text-align: center;
+
 }
 
-.about-text {
-  position: relative;
-  color: var(--white-color);
-  text-shadow: none;
+.about-text > h3 {
+  text-align: center;
+
 }
+
+.about-text h4 {
+  margin-bottom: 0;
+}
+
+.about-and-setting footer {
+text-align: center;
+margin-top: 3rem;
+color: var(--light-color)
+}
+
 
 .close-btn {
   position: absolute;

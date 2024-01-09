@@ -10,9 +10,9 @@ export default function SearchBar() {
     pageNo,
     setPageNo,
     actualPhotos,
-    isGalleryRendered,
+    isGalleryRendered
   } = usePhotos();
-  const { isUStoryRendered, setIsUStoryRendered } = useApp();
+  const { isUStoryRendered, setIsUStoryRendered, isSearchBarSticky } = useApp();
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -74,7 +74,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="search-bar sticky">
+    <div className={cc("search-bar", isSearchBarSticky && "sticky" )}>
       <button
         disabled={false}
         onClick={handlePriorBtn}

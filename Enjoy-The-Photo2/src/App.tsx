@@ -22,6 +22,7 @@ const DEFAULT_GRID_SIZE: GridSize = "medium";
 const DEFAULT_DYNAMIC_BACKGROUND: boolean = true;
 const DEFAULT_USTORY_PHOTO_TITLE: boolean = false;
 const DEFAULT_USTORY_SIZE: UStorySize = "medium";
+const DEFAULT_STICKY_SEARCH_BAR: boolean = true;
 
 export interface UStoryChain extends PhotoType {
   photoInStoryName: string;
@@ -65,6 +66,8 @@ interface AppContextProps {
   setIsAboutRendered: (active: boolean) => void;
   isSettingRendered: boolean;
   setIsSettingRendered: (active: boolean) => void;
+  isSearchBarSticky:boolean;
+  setIsSearchBarSticky: (active: boolean) => void;
 }
 
 export const AppContext = createContext<AppContextProps | null>(null);
@@ -82,6 +85,11 @@ export function App() {
     useLocalStorage<boolean>(
       "ETP-dynamic_background",
       DEFAULT_DYNAMIC_BACKGROUND
+    );
+    const [isSearchBarSticky, setIsSearchBarSticky] =
+    useLocalStorage<boolean>(
+      "ETP-sticky_search_bar",
+      DEFAULT_STICKY_SEARCH_BAR
     );
   const [gridSize, setGridSize] = useLocalStorage<GridSize>(
     "ETP-grig_size",
@@ -138,6 +146,7 @@ export function App() {
     setIsDynamicBackground(DEFAULT_DYNAMIC_BACKGROUND);
     setGridSize(DEFAULT_GRID_SIZE);
     setUStorySize(DEFAULT_GRID_SIZE);
+    setIsSearchBarSticky(DEFAULT_STICKY_SEARCH_BAR)
     window.location.reload();
   }
 
@@ -245,6 +254,8 @@ export function App() {
         setIsAboutRendered,
         isSettingRendered,
         setIsSettingRendered,
+        isSearchBarSticky,
+        setIsSearchBarSticky,
       }}
     >
       <div className="main-container">

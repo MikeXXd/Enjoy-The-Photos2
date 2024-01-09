@@ -17,6 +17,8 @@ const Setting = () => {
     isSeenUStoryPhotoTitle,
     setIsSeenUStoryPhotoTitle,
     setIsSettingRendered,
+    isSearchBarSticky,
+    setIsSearchBarSticky
   } = useApp();
 
   function handleReset() {
@@ -43,18 +45,29 @@ const Setting = () => {
       </div>
       <div
         className="about-and-setting"
-        style={{
-          backgroundImage:
-            'url("https://images.unsplash.com/photo-1587408811730-1a978e6c407d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxhaXJjcmFmdHxlbnwwfHx8fDE2OTc4MTA5NDV8MA&ixlib=rb-4.0.3&q=80&w=1080")',
-        }}
+        // style={{
+        //   backgroundImage:
+        //     'url("https://images.unsplash.com/photo-1587408811730-1a978e6c407d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxhaXJjcmFmdHxlbnwwfHx8fDE2OTc4MTA5NDV8MA&ixlib=rb-4.0.3&q=80&w=1080")',
+        // }}
       >
         <h1>Setting</h1>
+        
         <h3>Dynamic Background</h3>
         <label className="switch">
           <input
             type="checkbox"
             onChange={() => setIsDynamicBackground(!isDynamicBackground)}
             checked={isDynamicBackground}
+          />
+          <span className="slider"></span>
+        </label>
+
+        <h3>Sticky Search bar </h3>
+        <label className="switch">
+          <input
+            type="checkbox"
+            onChange={() => setIsSearchBarSticky(!isSearchBarSticky)}
+            checked={isSearchBarSticky}
           />
           <span className="slider"></span>
         </label>

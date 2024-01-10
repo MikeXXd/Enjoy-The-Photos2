@@ -3,7 +3,11 @@ import { PhotoType } from "../context/Photos";
 import { cc } from "../utils/cc";
 import Modal from "./Modal";
 import { FaInfo } from "react-icons/fa";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiFillHeart,
+  AiOutlineEyeInvisible,
+} from "react-icons/ai";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
@@ -48,6 +52,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [uStoryWords, setUStoryWords] = useState<string[]>([]);
   const [isUStoryIconSpread, setIsUStoryIconSpread] = useState(false);
+  const [isPhotoInvisible, setIsPhotoInvisible] = useState(false);
 
   //--handling image interaction-----------------------------------------
   function handleMouseEnter() {
@@ -96,13 +101,19 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         photoSize.cssClass,
         isLoaded && "loaded"
       )}
-      style={{ backgroundImage: `url(${photo.urls.thumb})` }}
+      style={
+        !isPhotoInvisible
+          ? { backgroundImage: `url(${photo.urls.thumb})` }
+          : { border: "none" }
+      }
     >
-      <img
-        className={cc("img", isResizing && "img-resize-here")}
-        src={photo.urls[photoSize.apiSize]}
-        onLoad={() => setIsLoaded(true)}
-      />
+      {!isPhotoInvisible && (
+        <img
+          className={cc("img", isResizing && "img-resize-here")}
+          src={photo.urls[photoSize.apiSize]}
+          onLoad={() => setIsLoaded(true)}
+        />
+      )}
       {/* ----Top Icons ---------------------------------- */}
       <div
         className={cc(
@@ -121,11 +132,17 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
             fill="pink"
             title="Size up"
           />
-          )}
-          <MdOutlineFlipToBack
+        )}
+        <MdOutlineFlipToBack
           onClick={() => setBackgroundImage(photo)}
           fill="pink"
-          title="Set photo to background" />
+          title="Set photo to background"
+        />
+        <AiOutlineEyeInvisible
+          onClick={() => setIsPhotoInvisible((s) => !s)}
+          fill="pink"
+          title="invisible photo"
+        />
       </div>
       {/* ---uStory Icon and spread options---------------------------------------- */}
       <div

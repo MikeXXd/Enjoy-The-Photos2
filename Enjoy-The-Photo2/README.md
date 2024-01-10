@@ -8,7 +8,6 @@ https://enjoy-the-photos-2.netlify.app/
 - enjoy dynamic background
 - customize app in setting to your liking
 - have fun with the app, just play
-- let me know what how you like or don't like and what you would like to see in the app. mike3d(at)seznam.cz
 
-Current version 2.0 build and deployed 1/1/2024
+Current version 2.1 (build and deployed 10/01/2024)
 Powered by: Unsplash API

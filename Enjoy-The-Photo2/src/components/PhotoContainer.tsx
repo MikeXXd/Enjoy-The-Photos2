@@ -12,6 +12,8 @@ import nlp from "compromise";
 import UStoryOptionBtn from "./UStoryOptionBtn";
 import useApp from "../context/useApp";
 import { GiFlowerEmblem } from "react-icons/gi";
+import { MdOutlineFlipToBack } from "react-icons/md";
+import { setBackgroundImage } from "../services/extFunctions";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -33,7 +35,7 @@ const PHOTO_ORIENTATION: OrientationProps[] = [
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { gallery, arrangeGallery, query, isInGalery } = usePhotos();
-  const {isUStoryCreating } = useApp();
+  const { isUStoryCreating } = useApp();
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [photoSize, setPhotoSize] = useState(
@@ -114,15 +116,35 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           title="Show full size"
         />
         {photoSize.cssClass === "tall wide" || (
-          <IoIosResize onClick={handleResizePhoto} fill="pink" title="Size up"/>
-        )}
+          <IoIosResize
+            onClick={handleResizePhoto}
+            fill="pink"
+            title="Size up"
+          />
+          )}
+          <MdOutlineFlipToBack
+          onClick={() => setBackgroundImage(photo)}
+          fill="pink"
+          title="Set photo to background" />
       </div>
       {/* ---uStory Icon and spread options---------------------------------------- */}
       <div
-        className={cc("img-icons img-center-icon", areIconsActive && "show", isUStoryCreating && "ustory-on")}
+        className={cc(
+          "img-icons img-center-icon",
+          areIconsActive && "show",
+          isUStoryCreating && "ustory-on"
+        )}
       >
         {!isUStoryIconSpread && (
-          <GiFlowerEmblem onClick={() => setIsUStoryIconSpread((s) => !s) } fill="pink"  title={ isUStoryCreating ? "Continue in uStory creation" : "Start uStory creation"} />
+          <GiFlowerEmblem
+            onClick={() => setIsUStoryIconSpread((s) => !s)}
+            fill="pink"
+            title={
+              isUStoryCreating
+                ? "Continue in uStory creation"
+                : "Start uStory creation"
+            }
+          />
         )}
       </div>
 
@@ -143,12 +165,28 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         )}
       >
         {isLiked ? (
-          <AiFillHeart onClick={handleHeartIcon} fill={"rgb(238, 93, 93)"} title="In Gallery"/>
+          <AiFillHeart
+            onClick={handleHeartIcon}
+            fill={"rgb(238, 93, 93)"}
+            title="In Gallery"
+          />
         ) : (
-          <AiOutlineHeart onClick={handleHeartIcon} fill="pink" title="Save to Gallery"/>
+          <AiOutlineHeart
+            onClick={handleHeartIcon}
+            fill="pink"
+            title="Save to Gallery"
+          />
         )}
-        <FaInfo onClick={() => setIsInfoActive(true)} fill="pink" title="Show info" />
-        <IoOpen onClick={() => window.open(photo.urls.full)} fill="pink" title="Open photo in new window"/>
+        <FaInfo
+          onClick={() => setIsInfoActive(true)}
+          fill="pink"
+          title="Show info"
+        />
+        <IoOpen
+          onClick={() => window.open(photo.urls.full)}
+          fill="pink"
+          title="Open photo in new window"
+        />
       </div>
 
       {/* ---Photo MODAL ------------------------------------ */}
@@ -178,8 +216,6 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
 export default PhotoContainer;
 
-
-
 function extractVerbsAndNouns(text: string) {
   // extracting verbs and nouns from photo description to use then for further search in uStory
   if (!text) return;
@@ -195,12 +231,14 @@ function extractVerbsAndNouns(text: string) {
   const cleanedVerbs = nullCleaner(verbs);
   const cleanedNouns = nullCleaner(nouns);
 
-  // slicing sentences into single words and adding them to original 
+  // slicing sentences into single words and adding them to original
   const sliceAndAdd = (originalArray: string[]) => {
     const allSingleWords = originalArray
       .map((item) => (item.includes(" ") ? item.split(" ") : item))
       .flat();
-    const onlySentences = originalArray.filter((item) => item.includes(" ")).flat();
+    const onlySentences = originalArray
+      .filter((item) => item.includes(" "))
+      .flat();
     return [...allSingleWords, ...onlySentences];
   };
 

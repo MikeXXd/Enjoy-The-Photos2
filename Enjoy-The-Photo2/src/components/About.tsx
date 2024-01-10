@@ -1,15 +1,12 @@
-import { useState } from "react";
 import useApp from "../context/useApp";
 import { setBackgroundImage } from "../services/extFunctions";
 
 const About = () => {
-  const { setIsAboutRendered } = useApp();
-  // const [backgroundBefore, setBackgroundBefore] = useState("");
-  // >
+  const { setIsAboutRendered, isDynamicBackground } = useApp();
 
-  setBackgroundImage(
+  {isDynamicBackground && setBackgroundImage(
     "https://images.unsplash.com/photo-1630334979993-dc4bf603b121?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHwlMjBzZWElMjBwYXRlcm5zfGVufDB8fHx8MTcwNDc1MDgxMHww&ixlib=rb-4.0.3&q=80&w=1080"
-  );
+  )}
 
   return (
     <div className="wrap-about-and-setting">
@@ -20,10 +17,6 @@ const About = () => {
       </div>
       <div
         className="about-and-setting"
-        // style={{
-        //   backgroundImage:
-        //     'url("https://images.unsplash.com/photo-1524802414218-3983cd08ed53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxN3x8c3RyZWFrc3xlbnwwfHx8fDE3MDQ3NTA4Mjl8MA&ixlib=rb-4.0.3&q=80&w=1080")',
-        // }}
       >
         <h1>About</h1>
 
@@ -66,11 +59,10 @@ const About = () => {
               You can save your favorite photo to the gallery by clicking on the
               HEART icon and remove it in the same way.
             </li>
-            <li>Escape all modals by pressing the ESC key.</li>
             <li>Move through uStory using the LEFT and RIGHT ARROW keys.</li>
-            <li>Close all open uStory settings by pressing the ECS key.</li>
+            <li>Close all open uStory settings by the ECS key.</li>
           </ul>
-          <footer >Current version: 2.0 <br />
+          <footer >Current version: 2.1 <br />
           Created by:{" "}
           <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">
             Michal Viliš

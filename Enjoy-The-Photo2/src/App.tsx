@@ -1,19 +1,19 @@
 import "./styles.css";
+import { createContext, useEffect, useState } from "react";
 import PhotosGrid from "./components/PhotosGrid";
 import SearchBar from "./components/SearchBar";
 import NavBar from "./components/NavBar";
 import usePhotos from "./context/usePhotos";
-import imgTriangle from "./img/icons8-triangle-color-96.png";
-import { createContext, useEffect, useState } from "react";
-import { setBackgroundImage } from "./services/extFunctions";
-import useLocalStorage from "./hooks/useLocalStorage";
 import { PhotoType } from "./context/Photos";
+import useLocalStorage from "./hooks/useLocalStorage";
+import imgTriangle from "./img/icons8-triangle-color-96.png";
 import UStoryMain from "./components/uStory/UStoryMain";
 import OnStoryView from "./components/OnStoryView";
-import { GiFlowerEmblem } from "react-icons/gi";
-import { USTORY_DEFAULT_PHOTOS } from "./data/defaultData";
 import About from "./components/About";
 import Setting from "./components/setting/Setting";
+import { USTORY_DEFAULT_PHOTOS } from "./data/defaultData";
+import { setBackgroundImage } from "./services/extFunctions";
+import { GiFlowerEmblem } from "react-icons/gi";
 
 export type GridSize = "small" | "medium" | "large";
 export type UStorySize = GridSize;

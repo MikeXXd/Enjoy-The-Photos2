@@ -114,11 +114,13 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           onLoad={() => setIsLoaded(true)}
         />
       )}
-      {/* ----Top Icons ---------------------------------- */}
+
+      {/* ----Top left Icons ---------------------------------- */}
+
       <div
         className={cc(
-          "img-icons img-top-icons",
-          areIconsActive && !isUStoryIconSpread && "show"
+          "img-icons img-top-left-icons",
+          areIconsActive && !isUStoryIconSpread && !isPhotoInvisible && !isInfoActive &&  "show"
         )}
       >
         <SlSizeFullscreen
@@ -133,22 +135,32 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
             title="Size up"
           />
         )}
-        <MdOutlineFlipToBack
-          onClick={() => setBackgroundImage(photo)}
-          fill="pink"
-          title="Set photo to background"
-        />
+      </div>
+      {/* ----Top right Icons ---------------------------------- */}
+      <div
+        className={cc(
+          "img-icons img-top-right-icons",
+          areIconsActive && !isUStoryIconSpread && "show"
+        )}
+      >
         <AiOutlineEyeInvisible
           onClick={() => setIsPhotoInvisible((s) => !s)}
           fill="pink"
           title="invisible photo"
         />
+        {!isPhotoInvisible && (
+          <MdOutlineFlipToBack
+            onClick={() => setBackgroundImage(photo)}
+            fill="pink"
+            title="Set photo to background"
+          />
+        )}
       </div>
       {/* ---uStory Icon and spread options---------------------------------------- */}
       <div
         className={cc(
           "img-icons img-center-icon",
-          areIconsActive && "show",
+          areIconsActive && !isPhotoInvisible && !isInfoActive && "show",
           isUStoryCreating && "ustory-on"
         )}
       >
@@ -165,7 +177,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
         )}
       </div>
 
-      {isUStoryIconSpread && (
+      {isUStoryIconSpread && !isPhotoInvisible && (
         <div className="u-story-options-container">
           {uStoryWords.map((word, i) => (
             <UStoryOptionBtn key={i} word={word} photo={photo} />
@@ -178,7 +190,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       <div
         className={cc(
           "img-icons img-bottom-icons",
-          areIconsActive && !isUStoryIconSpread && "show"
+          areIconsActive && !isUStoryIconSpread && !isPhotoInvisible && "show"
         )}
       >
         {isLiked ? (
@@ -195,7 +207,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           />
         )}
         <FaInfo
-          onClick={() => setIsInfoActive(true)}
+          onClick={() => setIsInfoActive(!isInfoActive)}
           fill="pink"
           title="Show info"
         />

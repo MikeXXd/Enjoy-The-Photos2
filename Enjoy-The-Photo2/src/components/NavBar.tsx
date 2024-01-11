@@ -1,11 +1,6 @@
-import { useState, Dispatch, SetStateAction } from "react";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
-// import About from "./About";
-import Setting from "./setting/Setting";
-import Modal from "./Modal";
 import useApp from "../context/useApp";
-import { set } from "react-hook-form";
 
 interface NavItemsProps {
   label: string;

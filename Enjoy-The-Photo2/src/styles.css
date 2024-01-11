@@ -327,8 +327,14 @@ a:focus {
   cursor: pointer;
 }
 
-.img-icons.img-top-icons {
+.img-icons.img-top-right-icons {
   right: 0.8em;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0.5em;
+}
+.img-icons.img-top-left-icons {
+  left: 0.5em;
   flex-direction: column;
   justify-content: space-between;
   top: 0.5em;
@@ -364,7 +370,8 @@ a:focus {
   transform: scale(1.2);
 }
 
-.img-top-icons > svg {
+.img-top-right-icons > svg,
+.img-top-left-icons > svg {
   --size: calc(var(--icon-original-size) - 5%);
   border-radius: var(--soft-radius);
   margin-bottom: 0.5rem;

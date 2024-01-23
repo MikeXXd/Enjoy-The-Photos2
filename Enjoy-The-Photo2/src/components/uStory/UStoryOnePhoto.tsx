@@ -1,14 +1,14 @@
-import { UStoryChain, UStoryType } from "../../App";
-import { cc } from "../../utils/cc";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {
-  MdOutlineFlipToBack,
-  MdDriveFileRenameOutline,
   MdDelete,
+  MdDriveFileRenameOutline,
+  MdOutlineFlipToBack,
 } from "react-icons/md";
-import usePhotos from "../../context/usePhotos";
-import { setBackgroundImage } from "../../services/extFunctions";
+import { UStoryChain, UStoryType } from "../../App";
 import useApp from "../../context/useApp";
+import usePhotos from "../../context/usePhotos";
+import setBackgroundImage from "../../services/extFunctions";
+import { cc } from "../../utils/cc";
 
 interface Props {
   story: UStoryType;
@@ -22,7 +22,8 @@ export default function UStoryOnePhoto({
   story,
 }: Props) {
   const { isInGalery, arrangeGallery } = usePhotos();
-  const { changeUStoryPhotoTitle, deleteUStoryPhoto, isSeenUStoryPhotoTitle } = useApp();
+  const { changeUStoryPhotoTitle, deleteUStoryPhoto, isSeenUStoryPhotoTitle } =
+    useApp();
 
   function handleHeartIcon() {
     arrangeGallery(photo);
@@ -44,9 +45,8 @@ export default function UStoryOnePhoto({
   }
 
   function handleDeletePhoto() {
-      deleteUStoryPhoto({storyId: story.id,
-        photoId: photo.id});
-    }
+    deleteUStoryPhoto({ storyId: story.id, photoId: photo.id });
+  }
 
   return (
     <div
@@ -85,7 +85,10 @@ export default function UStoryOnePhoto({
               title="Rename photo"
             />
           </div>
-          <MdDelete className="delete-icon"  onClick={handleDeletePhoto} title="Delete photo"
+          <MdDelete
+            className="delete-icon"
+            onClick={handleDeletePhoto}
+            title="Delete photo"
           />
         </div>
       )}

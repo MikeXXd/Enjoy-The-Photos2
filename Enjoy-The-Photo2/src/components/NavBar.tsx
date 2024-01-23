@@ -1,6 +1,6 @@
+import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
-import useApp from "../context/useApp";
 
 interface NavItemsProps {
   label: string;

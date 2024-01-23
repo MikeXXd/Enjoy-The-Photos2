@@ -1,11 +1,11 @@
-import Flickity from "react-flickity-component";
-import { UStoryType } from "../../App";
-import "./flickity.css";
-import useApp from "../../context/useApp";
 import { useEffect, useState } from "react";
-import UStoryOnePhoto from "./UStoryOnePhoto";
-import { cc } from "../../utils/cc";
+import Flickity from "react-flickity-component";
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
+import { UStoryType } from "../../App";
+import useApp from "../../context/useApp";
+import { cc } from "../../utils/cc";
+import UStoryOnePhoto from "./UStoryOnePhoto";
+import "./flickity.css";
 
 interface Props {
   story: UStoryType;

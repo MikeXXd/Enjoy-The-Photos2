@@ -1,5 +1,5 @@
 // concatenate classes
 
-export function cc (...classes: unknown[]) {
-  return classes.filter(c => typeof c === "string").join(" ")
+export function cc(...classes: unknown[]) {
+  return classes.filter((c) => typeof c === "string").join(" ");
 }

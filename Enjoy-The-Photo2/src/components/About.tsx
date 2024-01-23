@@ -1,5 +1,5 @@
 import useApp from "../context/useApp";
-import { setBackgroundImage } from "../services/extFunctions";
+import setBackgroundImage from "../services/extFunctions";
 
 const About = () => {
   const { setIsAboutRendered, isDynamicBackground } = useApp();

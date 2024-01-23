@@ -1,7 +1,7 @@
-import { MouseEvent, KeyboardEvent, useEffect, useState, useRef } from "react";
+import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
-import useApp from "../context/useApp";
 
 export default function SearchBar() {
   const {
@@ -10,7 +10,7 @@ export default function SearchBar() {
     pageNo,
     setPageNo,
     actualPhotos,
-    isGalleryRendered
+    isGalleryRendered,
   } = usePhotos();
   const { isUStoryRendered, setIsUStoryRendered, isSearchBarSticky } = useApp();
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
@@ -74,7 +74,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div className={cc("search-bar", isSearchBarSticky && "sticky" )}>
+    <div className={cc("search-bar", isSearchBarSticky && "sticky")}>
       <button
         disabled={false}
         onClick={handlePriorBtn}

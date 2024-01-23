@@ -1,6 +1,6 @@
 import useApp from "../../context/useApp";
 import Carousel from "./Carousel";
-import './styles-uStory.css'
+import "./styles-uStory.css";
 
 export default function UStoryMain() {
   const { uStory } = useApp();
@@ -16,4 +16,3 @@ export default function UStoryMain() {
     </div>
   );
 }
-

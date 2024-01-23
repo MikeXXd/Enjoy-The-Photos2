@@ -640,7 +640,7 @@ a:focus {
 }
 
 .about-and-setting {
-  position:relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -657,7 +657,7 @@ a:focus {
 
 .about-text ol,
 .about-text ul {
-  margin: 0 1rem ;
+  margin: 0 1rem;
   padding: 1rem;
 }
 
@@ -667,7 +667,6 @@ a:focus {
 .about-text h4 {
   color: var(--light-color);
   margin: 1rem;
-
 }
 
 .about-and-setting h1 {
@@ -679,12 +678,10 @@ a:focus {
 .about-text h2 {
   color: var(--orange-light-color);
   text-align: center;
-
 }
 
 .about-text > h3 {
   text-align: center;
-
 }
 
 .about-text h4 {
@@ -692,11 +689,10 @@ a:focus {
 }
 
 .about-and-setting footer {
-text-align: center;
-margin-top: 3rem;
-color: var(--light-color)
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--light-color);
 }
-
 
 .close-btn {
   position: absolute;

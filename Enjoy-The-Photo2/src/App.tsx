@@ -1,19 +1,19 @@
-import "./styles.css";
 import { createContext, useEffect, useState } from "react";
+import { GiFlowerEmblem } from "react-icons/gi";
+import About from "./components/About";
+import NavBar from "./components/NavBar";
+import OnStoryView from "./components/OnStoryView";
 import PhotosGrid from "./components/PhotosGrid";
 import SearchBar from "./components/SearchBar";
-import NavBar from "./components/NavBar";
-import usePhotos from "./context/usePhotos";
+import Setting from "./components/setting/Setting";
+import UStoryMain from "./components/uStory/UStoryMain";
 import { PhotoType } from "./context/Photos";
+import usePhotos from "./context/usePhotos";
+import { USTORY_DEFAULT_PHOTOS } from "./data/defaultData";
 import useLocalStorage from "./hooks/useLocalStorage";
 import imgTriangle from "./img/icons8-triangle-color-96.png";
-import UStoryMain from "./components/uStory/UStoryMain";
-import OnStoryView from "./components/OnStoryView";
-import About from "./components/About";
-import Setting from "./components/setting/Setting";
-import { USTORY_DEFAULT_PHOTOS } from "./data/defaultData";
-import { setBackgroundImage } from "./services/extFunctions";
-import { GiFlowerEmblem } from "react-icons/gi";
+import setBackgroundImage from "./services/extFunctions";
+import "./styles.css";
 
 export type GridSize = "small" | "medium" | "large";
 export type UStorySize = GridSize;
@@ -66,7 +66,7 @@ interface AppContextProps {
   setIsAboutRendered: (active: boolean) => void;
   isSettingRendered: boolean;
   setIsSettingRendered: (active: boolean) => void;
-  isSearchBarSticky:boolean;
+  isSearchBarSticky: boolean;
   setIsSearchBarSticky: (active: boolean) => void;
 }
 
@@ -86,11 +86,10 @@ export function App() {
       "ETP-dynamic_background",
       DEFAULT_DYNAMIC_BACKGROUND
     );
-    const [isSearchBarSticky, setIsSearchBarSticky] =
-    useLocalStorage<boolean>(
-      "ETP-sticky_search_bar",
-      DEFAULT_STICKY_SEARCH_BAR
-    );
+  const [isSearchBarSticky, setIsSearchBarSticky] = useLocalStorage<boolean>(
+    "ETP-sticky_search_bar",
+    DEFAULT_STICKY_SEARCH_BAR
+  );
   const [gridSize, setGridSize] = useLocalStorage<GridSize>(
     "ETP-grig_size",
     DEFAULT_GRID_SIZE
@@ -120,7 +119,7 @@ export function App() {
   useEffect(() => {
     setIsSettingRendered(false);
     setIsAboutRendered(false);
-    }, [actualPhotos]);
+  }, [actualPhotos]);
 
   //----ECS btn for closing opened setting in all uStory carousels------
   useEffect(() => {
@@ -146,7 +145,7 @@ export function App() {
     setIsDynamicBackground(DEFAULT_DYNAMIC_BACKGROUND);
     setGridSize(DEFAULT_GRID_SIZE);
     setUStorySize(DEFAULT_GRID_SIZE);
-    setIsSearchBarSticky(DEFAULT_STICKY_SEARCH_BAR)
+    setIsSearchBarSticky(DEFAULT_STICKY_SEARCH_BAR);
     window.location.reload();
   }
 

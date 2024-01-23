@@ -1,35 +1,35 @@
+import nlp from "compromise";
 import { useEffect, useState } from "react";
-import { PhotoType } from "../context/Photos";
-import { cc } from "../utils/cc";
-import Modal from "./Modal";
-import { FaInfo } from "react-icons/fa";
 import {
-  AiOutlineHeart,
   AiFillHeart,
   AiOutlineEyeInvisible,
+  AiOutlineHeart,
 } from "react-icons/ai";
-import { SlSizeFullscreen } from "react-icons/sl";
+import { FaInfo } from "react-icons/fa";
+import { GiFlowerEmblem } from "react-icons/gi";
 import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
-import usePhotos from "../context/usePhotos";
-import nlp from "compromise";
-import UStoryOptionBtn from "./UStoryOptionBtn";
-import useApp from "../context/useApp";
-import { GiFlowerEmblem } from "react-icons/gi";
 import { MdOutlineFlipToBack } from "react-icons/md";
-import { setBackgroundImage } from "../services/extFunctions";
+import { SlSizeFullscreen } from "react-icons/sl";
+import { PhotoType } from "../context/Photos";
+import useApp from "../context/useApp";
+import usePhotos from "../context/usePhotos";
+import setBackgroundImage from "../services/extFunctions";
+import { cc } from "../utils/cc";
+import Modal from "./Modal";
+import UStoryOptionBtn from "./UStoryOptionBtn";
 
 interface PhotoContainerProps {
   photo: PhotoType;
 }
 
-interface OrientationProps {
+interface PhotoSizesProps {
   cssClass: string;
   apiSize: "regular" | "small" | "full";
 }
 
 // -- adding or removing similar objects to this array will influence the randomization of PhotoContainer size
-const PHOTO_ORIENTATION: OrientationProps[] = [
+const PHOTO_SIZES: PhotoSizesProps[] = [
   { cssClass: "tall wide", apiSize: "regular" }, // this array[0] is PRIVATE, DO NOT CHANGE NOR REMOVE!!!
   { cssClass: "", apiSize: "small" },
   { cssClass: "", apiSize: "small" },
@@ -44,7 +44,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [photoSize, setPhotoSize] = useState(
     () =>
-      PHOTO_ORIENTATION[Math.floor(Math.random() * PHOTO_ORIENTATION.length)]
+      PHOTO_SIZES[Math.floor(Math.random() * PHOTO_SIZES.length)]
   );
   const [isResizing, setIsResizing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -72,7 +72,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
   //--Resize Icon------------------------------------------
   function handleResizePhoto() {
-    setPhotoSize(PHOTO_ORIENTATION[0]);
+    setPhotoSize(PHOTO_SIZES[0]);
     setIsResizing(true);
     handleMouseLeave(); //serving the purpose of hiding icons
   }
@@ -256,7 +256,7 @@ function extractVerbsAndNouns(text: string) {
     array.map((word: string) =>
       word.startsWith("null") ? word.slice(4) : word
     );
-  // some words are poluted with word "null" prefix nullCleaner removes it
+  // some words are poluted with "null" prefix nullCleaner removes it
   const cleanedVerbs = nullCleaner(verbs);
   const cleanedNouns = nullCleaner(nouns);
 

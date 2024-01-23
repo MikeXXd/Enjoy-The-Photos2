@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { FiArrowDownCircle, FiArrowUpCircle } from "react-icons/fi";
 import { UStoryType } from "../App";
 import { cc } from "../utils/cc";
-import { FiArrowDownCircle, FiArrowUpCircle } from "react-icons/fi";
 
 interface Props {
   uStory: UStoryType;

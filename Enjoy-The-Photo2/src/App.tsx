@@ -14,6 +14,8 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import imgTriangle from "./img/icons8-triangle-color-96.png";
 import setBackgroundImage from "./services/extFunctions";
 import "./styles.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 export type GridSize = "small" | "medium" | "large";
 export type UStorySize = GridSize;
@@ -70,7 +72,7 @@ interface AppContextProps {
   setIsSearchBarSticky: (active: boolean) => void;
 }
 
-export const AppContext = createContext<AppContextProps | null>(null);
+export const AppContext = createContext<AppContextProps>({} as AppContextProps);
 
 // -----APP---------------------------------------------------------
 export function App() {
@@ -151,7 +153,7 @@ export function App() {
 
   //---Arranging uStory--------------------------------------------------------
   function arrangeUStory(photo: PhotoType, photoTitle: string) {
-    const title = photoTitle === query ? query : photoTitle; // if photoTitle =  query, then photo is added but no new query search initiated
+    const title = photoTitle === query ? query : photoTitle; // if photoTitle =  query, it means that photo is added but no new query search initiated
     const newPhoto: UStoryChain = { ...photo, photoInStoryName: title };
     if (!isUStoryCreating) {
       setIsUStoryCreating(true);
@@ -224,7 +226,6 @@ export function App() {
     setIsAllUStorySettingClosed(false);
   }
 
-  //------------------------------------------------------------------------------
   return (
     <AppContext.Provider
       value={{
@@ -259,22 +260,7 @@ export function App() {
     >
       <div className="main-container">
         <div className="header-and-nav-bar">
-          <span className="pre-header hide-on-small-device">
-            Breath in the depth of colors and geometry, jump in and enjoooooy!
-          </span>
-          <header className="header">
-            <div className="symbol">
-              {isUStoryCreating ? (
-                <GiFlowerEmblem
-                  onClick={() => setIsUStoryCreating(false)}
-                  title="STOP uStory creation"
-                />
-              ) : (
-                <img src={imgTriangle} />
-              )}
-            </div>
-            <h1>Enjoy the Photos2</h1>
-          </header>
+          <Header />
           <NavBar />
         </div>
         <SearchBar />
@@ -288,17 +274,9 @@ export function App() {
         ) : (
           <PhotosGrid />
         )}
-        <footer className="footer">
-          <span>
-            Created by
-            <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">
-              MikeXd
-            </a>{" "}
-            2023
-          </span>
-        </footer>
+        <Footer />
       </div>
-      {isUStoryCreating && <OnStoryView uStory={uStory[uStory.length - 1]} />}
+      {isUStoryCreating && <OnStoryView uStory={uStory[uStory.length - 1]} />} 
     </AppContext.Provider>
   );
 }

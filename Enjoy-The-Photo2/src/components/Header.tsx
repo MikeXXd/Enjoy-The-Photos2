@@ -2,9 +2,12 @@ import { GiFlowerEmblem } from "react-icons/gi";
 import imgTriangle from "../img/icons8-triangle-color-96.png";
 
 import useApp from "../context/useApp";
+import useStories from "./uStory/store";
 
 export default function Header() {
-    const {setIsUStoryCreating, isUStoryCreating } = useApp();
+    // const {setIsUStoryCreating, isUStoryCreating } = useApp();
+  const {isUStoryCreating, setIsUStoryCreating} = useStories();
+
 
   return (
     <>

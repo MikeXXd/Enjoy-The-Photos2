@@ -1,33 +1,69 @@
 import { create } from "zustand";
-import { UStoryChain, UStoryType } from "../../App";
 import { USTORY_DEFAULT_PHOTOS } from "../../data/defaultData";
 import getLocalStorage from "../../services/getLocalStorage";
 import { PhotoType } from "../../context/Photos";
 
-interface UStoryStoreProps {
-  uStories: UStoryType[];
-  isUStoryCreating: boolean;
-  setIsUStoryCreating: (isCreating: boolean) => void;
-  loadUStories: (stories: UStoryType[]) => void;
-  addingUStory: (photo: PhotoType, photoTitle: string, query: string) => void;
-  // removeUStory: (uStory: UStoryType) => void;
-  // setDefaultUStories: () => void;
-  // changeUStoryName: (uStory: UStoryType) => void;
-  // changePhotoNameInUStory: (uStory: UStoryType) => void;
-  // deletePhotoInUStory: (uStory: UStoryType) => void;
+const LS_USTORY_KEY = "ETP-uStory";
+
+interface UStoryPhotoTitleType {
+  storyId: UStoryType["id"];
+  photoId: UStoryChain["id"];
+  name: UStoryChain["photoInStoryName"];
 }
 
-const useUStoriesStore = create<UStoryStoreProps>((set) => ({
+export interface UStoryChain extends PhotoType {
+  photoInStoryName: string;
+}
+
+export interface UStoryType {
+  id: string;
+  name: string;
+  body: UStoryChain[];
+}
+
+interface UStoryPhotoTitleType {
+  storyId: UStoryType["id"];
+  photoId: UStoryChain["id"];
+  name: UStoryChain["photoInStoryName"];
+}
+
+interface UStoryStoreProps {
+  uStories: UStoryType[];
+  isUStoryCreating: boolean; //IMPLEMENTED
+  setIsUStoryCreating: (isCreating: boolean) => void; //IMPLEMENTED
+  addingUStory: (photo: PhotoType, photoTitle: string, query: string) => void; //IMPLEMENTED
+
+  deleteUStory: (uStoryId: Pick<UStoryType, "id">) => void; //IMPLEMENTED
+  setDefaultUStories: () => void; //IMPLEMENTED
+  changeUStoryName: ({ id, name }: Omit<UStoryType, "body">) => void;
+  changePhotoNameInUStory: ({
+    storyId,
+    photoId,
+    name,
+  }: UStoryPhotoTitleType) => void;
+  deletePhotoInUStory: ({
+    storyId,
+    photoId,
+  }: Omit<UStoryPhotoTitleType, "name">) => void; //IMPLEMENTED
+}
+
+const useStories = create<UStoryStoreProps>((set) => ({
   uStories:
-    getLocalStorage<UStoryType[]>("ETP-uStory", USTORY_DEFAULT_PHOTOS) || [],
-  loadUStories: (stories) => set({ uStories: stories }),
+    getLocalStorage<UStoryType[]>(LS_USTORY_KEY, USTORY_DEFAULT_PHOTOS) || [],
   isUStoryCreating: false,
   setIsUStoryCreating: (value) => set({ isUStoryCreating: value }),
+
+  deleteUStory: (uStoryId) => {
+    set((state) => ({
+      uStories: state.uStories.filter((story) => story.id !== uStoryId.id),
+    }));
+    saveUStoriesToLC();
+  },
   addingUStory: (photo, photoTitle, query) => {
     const title = photoTitle === query ? query : photoTitle; // if photoTitle =  query, it means that photo is added but no new query search initiated
     const newPhoto: UStoryChain = { ...photo, photoInStoryName: title };
 
-    const getCurrent = useUStoriesStore.getState();
+    const getCurrent = useStories.getState();
 
     if (getCurrent.isUStoryCreating === false) {
       set({ isUStoryCreating: true });
@@ -48,8 +84,58 @@ const useUStoriesStore = create<UStoryStoreProps>((set) => ({
             : story
         ),
       }));
+      saveUStoriesToLC();
     }
+  },
+  deletePhotoInUStory: ({ storyId, photoId }) => {
+    set((state) => ({
+      uStories: state.uStories.map((story) =>
+        story.id === storyId
+          ? {
+              ...story,
+              body: story.body.filter((photo) => photo.id !== photoId),
+            }
+          : story
+      ),
+    }));
+    saveUStoriesToLC();
+  },
+  setDefaultUStories: () => {
+    set({ uStories: USTORY_DEFAULT_PHOTOS });
+    saveUStoriesToLC();
+  },
+  changePhotoNameInUStory: ({ storyId, photoId, name }) => {
+    set((state) => ({
+      uStories: state.uStories.map((story) =>
+        story.id === storyId
+          ? {
+              ...story,
+              body: story.body.map((photo) =>
+                photo.id === photoId
+                  ? { ...photo, photoInStoryName: name }
+                  : photo
+              ),
+            }
+          : story
+      ),
+    }));
+    saveUStoriesToLC();
+  },
+  changeUStoryName: ({ id, name }) => {
+    set((state) => ({
+      uStories: state.uStories.map((story) =>
+        story.id === id ? { ...story, name } : story
+      ),
+    }));
+    saveUStoriesToLC();
   },
 }));
 
-export default useUStoriesStore;
+export default useStories;
+
+function saveUStoriesToLC() {
+  localStorage.setItem(
+    LS_USTORY_KEY,
+    JSON.stringify(useStories.getState().uStories)
+  );
+}

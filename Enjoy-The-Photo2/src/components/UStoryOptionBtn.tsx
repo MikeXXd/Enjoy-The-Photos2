@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PhotoType } from "../context/Photos";
 import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
+import useStories from "./uStory/store";
 
 interface Props {
   word: string;
@@ -12,11 +13,12 @@ interface Props {
 
 export default function UStoryOptionBtn({ word, photo }: Props) {
   const { setNewQuery, query } = usePhotos();
-  const { arrangeUStory } = useApp();
+  // const { arrangeUStory } = useApp();
+  const {addingUStory} = useStories();
   const [addedToStory, setAddedToStory] = useState(false);
 
   function handleOnClick() {
-    arrangeUStory(photo, word);
+    addingUStory(photo, word, query);
     if (word !== query) {
       setNewQuery(word);
       window.scrollTo({ top: 0, behavior: "smooth" });

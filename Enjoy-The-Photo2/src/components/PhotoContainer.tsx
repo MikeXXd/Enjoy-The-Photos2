@@ -18,6 +18,7 @@ import setBackgroundImage from "../services/extFunctions";
 import { cc } from "../utils/cc";
 import Modal from "./Modal";
 import UStoryOptionBtn from "./UStoryOptionBtn";
+import useStories from "./uStory/store";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -39,7 +40,8 @@ const PHOTO_SIZES: PhotoSizesProps[] = [
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { gallery, arrangeGallery, query, isInGalery } = usePhotos();
-  const { isUStoryCreating } = useApp();
+  const {isUStoryCreating} = useStories();
+
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [photoSize, setPhotoSize] = useState(

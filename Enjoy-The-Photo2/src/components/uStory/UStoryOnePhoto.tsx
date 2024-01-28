@@ -4,11 +4,11 @@ import {
   MdDriveFileRenameOutline,
   MdOutlineFlipToBack,
 } from "react-icons/md";
-import { UStoryChain, UStoryType } from "../../App";
 import useApp from "../../context/useApp";
 import usePhotos from "../../context/usePhotos";
 import setBackgroundImage from "../../services/extFunctions";
 import { cc } from "../../utils/cc";
+import useStories, { UStoryChain, UStoryType } from "./store";
 
 interface Props {
   story: UStoryType;
@@ -22,8 +22,10 @@ export default function UStoryOnePhoto({
   story,
 }: Props) {
   const { isInGalery, arrangeGallery } = usePhotos();
-  const { changeUStoryPhotoTitle, deleteUStoryPhoto, isSeenUStoryPhotoTitle } =
+  const { isSeenUStoryPhotoTitle } =
     useApp();
+
+    const { deletePhotoInUStory, changePhotoNameInUStory } = useStories()
 
   function handleHeartIcon() {
     arrangeGallery(photo);
@@ -36,7 +38,7 @@ export default function UStoryOnePhoto({
   function handleRenamePhoto() {
     const newTitle = prompt("Enter new title");
     if (newTitle) {
-      changeUStoryPhotoTitle({
+      changePhotoNameInUStory({
         storyId: story.id,
         photoId: photo.id,
         name: newTitle,
@@ -45,7 +47,7 @@ export default function UStoryOnePhoto({
   }
 
   function handleDeletePhoto() {
-    deleteUStoryPhoto({ storyId: story.id, photoId: photo.id });
+    deletePhotoInUStory({ storyId: story.id, photoId: photo.id });
   }
 
   return (

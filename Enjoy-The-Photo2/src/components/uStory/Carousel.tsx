@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Flickity from "react-flickity-component";
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
-import { UStoryType } from "../../App";
 import useApp from "../../context/useApp";
 import { cc } from "../../utils/cc";
 import UStoryOnePhoto from "./UStoryOnePhoto";
 import "./flickity.css";
+import useStories, { UStoryType } from "./store";
 
 interface Props {
   story: UStoryType;
@@ -13,12 +13,11 @@ interface Props {
 
 export default function Carousel({ story }: Props) {
   const {
-    changeUStoryTitle,
-    deleteUStory,
     unblockAllUStorySettings,
     isAllUStorySettingClosed,
     uStorySize,
   } = useApp();
+  const { deleteUStory, changeUStoryName } = useStories()
   const [isSettingRendered, setIsSettingRendered] = useState(false);
 
   const flickityOptions = {
@@ -43,7 +42,7 @@ export default function Carousel({ story }: Props) {
   function handleStoryTitle() {
     const newTitle = prompt("Enter new title");
     if (newTitle) {
-      changeUStoryTitle({ id: story.id, name: newTitle });
+      changeUStoryName({ id: story.id, name: newTitle });
     }
   }
 

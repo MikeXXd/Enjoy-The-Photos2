@@ -1,6 +1,7 @@
 import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
+import useStories from "./uStory/store";
 
 interface NavItemsProps {
   label: string;
@@ -11,9 +12,15 @@ interface NavItemsProps {
 const NavBar = () => {
   const { renderGallery, isGalleryRendered, setIsGalleryRendered, gallery } =
     usePhotos();
-  const { setIsUStoryCreating, isUStoryRendered, setIsUStoryRendered, uStory, isAboutRendered, setIsAboutRendered,
-    isSettingRendered, setIsSettingRendered} =
-    useApp();
+  const { uStories, setIsUStoryCreating } = useStories();
+  const {
+    isUStoryRendered,
+    setIsUStoryRendered,
+    isAboutRendered,
+    setIsAboutRendered,
+    isSettingRendered,
+    setIsSettingRendered,
+  } = useApp();
 
   function handleGallery() {
     if (gallery.length) {
@@ -27,7 +34,7 @@ const NavBar = () => {
   }
 
   function handleUStories() {
-    if (uStory.length) {
+    if (uStories.length) {
       setIsUStoryCreating(false);
       setIsUStoryRendered(!isUStoryRendered);
       setIsGalleryRendered(false);
@@ -67,12 +74,16 @@ const NavBar = () => {
           <NavItem
             label="Gallery"
             onClick={handleGallery}
-            isSelected={!isSettingRendered && !isAboutRendered && isGalleryRendered}
+            isSelected={
+              !isSettingRendered && !isAboutRendered && isGalleryRendered
+            }
           />
           <NavItem
             label="uStories"
             onClick={handleUStories}
-            isSelected={!isSettingRendered && !isAboutRendered && isUStoryRendered}
+            isSelected={
+              !isSettingRendered && !isAboutRendered && isUStoryRendered
+            }
           />
           <NavItem
             label="About"

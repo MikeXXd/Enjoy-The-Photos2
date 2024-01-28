@@ -37,7 +37,7 @@ interface FetchPhotosResponse {
   results: PhotoType[];
 }
 
-export const Context = createContext<PhotosContext | null>(null);
+export const Context = createContext<PhotosContext>({} as PhotosContext);
 
 export function PhotosProvider({ children }: { children: ReactNode }) {
   const [actualPhotos, setActualPhotos] = useState<PhotoType[]>([]);

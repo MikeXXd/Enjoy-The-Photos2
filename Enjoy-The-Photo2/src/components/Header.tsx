@@ -5,6 +5,7 @@ import useApp from "../context/useApp";
 
 export default function Header() {
     const {setIsUStoryCreating, isUStoryCreating } = useApp();
+
   return (
     <>
       <span className="pre-header hide-on-small-device">

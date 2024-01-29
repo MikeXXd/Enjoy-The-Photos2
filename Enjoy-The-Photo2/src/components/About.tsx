@@ -1,8 +1,10 @@
 import useApp from "../context/useApp";
 import setBackgroundImage from "../services/extFunctions";
+import useAppSetting from "./setting/store";
 
 const About = () => {
-  const { setIsAboutRendered, isDynamicBackground } = useApp();
+  const { setIsAboutRendered } = useApp();
+ const {isDynamicBackground} = useAppSetting();
 
   {isDynamicBackground && setBackgroundImage(
     "https://images.unsplash.com/photo-1630334979993-dc4bf603b121?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHwlMjBzZWElMjBwYXRlcm5zfGVufDB8fHx8MTcwNDc1MDgxMHww&ixlib=rb-4.0.3&q=80&w=1080"

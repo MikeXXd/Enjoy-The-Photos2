@@ -1,10 +1,10 @@
-import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import PhotoContainer from "./PhotoContainer";
+import useAppSetting from "./setting/store";
 
 const PhotosGrid = () => {
   const { actualPhotos } = usePhotos();
-  const { gridSize } = useApp();
+  const { gridSize } = useAppSetting();
   
   // console.log('PhotosGrid Rendered')
   

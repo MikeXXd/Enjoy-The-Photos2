@@ -1,4 +1,4 @@
-import { UStoryType } from "../App";
+import { UStoryType } from "../components/uStory/store";
 import { PhotoType } from "../context/Photos";
 
 export const GALERY_DEFAULT_PHOTOS: PhotoType[] = [

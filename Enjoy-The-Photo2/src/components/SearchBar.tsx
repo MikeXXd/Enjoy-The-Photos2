@@ -2,6 +2,7 @@ import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
+import useAppSetting from "./setting/store";
 
 export default function SearchBar() {
   const {
@@ -12,7 +13,8 @@ export default function SearchBar() {
     actualPhotos,
     isGalleryRendered,
   } = usePhotos();
-  const { isUStoryRendered, setIsUStoryRendered, isSearchBarSticky } = useApp();
+  const { isUStoryRendered, setIsUStoryRendered } = useApp();
+ const {isSearchBarSticky} = useAppSetting()
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
   const inputRef = useRef<HTMLInputElement | null>(null);

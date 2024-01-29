@@ -1,36 +1,57 @@
-import { GridSize, UStorySize } from "../../App";
 import useApp from "../../context/useApp";
+import usePhotos from "../../context/usePhotos";
+import {
+  DYNAMIC_BACKGROUND,
+  GRID_SIZE,
+  STICKY_SEARCH_BAR,
+  USTORY_PHOTO_TITLE,
+  USTORY_SIZE,
+} from "../../data/defaultConst";
+import useStories from "../uStory/store";
+import useAppSetting from "./store";
 import "./styles-setting.css";
+
+export type GridSize = "small" | "medium" | "large";
+export type UStorySize = GridSize;
 
 const GRID_SIZE_ARRAY: GridSize[] = ["small", "medium", "large"];
 const USTORY_SIZE_ARRAY: UStorySize[] = ["small", "medium", "large"];
 
+// -----SETTING---------------------------------------------------------
 const Setting = () => {
+  const { setIsSettingRendered } = useApp();
+
+  const { clearGallery } = usePhotos();
+
+  const { setDefaultUStories } = useStories();
+
   const {
-    isDynamicBackground,
-    setIsDynamicBackground,
-    gridSize,
-    setGridSize,
-    resetApp,
-    uStorySize,
-    setUStorySize,
-    isSeenUStoryPhotoTitle,
-    setIsSeenUStoryPhotoTitle,
-    setIsSettingRendered,
     isSearchBarSticky,
     setIsSearchBarSticky,
-  } = useApp();
+    isDynamicBackground,
+    setIsDynamicBackground,
+    isSeenUStoryPhotoTitle,
+    setIsSeenUStoryPhotoTitle,
+    gridSize,
+    setGridSize,
+    uStorySize,
+    setUStorySize,
+  } = useAppSetting();
 
   function handleReset() {
     const confirmed = window.confirm(
       "Are you sure you want to reset the application, delete Gallery and uStories?"
     );
     if (confirmed) {
-      resetApp();
+      clearGallery();
+      setDefaultUStories();
+      setIsDynamicBackground(DYNAMIC_BACKGROUND.DEFAULT_VALUE);
+      setGridSize(GRID_SIZE.DEFAULT_VALUE);
+      setUStorySize(USTORY_SIZE.DEFAULT_VALUE);
+      setIsSearchBarSticky(STICKY_SEARCH_BAR.DEFAULT_VALUE);
+      setIsSeenUStoryPhotoTitle(USTORY_PHOTO_TITLE.DEFAULT_VALUE);
+      window.location.reload();
     }
-  }
-  function toFirstLetterUpperCase(word: string) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
   return (
@@ -120,3 +141,8 @@ const Setting = () => {
 };
 
 export default Setting;
+
+// helping functions-----------------------------------
+function toFirstLetterUpperCase(word: string) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}

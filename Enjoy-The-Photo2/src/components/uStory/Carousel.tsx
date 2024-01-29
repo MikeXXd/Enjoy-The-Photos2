@@ -6,6 +6,7 @@ import { cc } from "../../utils/cc";
 import UStoryOnePhoto from "./UStoryOnePhoto";
 import "./flickity.css";
 import useStories, { UStoryType } from "./store";
+import useAppSetting from "../setting/store";
 
 interface Props {
   story: UStoryType;
@@ -15,9 +16,10 @@ export default function Carousel({ story }: Props) {
   const {
     unblockAllUStorySettings,
     isAllUStorySettingClosed,
-    uStorySize,
   } = useApp();
   const { deleteUStory, changeUStoryName } = useStories()
+  const { uStorySize } = useAppSetting()
+
   const [isSettingRendered, setIsSettingRendered] = useState(false);
 
   const flickityOptions = {

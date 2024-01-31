@@ -8,7 +8,6 @@ import router from "./routes.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <PhotosProvider>
     <React.StrictMode>
-      {/* <App /> */}
       <RouterProvider router={router} />
     </React.StrictMode>
   </PhotosProvider>

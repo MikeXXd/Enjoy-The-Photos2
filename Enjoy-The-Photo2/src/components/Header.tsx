@@ -1,6 +1,7 @@
 import { GiFlowerEmblem } from "react-icons/gi";
 import imgTriangle from "../img/icons8-triangle-color-96.png";
 
+import { NavLink } from "react-router-dom";
 import useStories from "./uStory/store";
 
 export default function Header() {
@@ -23,7 +24,7 @@ export default function Header() {
             <img src={imgTriangle} />
           )}
         </div>
-        <h1>Enjoy the Photos2</h1>
+        <NavLink to="/" className={({isActive}) => isActive ? 'active' : ''} >Enjoy the Photos2</NavLink>
       </header>
     </>
   );

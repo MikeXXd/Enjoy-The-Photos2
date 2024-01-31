@@ -55,15 +55,6 @@ const Setting = () => {
   }
 
   return (
-    <div className="wrap-about-and-setting">
-      <div>
-        <button
-          onClick={() => setIsSettingRendered(false)}
-          className="close-btn"
-        >
-          X
-        </button>
-      </div>
       <div className="about-and-setting">
         <h1>Setting</h1>
 
@@ -136,7 +127,6 @@ const Setting = () => {
           ! Reset
         </button>
       </div>
-    </div>
   );
 };
 

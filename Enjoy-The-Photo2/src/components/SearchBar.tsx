@@ -3,6 +3,7 @@ import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 import useAppSetting from "./setting/store";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
   const {
@@ -18,6 +19,8 @@ export default function SearchBar() {
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (inputRef.current === null) return;
@@ -46,6 +49,7 @@ export default function SearchBar() {
     e.preventDefault();
     e.currentTarget.blur();
     window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate("/");
     isUStoryRendered && setIsUStoryRendered(false);
   }
 

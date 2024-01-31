@@ -1,28 +1,10 @@
-import useApp from "../context/useApp";
-import setBackgroundImage from "../services/extFunctions";
-import useAppSetting from "../components/setting/store";
 
 const About = () => {
-  const { setIsAboutRendered } = useApp();
-  const { isDynamicBackground } = useAppSetting();
 
-  {
-    isDynamicBackground &&
-      setBackgroundImage(
-        "https://images.unsplash.com/photo-1630334979993-dc4bf603b121?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHwlMjBzZWElMjBwYXRlcm5zfGVufDB8fHx8MTcwNDc1MDgxMHww&ixlib=rb-4.0.3&q=80&w=1080"
-      );
-  }
 
   return (
-    <div className="wrap-about-and-setting">
-      <div>
-        <button onClick={() => setIsAboutRendered(false)} className="close-btn">
-          X
-        </button>
-      </div>
       <div className="about-and-setting">
         <h1>About</h1>
-
         <div className="about-text">
           <h2>
             Enjoy the Photos2 has been created as a desktop-first application;
@@ -75,7 +57,6 @@ const About = () => {
           </footer>
         </div>
       </div>
-    </div>
   );
 };
 

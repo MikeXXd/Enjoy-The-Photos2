@@ -41,11 +41,7 @@ export function App() {
   const [isAboutRendered, setIsAboutRendered] = useState(false);
   const [isSettingRendered, setIsSettingRendered] = useState(false);
 
-  // dynamic-background-mechanism -----------------------------------------
-  useEffect(() => {
-    if (actualPhotos.length < 2 || !isDynamicBackground) return;
-    setBackgroundImage(actualPhotos[1]); //[1] the second photo looks better
-  }, [actualPhotos, isDynamicBackground]);
+
 
   useEffect(() => {
     setIsSettingRendered(false);
@@ -88,26 +84,8 @@ export function App() {
       }}
     >
       <div className="main-container">
-        <div className="header-and-nav-bar">
-          <Header />
-          <NavBar />
-        </div>
-        <SearchBar />
         {error && <div className="error">{error}</div>}
-        {isAboutRendered ? (
-          <About />
-        ) : isSettingRendered ? (
-          <Setting />
-        ) : isUStoryRendered ? (
-          <UStoryMain />
-        ) : (
-          <PhotosGrid />
-        )}
-        <Footer />
       </div>
-      {isUStoryCreating && (
-        <OnStoryView uStory={uStories[uStories.length - 1]} />
-      )}
     </AppContext.Provider>
   );
 }

@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 import useStories from "./uStory/store";
 
-interface NavItemsProps {
-  label: string;
-  onClick: () => void;
-  isSelected: boolean;
-}
+// interface NavItemsProps {
+//   label: string;
+//   onClick: () => void;
+//   isSelected: boolean;
+// }
 
 const NavBar = () => {
   // const { renderGallery, isGalleryRendered, setIsGalleryRendered, gallery } =
@@ -58,24 +58,24 @@ const NavBar = () => {
       <nav className="nav-bar">
         <ul>
           <li>
-            <Link to="/gallery" role="button">
+            <NavLink id="link" to="/gallery" className={({isActive}) => isActive ? 'nav active ' : 'nav'} role="button">
               Gallery
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/youstory" role="button">
+            <NavLink id="link" to="/youstory" className={({isActive}) => isActive ? 'nav active ' : 'nav'} role="button">
               uStory
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/about" role="button">
+            <NavLink id="link" to="/about" className={({isActive}) => isActive ? 'nav active ' : 'nav'} role="button">
               About
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/setting" role="button">
+            <NavLink id="link" to="/setting" className={({isActive}) => isActive ? 'nav active ' : 'nav'} role="button">
               Setting
-            </Link>
+            </NavLink>
           </li>
           {/*
           <NavItem

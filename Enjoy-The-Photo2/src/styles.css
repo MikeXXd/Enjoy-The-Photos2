@@ -92,10 +92,21 @@ a:focus {
   align-items: center;
 }
 
-.header h1 {
+.header > a {
   font-family: "Sedgwick Ave Display", cursive;
   font-size: 2rem;
   color: white;
+  scale: 1; 
+  text-decoration: none;
+}
+
+.header > a:hover {
+  transform: scale(1.03);
+  transition: all 0.1s ease-in-out;
+}
+
+.header > a.active {
+  text-shadow:  0 0 12px white;
 }
 
 .symbol {
@@ -138,12 +149,16 @@ a:focus {
 .nav-bar a {
   margin: 0 0.5rem;
   text-decoration: none;
-  transition: all 0.2s ease-in-out;
 }
 
-.nav-bar a.selected {
-  color: var(--orange-color);
-  font-weight: 900;
+.nav:hover {
+  border-bottom: 2px solid var(--white-color);
+}
+
+.nav.active {
+  color: white;
+  font-weight: bold;
+  border-bottom: none
 }
 
 /* ----search-bar------------------------------------------------------ */
@@ -633,14 +648,10 @@ a:focus {
 
 /* about and setting--------------------------------------- */
 
-.wrap-about-and-setting {
+.about-and-setting {
   position: relative;
   margin: 0 auto;
   max-width: 50rem;
-}
-
-.about-and-setting {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -648,7 +659,6 @@ a:focus {
   border: 1px solid var(--white-color);
   border-radius: var(--soft-radius);
   padding: 1rem;
-  margin: 0.1rem;
   background-color: rgba(0, 0, 0, 0.8);
   font-size: 1.3rem;
   color: var(--medium-color);

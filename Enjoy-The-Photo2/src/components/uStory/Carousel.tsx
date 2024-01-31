@@ -1,23 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Flickity from "react-flickity-component";
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
-import useApp from "../../context/useApp";
 import { cc } from "../../utils/cc";
+import useAppSetting from "../setting/store";
 import UStoryOnePhoto from "./UStoryOnePhoto";
 import "./flickity.css";
 import useStories, { UStoryType } from "./store";
-import useAppSetting from "../setting/store";
 
 interface Props {
   story: UStoryType;
 }
 
 export default function Carousel({ story }: Props) {
-  const {
-    unblockAllUStorySettings,
-    isAllUStorySettingClosed,
-  } = useApp();
-  const { deleteUStory, changeUStoryName } = useStories()
+  const { deleteUStory, changeUStoryName, setIsUStoryCreating } = useStories()
   const { uStorySize } = useAppSetting()
 
   const [isSettingRendered, setIsSettingRendered] = useState(false);
@@ -35,11 +30,7 @@ export default function Carousel({ story }: Props) {
     setGallerySize: true,
   }; // bound to flickity.css
 
-  useEffect(() => {
-    if (isAllUStorySettingClosed) {
-      setIsSettingRendered(false);
-    }
-  }, [isAllUStorySettingClosed]);
+
 
   function handleStoryTitle() {
     const newTitle = prompt("Enter new title");
@@ -49,7 +40,7 @@ export default function Carousel({ story }: Props) {
   }
 
   function handleStorySetting() {
-    unblockAllUStorySettings();
+    setIsUStoryCreating(false)
     setIsSettingRendered((s) => !s);
   }
 

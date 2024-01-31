@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { PhotoType } from "../context/Photos";
-import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import useStories from "./uStory/store";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   word: string;
@@ -13,14 +13,15 @@ interface Props {
 
 export default function UStoryOptionBtn({ word, photo }: Props) {
   const { setNewQuery, query } = usePhotos();
-  // const { arrangeUStory } = useApp();
   const {addingUStory} = useStories();
   const [addedToStory, setAddedToStory] = useState(false);
+  const navigate = useNavigate()
 
   function handleOnClick() {
     addingUStory(photo, word, query);
     if (word !== query) {
       setNewQuery(word);
+      navigate("/");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setAddedToStory(true);

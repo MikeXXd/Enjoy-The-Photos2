@@ -17,6 +17,7 @@
     "react-dom": "^18.2.0",
     "react-flickity-component": "^4.0.7",
     "react-icons": "^4.9.0",
+    "react-router-dom": "^6.21.3",
     "zustand": "^4.5.0"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import About from "./components/About";
+import About from "./Pages/AboutPage";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
@@ -8,7 +8,7 @@ import PhotosGrid from "./components/PhotosGrid";
 import SearchBar from "./components/SearchBar";
 import Setting from "./components/setting/Setting";
 import useAppSetting from "./components/setting/store";
-import UStoryMain from "./components/uStory/UStoryMain";
+import UStoryMain from "./components/uStory/YouStory";
 import useStories from "./components/uStory/store";
 import usePhotos from "./context/usePhotos";
 import setBackgroundImage from "./services/extFunctions";

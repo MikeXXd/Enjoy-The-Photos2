@@ -6,7 +6,6 @@ const PhotosGrid = () => {
   const { actualPhotos } = usePhotos();
   const { gridSize } = useAppSetting();
   
-  // console.log('PhotosGrid Rendered')
   
   return (
     <main className={`grid-container-masonri ${gridSize}`} >

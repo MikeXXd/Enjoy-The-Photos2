@@ -1,14 +1,17 @@
 import useApp from "../context/useApp";
 import setBackgroundImage from "../services/extFunctions";
-import useAppSetting from "./setting/store";
+import useAppSetting from "../components/setting/store";
 
 const About = () => {
   const { setIsAboutRendered } = useApp();
- const {isDynamicBackground} = useAppSetting();
+  const { isDynamicBackground } = useAppSetting();
 
-  {isDynamicBackground && setBackgroundImage(
-    "https://images.unsplash.com/photo-1630334979993-dc4bf603b121?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHwlMjBzZWElMjBwYXRlcm5zfGVufDB8fHx8MTcwNDc1MDgxMHww&ixlib=rb-4.0.3&q=80&w=1080"
-  )}
+  {
+    isDynamicBackground &&
+      setBackgroundImage(
+        "https://images.unsplash.com/photo-1630334979993-dc4bf603b121?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHwlMjBzZWElMjBwYXRlcm5zfGVufDB8fHx8MTcwNDc1MDgxMHww&ixlib=rb-4.0.3&q=80&w=1080"
+      );
+  }
 
   return (
     <div className="wrap-about-and-setting">
@@ -17,9 +20,7 @@ const About = () => {
           X
         </button>
       </div>
-      <div
-        className="about-and-setting"
-      >
+      <div className="about-and-setting">
         <h1>About</h1>
 
         <div className="about-text">
@@ -64,12 +65,14 @@ const About = () => {
             <li>Move through uStory using the LEFT and RIGHT ARROW keys.</li>
             <li>Close all open uStory settings by the ECS key.</li>
           </ul>
-          <footer >Current version: 2.1 <br />
-          Created by:{" "}
-          <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">
-            Michal Viliš
-          </a>{" "}
-          2024{" "}</footer>
+          <footer>
+            Current version: 2.1 <br />
+            Created by:{" "}
+            <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">
+              Michal Viliš
+            </a>{" "}
+            2024{" "}
+          </footer>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
@@ -10,67 +11,73 @@ interface NavItemsProps {
 }
 
 const NavBar = () => {
-  const { renderGallery, isGalleryRendered, setIsGalleryRendered, gallery } =
-    usePhotos();
-  const { uStories, setIsUStoryCreating } = useStories();
-  const {
-    isUStoryRendered,
-    setIsUStoryRendered,
-    isAboutRendered,
-    setIsAboutRendered,
-    isSettingRendered,
-    setIsSettingRendered,
-  } = useApp();
+  // const { renderGallery, isGalleryRendered, setIsGalleryRendered, gallery } =
+  //   usePhotos();
+  // const { uStories, setIsUStoryCreating } = useStories();
+  // const {
+  //   isUStoryRendered,
+  //   setIsUStoryRendered,
+  //   isAboutRendered,
+  //   setIsAboutRendered,
+  //   isSettingRendered,
+  //   setIsSettingRendered,
+  // } = useApp();
 
-  function handleGallery() {
-    if (gallery.length) {
-      renderGallery();
-      setIsUStoryCreating(false);
-      setIsUStoryRendered(false);
-      setIsSettingRendered(false);
-      setIsAboutRendered(false);
-    }
-    return;
-  }
+  // function handleGallery() {
+  //   if (gallery.length) {
+  //     renderGallery();
+  //     setIsUStoryCreating(false);
+  //     setIsUStoryRendered(false);
+  //     setIsSettingRendered(false);
+  //     setIsAboutRendered(false);
+  //   }
+  //   return;
+  // }
 
-  function handleUStories() {
-    if (uStories.length) {
-      setIsUStoryCreating(false);
-      setIsUStoryRendered(!isUStoryRendered);
-      setIsGalleryRendered(false);
-      setIsSettingRendered(false);
-      setIsAboutRendered(false);
-    }
-    return;
-  }
+  // function handleUStories() {
+  //   if (uStories.length) {
+  //     setIsUStoryCreating(false);
+  //     setIsUStoryRendered(!isUStoryRendered);
+  //     setIsGalleryRendered(false);
+  //     setIsSettingRendered(false);
+  //     setIsAboutRendered(false);
+  //   }
+  //   return;
+  // }
 
-  function handleAbout() {
-    setIsSettingRendered(false);
-    setIsAboutRendered(!isAboutRendered);
-  }
 
-  function handleSetting() {
-    setIsAboutRendered(false);
-    setIsSettingRendered(!isSettingRendered);
-  }
 
-  const NavItem = ({ label, onClick, isSelected }: NavItemsProps) => (
-    <li>
-      <a
-        href="#"
-        role="button"
-        onClick={onClick}
-        className={cc(isSelected && "selected")}
-      >
-        {label}
-      </a>
-    </li>
-  );
+  // function handleSetting() {
+  //   setIsAboutRendered(false);
+  //   setIsSettingRendered(!isSettingRendered);
+  // }
+
 
   return (
     <>
       <nav className="nav-bar">
         <ul>
+          <li>
+            <Link to="/gallery" role="button">
+              Gallery
+            </Link>
+          </li>
+          <li>
+            <Link to="/youstory" role="button">
+              uStory
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" role="button">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="/setting" role="button">
+              Setting
+            </Link>
+          </li>
+          {/*
           <NavItem
             label="Gallery"
             onClick={handleGallery}
@@ -94,7 +101,7 @@ const NavBar = () => {
             label="Setting"
             onClick={handleSetting}
             isSelected={isSettingRendered}
-          />
+          /> */}
         </ul>
       </nav>
     </>

@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./App.tsx";
 import { PhotosProvider } from "./context/Photos.tsx";
 import "./styles.css";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <PhotosProvider>
     <React.StrictMode>
-      <App />
+      {/* <App /> */}
+      <RouterProvider router={router} />
     </React.StrictMode>
   </PhotosProvider>
 );

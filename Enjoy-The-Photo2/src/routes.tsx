@@ -4,8 +4,8 @@ import GalleryPage from "./Pages/GalleryPage";
 import HomePage from "./Pages/HomePage";
 import Layout from "./Pages/Layout";
 import SettingPage from "./Pages/SettingPage";
-import YouStoryPage from "./components/uStory/YouStory";
 import ErrorPage from "./Pages/ErrorPage";
+import YouStoryPage from "./Pages/YouStoryPage";
 
 const router = createBrowserRouter([
   {

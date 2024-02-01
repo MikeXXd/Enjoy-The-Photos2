@@ -1,9 +1,20 @@
-import YouStory from '../components/uStory/YouStory'
+import YouStory from "../components/uStory/YouStory";
+import useStories from "../components/uStory/store";
 
 const YouStoryPage = () => {
-  return (
-    <YouStory />
-  )
-}
+  const { uStories } = useStories();
 
-export default YouStoryPage
+  return (
+    <>
+      {!uStories.length && (
+        <div className="information-wrap">
+          <h2>Oops...</h2>
+          <p>Your uStory gallery is empty</p>
+        </div>
+      )}{" "}
+      <YouStory />
+    </>
+  );
+};
+
+export default YouStoryPage;

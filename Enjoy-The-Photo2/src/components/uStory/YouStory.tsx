@@ -7,6 +7,7 @@ export default function UStoryMain() {
   const { uStories } = useStories();
   const [closingTrigger, setClosingTrigger] = useState(0)
  
+  console.log('no uStories available', uStories.length)
 
   useEffect(() => {
     const handleEvent = (e: KeyboardEvent) => {
@@ -23,10 +24,11 @@ export default function UStoryMain() {
   }, []);
 
   return (
+    <>
     <div className="ustories-wrap">
       {uStories.map((story) => (
         <Carousel key={story.id} story={story} closingTrigger={closingTrigger}/>
       ))}
-    </div>
+    </div></>
   );
 }

@@ -733,7 +733,8 @@ a:focus {
 }
 
 /*--error-component--------------------------------------------*/
-.error-wrap {
+.error-wrap,
+.information-wrap {
   height: 100vh;
   display: flex;
   justify-content: start;
@@ -746,6 +747,11 @@ a:focus {
 .error-wrap h1 {
   margin-bottom: 1rem;
   color: red;
+}
+
+.information-wrap h2 {
+  margin-top: 1rem;
+  color: var(--orange-color);
 }
 
 /*---footer------------------------------------------------------------- */

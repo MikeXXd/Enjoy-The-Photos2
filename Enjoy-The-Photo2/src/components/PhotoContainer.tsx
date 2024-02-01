@@ -12,7 +12,6 @@ import { IoOpen } from "react-icons/io5";
 import { MdOutlineFlipToBack } from "react-icons/md";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { PhotoType } from "../context/Photos";
-import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import setBackgroundImage from "../services/setBackground";
 import { cc } from "../utils/cc";

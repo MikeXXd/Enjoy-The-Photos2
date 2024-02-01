@@ -16,7 +16,7 @@ export default function Header() {
     const interval = setInterval(() => {
       let newActiveText = randomTextFromArray(SENTENCES_FOR_ACTIVE_TEXT);
       setActiveText(newActiveText);
-    }, 21212); //
+    }, 21000);
 
     return () => {
       clearInterval(interval);

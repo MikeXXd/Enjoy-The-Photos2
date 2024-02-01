@@ -1,57 +1,6 @@
-import { Link, NavLink } from "react-router-dom";
-import useApp from "../context/useApp";
-import usePhotos from "../context/usePhotos";
-import { cc } from "../utils/cc";
-import useStories from "./uStory/store";
-
-// interface NavItemsProps {
-//   label: string;
-//   onClick: () => void;
-//   isSelected: boolean;
-// }
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
-  // const { renderGallery, isGalleryRendered, setIsGalleryRendered, gallery } =
-  //   usePhotos();
-  // const { uStories, setIsUStoryCreating } = useStories();
-  // const {
-  //   isUStoryRendered,
-  //   setIsUStoryRendered,
-  //   isAboutRendered,
-  //   setIsAboutRendered,
-  //   isSettingRendered,
-  //   setIsSettingRendered,
-  // } = useApp();
-
-  // function handleGallery() {
-  //   if (gallery.length) {
-  //     renderGallery();
-  //     setIsUStoryCreating(false);
-  //     setIsUStoryRendered(false);
-  //     setIsSettingRendered(false);
-  //     setIsAboutRendered(false);
-  //   }
-  //   return;
-  // }
-
-  // function handleUStories() {
-  //   if (uStories.length) {
-  //     setIsUStoryCreating(false);
-  //     setIsUStoryRendered(!isUStoryRendered);
-  //     setIsGalleryRendered(false);
-  //     setIsSettingRendered(false);
-  //     setIsAboutRendered(false);
-  //   }
-  //   return;
-  // }
-
-
-
-  // function handleSetting() {
-  //   setIsAboutRendered(false);
-  //   setIsSettingRendered(!isSettingRendered);
-  // }
-
 
   return (
     <>
@@ -77,31 +26,6 @@ const NavBar = () => {
               Setting
             </NavLink>
           </li>
-          {/*
-          <NavItem
-            label="Gallery"
-            onClick={handleGallery}
-            isSelected={
-              !isSettingRendered && !isAboutRendered && isGalleryRendered
-            }
-          />
-          <NavItem
-            label="uStories"
-            onClick={handleUStories}
-            isSelected={
-              !isSettingRendered && !isAboutRendered && isUStoryRendered
-            }
-          />
-          <NavItem
-            label="About"
-            onClick={handleAbout}
-            isSelected={isAboutRendered}
-          />
-          <NavItem
-            label="Setting"
-            onClick={handleSetting}
-            isSelected={isSettingRendered}
-          /> */}
         </ul>
       </nav>
     </>

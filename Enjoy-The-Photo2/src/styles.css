@@ -138,14 +138,36 @@ a:focus {
   margin-right: 0.5rem;
 }
 
-/*---active-text----------------------------------------------*/
-
+/*---active-text and active-words------------------------*/
 .active-text:hover {
   text-shadow: 0 0 10px white;
   font-weight: bold;
-  transition: all 0.1s ease-in-out;
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
 
+.active-text.glittering {
+  animation: 5s glittering linear;
+}
+
+.active-text.glittering:hover {
+  animation: none
+}
+ 
+@keyframes glittering {
+  0% {
+    font-weight: 100;
+    color: white;
+  }
+  50% {
+    font-weight: bold;
+    color: var(--orange-color)
+  }
+  100% {
+    font-weight: 100;
+    color: white;
+
+  }
 }
 
 /* ----nav-bar------------------------------------------------------ */

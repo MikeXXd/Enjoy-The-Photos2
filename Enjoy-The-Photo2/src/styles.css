@@ -62,6 +62,7 @@ a:focus {
 
 /* ----header-and-nav-bar------------------------------------------------------ */
 .header-and-nav-bar {
+  min-height: 6rem; 
   position: relative;
   left: 50%;
   transform: translateX(-50%);

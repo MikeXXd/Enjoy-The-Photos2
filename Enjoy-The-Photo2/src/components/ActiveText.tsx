@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 interface Props {
   children: string;
 }
-
+ // describe what the component dea
 const ActiveText = ({ children }: Props) => {
     
   const words = children.split(" ");
@@ -46,7 +46,7 @@ const ActiveWord = ({word}: ActiveWordProps) => {
         setIsGlittering(false);
 
         return () => clearTimeout(interval);
-    }, []);
+    }, [word]);
 
     const handleClick = (word: string) => {
         setNewQuery(word);

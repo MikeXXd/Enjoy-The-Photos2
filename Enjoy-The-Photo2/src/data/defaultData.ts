@@ -179,3 +179,16 @@ export const USTORY_DEFAULT_PHOTOS: UStoryType[] = [
     ],
   },
 ];
+
+export const SENTENCES_FOR_ACTIVE_TEXT = [
+  "Whispering forms, secrets unfold, tales of cosmic interconnection echoing through the vast universe.",
+  "Vibrant collisions of hues compose perception's kaleidoscopic symphony, a vivid exploration of reality.",
+  "Contours weave sagas, geometry's murmurs shaping the narrative of existence.",
+  "In the chromatic saga, emotions unfold in verses, colors narrating life's profound story.",
+  "Dancing angles, geometry orchestrates a silent ballet, a cosmic rhythm echoing through eternity.",
+  "Nature's canvas, eternal hues delicately brush strokes, creating a timeless masterpiece of being.",
+  "Life's poetic echoes resonate in shapes, a rhythmic dance, an eloquent symphony of existence.",
+  "Blossoming colors unveil hidden symmetries, intricacies woven into the vast tapestry of being.",
+  "Chaos surrenders gracefully to geometry's structured ballet, a sublime elegance in cosmic beauty.",
+  "Within shapes' simplicity, complexity finds a tranquil refuge, a sanctuary of intricate form.",
+]

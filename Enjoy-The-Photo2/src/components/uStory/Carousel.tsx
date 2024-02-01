@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Flickity from "react-flickity-component";
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
 import { cc } from "../../utils/cc";
@@ -9,9 +9,10 @@ import useStories, { UStoryType } from "./store";
 
 interface Props {
   story: UStoryType;
+  closingTrigger: number
 }
 
-export default function Carousel({ story }: Props) {
+export default function Carousel({ story, closingTrigger }: Props) {
   const { deleteUStory, changeUStoryName, setIsUStoryCreating } = useStories()
   const { uStorySize } = useAppSetting()
 
@@ -30,7 +31,9 @@ export default function Carousel({ story }: Props) {
     setGallerySize: true,
   }; // bound to flickity.css
 
-
+ useEffect(() => {
+  setIsSettingRendered(false)
+ }, [closingTrigger])
 
   function handleStoryTitle() {
     const newTitle = prompt("Enter new title");

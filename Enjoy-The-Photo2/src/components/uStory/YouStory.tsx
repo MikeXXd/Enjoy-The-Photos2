@@ -1,40 +1,35 @@
+import { useEffect, useState } from "react";
 import Carousel from "./Carousel";
 import useStories from "./store";
 import "./styles-uStory.css";
 
 export default function UStoryMain() {
   const { uStories } = useStories();
+  const [closingTrigger, setClosingTrigger] = useState(0)
+ 
 
-  //----ECS btn for closing opened setting in all uStory carousels------
-  // useEffect(() => {
-  //   if (!isUStoryRendered) return;
+  useEffect(() => {
+    const handleEvent = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        //setting closingTrigger is used to close the setting menu in child components
+        setClosingTrigger(Math.random());
+      }
+    };
+    document.addEventListener("keydown", handleEvent);
 
-  //   const handleEvent = (e: KeyboardEvent) => {
-  //     if (e.key === "Escape") {
-  //       setIsAllUStorySettingClosed(true);
-  //     }
-  //   };
-
-  //   document.addEventListener("keydown", handleEvent);
-
-  //   return () => {
-  //     document.removeEventListener("keydown", handleEvent);
-  //   };
-  // }, [isUStoryRendered]);
-
-  // function unblockAllUStorySettings() {
-  //   setIsAllUStorySettingClosed(false);
-  // }
+    return () => {
+      document.removeEventListener("keydown", handleEvent);
+    };
+  }, []);
 
 
-
-  // Reverse the uStory array if it exists
+  // Reverse the order
   const reversedUStory = uStories ? [...uStories].reverse() : [];
 
   return (
     <div className="ustories-wrap">
       {reversedUStory.map((story) => (
-        <Carousel key={story.id} story={story} />
+        <Carousel key={story.id} story={story} closingTrigger={closingTrigger}/>
       ))}
     </div>
   );

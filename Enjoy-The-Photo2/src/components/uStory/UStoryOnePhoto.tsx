@@ -26,6 +26,7 @@ export default function UStoryOnePhoto({
     const { deletePhotoInUStory, changePhotoNameInUStory } = useStories()
     const {isSeenUStoryPhotoTitle} = useAppSetting()
 
+
   function handleHeartIcon() {
     arrangeGallery(photo);
   }

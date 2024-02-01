@@ -24,7 +24,7 @@ export default function Header() {
             <img src={imgTriangle} />
           )}
         </div>
-        <NavLink to="/" className={({isActive}) => isActive ? 'active' : ''} >Enjoy the Photos2</NavLink>
+        <NavLink to="/" className={({isActive}) => isActive ? 'active' : ''} title="Home" >Enjoy the Photos2</NavLink>
       </header>
     </>
   );

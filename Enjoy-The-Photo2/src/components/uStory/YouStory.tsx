@@ -22,13 +22,9 @@ export default function UStoryMain() {
     };
   }, []);
 
-
-  // Reverse the order
-  const reversedUStory = uStories ? [...uStories].reverse() : [];
-
   return (
     <div className="ustories-wrap">
-      {reversedUStory.map((story) => (
+      {uStories.map((story) => (
         <Carousel key={story.id} story={story} closingTrigger={closingTrigger}/>
       ))}
     </div>

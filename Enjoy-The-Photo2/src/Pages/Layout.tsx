@@ -15,7 +15,7 @@ const {uStories, isUStoryCreating} = useStories()
       <Footer />
     </div>
     {isUStoryCreating && (
-        <OnStoryView uStory={uStories[uStories.length - 1]} />
+        <OnStoryView uStory={uStories[0]} />
       )}</>
   );
 };

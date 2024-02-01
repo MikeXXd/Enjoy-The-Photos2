@@ -73,10 +73,10 @@ const useStories = create<UStoryStoreProps>((set) => ({
         body: [newPhoto],
       };
 
-      set((state) => ({ uStories: [...state.uStories, newUStory] }));
+      set((state) => ({ uStories: [newUStory, ...state.uStories] }));
     } else {
       const nowCretingStoryId =
-        getCurrent.uStories[getCurrent.uStories.length - 1].id;
+        getCurrent.uStories[0].id;
       set((state) => ({
         uStories: state.uStories.map((story) =>
           story.id === nowCretingStoryId

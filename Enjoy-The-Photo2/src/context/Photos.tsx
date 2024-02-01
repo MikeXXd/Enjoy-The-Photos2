@@ -43,7 +43,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
   const [actualPhotos, setActualPhotos] = useState<PhotoType[]>([]);
 
   const [error, setError] = useState("");
-  const [query, setQuery] = useState("scenery rock");
+  const [query, setQuery] = useState("amazing colors");
   const [pageNo, setPageNo] = useState(1);
 
   const [isGalleryRendered, setIsGalleryRendered] = useState(false);
@@ -51,8 +51,6 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     "ETP-galery",
     GALERY_DEFAULT_PHOTOS
   );
-
-  console.log(actualPhotos);
 
   useEffect(() => {
     setIsGalleryRendered(false);

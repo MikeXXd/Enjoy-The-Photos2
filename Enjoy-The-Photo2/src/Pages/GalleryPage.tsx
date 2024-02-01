@@ -1,19 +1,18 @@
-import PhotosGrid from '../components/PhotosGrid'
-import usePhotos from '../context/usePhotos'
+import PhotosGrid from "../components/PhotosGrid";
+import InformationMessage from "../components/messages/InfoMessage";
+import usePhotos from "../context/usePhotos";
 
 const GalleryPage = () => {
-const {gallery: photos} = usePhotos()
+  const { gallery: photos } = usePhotos();
 
   return (
     <>
-    {!photos.length && <div className="information-wrap">
-        <h2>Oops...</h2>
-        <p>
-          You have no photos in gallery</p>
-    </div>}
-<PhotosGrid photos={photos}/>
-</>
-  )
-}
+      {!photos.length && (
+        <InformationMessage>You have no photos in gallery</InformationMessage>
+      )}
+      <PhotosGrid photos={photos} />
+    </>
+  );
+};
 
-export default GalleryPage
+export default GalleryPage;

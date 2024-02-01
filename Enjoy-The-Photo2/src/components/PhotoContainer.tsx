@@ -14,7 +14,7 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import { PhotoType } from "../context/Photos";
 import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
-import setBackgroundImage from "../services/extFunctions";
+import setBackgroundImage from "../services/setBackground";
 import { cc } from "../utils/cc";
 import Modal from "./Modal";
 import UStoryOptionBtn from "./UStoryOptionBtn";
@@ -40,13 +40,12 @@ const PHOTO_SIZES: PhotoSizesProps[] = [
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { gallery, arrangeGallery, query, isInGalery } = usePhotos();
-  const {isUStoryCreating} = useStories();
+  const { isUStoryCreating } = useStories();
 
   const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [photoSize, setPhotoSize] = useState(
-    () =>
-      PHOTO_SIZES[Math.floor(Math.random() * PHOTO_SIZES.length)]
+    () => PHOTO_SIZES[Math.floor(Math.random() * PHOTO_SIZES.length)]
   );
   const [isResizing, setIsResizing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -122,7 +121,11 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
       <div
         className={cc(
           "img-icons img-top-left-icons",
-          areIconsActive && !isUStoryIconSpread && !isPhotoInvisible && !isInfoActive &&  "show"
+          areIconsActive &&
+            !isUStoryIconSpread &&
+            !isPhotoInvisible &&
+            !isInfoActive &&
+            "show"
         )}
       >
         <SlSizeFullscreen

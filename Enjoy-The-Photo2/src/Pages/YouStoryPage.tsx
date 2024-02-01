@@ -1,3 +1,4 @@
+import InformationMessage from "../components/messages/InfoMessage";
 import YouStory from "../components/uStory/YouStory";
 import useStories from "../components/uStory/store";
 
@@ -7,11 +8,8 @@ const YouStoryPage = () => {
   return (
     <>
       {!uStories.length && (
-        <div className="information-wrap">
-          <h2>Oops...</h2>
-          <p>Your uStory gallery is empty</p>
-        </div>
-      )}{" "}
+        <InformationMessage>Your uStory gallery is empty.</InformationMessage>
+      )}
       <YouStory />
     </>
   );

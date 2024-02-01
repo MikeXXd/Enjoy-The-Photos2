@@ -5,7 +5,7 @@ import {
   MdOutlineFlipToBack,
 } from "react-icons/md";
 import usePhotos from "../../context/usePhotos";
-import setBackgroundImage from "../../services/extFunctions";
+import setBackgroundImage from "../../services/setBackground";
 import { cc } from "../../utils/cc";
 import useAppSetting from "../setting/store";
 import useStories, { UStoryChain, UStoryType } from "./store";
@@ -23,9 +23,8 @@ export default function UStoryOnePhoto({
 }: Props) {
   const { isInGalery, arrangeGallery } = usePhotos();
 
-    const { deletePhotoInUStory, changePhotoNameInUStory } = useStories()
-    const {isSeenUStoryPhotoTitle} = useAppSetting()
-
+  const { deletePhotoInUStory, changePhotoNameInUStory } = useStories();
+  const { isSeenUStoryPhotoTitle } = useAppSetting();
 
   function handleHeartIcon() {
     arrangeGallery(photo);

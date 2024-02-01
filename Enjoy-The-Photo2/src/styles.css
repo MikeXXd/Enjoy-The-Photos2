@@ -732,6 +732,22 @@ a:focus {
   box-shadow: 0 0 10px 0 var(--white-color);
 }
 
+/*--error-component--------------------------------------------*/
+.error-wrap {
+  height: 100vh;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  align-items: center;
+
+  color: red;
+}
+
+.error-wrap h1 {
+  margin-bottom: 1rem;
+  color: red;
+}
+
 /*---footer------------------------------------------------------------- */
 .footer > span {
   position: relative;

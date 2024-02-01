@@ -1,5 +1,4 @@
 import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from "react";
-import useApp from "../context/useApp";
 import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 import useAppSetting from "./setting/store";
@@ -14,7 +13,6 @@ export default function SearchBar() {
     actualPhotos,
     isGalleryRendered,
   } = usePhotos();
-  const { isUStoryRendered, setIsUStoryRendered } = useApp();
  const {isSearchBarSticky} = useAppSetting()
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
   const [isPriorBtnActive, setIsPriorBtnActive] = useState(pageNo > 1);
@@ -50,7 +48,6 @@ export default function SearchBar() {
     e.currentTarget.blur();
     window.scrollTo({ top: 0, behavior: "smooth" });
     navigate("/");
-    isUStoryRendered && setIsUStoryRendered(false);
   }
 
   function handlePriorBtn(e: MouseEvent<HTMLButtonElement>) {

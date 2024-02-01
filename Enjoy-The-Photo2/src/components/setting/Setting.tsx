@@ -1,4 +1,3 @@
-import useApp from "../../context/useApp";
 import usePhotos from "../../context/usePhotos";
 import {
   DYNAMIC_BACKGROUND,
@@ -19,7 +18,6 @@ const USTORY_SIZE_ARRAY: UStorySize[] = ["small", "medium", "large"];
 
 // -----SETTING---------------------------------------------------------
 const Setting = () => {
-  const { setIsSettingRendered } = useApp();
 
   const { clearGallery } = usePhotos();
 

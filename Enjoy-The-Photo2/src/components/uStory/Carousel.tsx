@@ -5,16 +5,17 @@ import { cc } from "../../utils/cc";
 import useAppSetting from "../setting/store";
 import UStoryOnePhoto from "./UStoryOnePhoto";
 import "./flickity.css";
-import useStories, { UStoryType } from "./store";
+import useStories from "./store";
+import UStory from "../../interfacesAndTypes/UStory";
 
 interface Props {
-  story: UStoryType;
-  closingTrigger: number
+  story: UStory;
+  closingTrigger: number;
 }
 
 export default function Carousel({ story, closingTrigger }: Props) {
-  const { deleteUStory, changeUStoryName, setIsUStoryCreating } = useStories()
-  const { uStorySize } = useAppSetting()
+  const { deleteUStory, changeUStoryName, setIsUStoryCreating } = useStories();
+  const { uStorySize } = useAppSetting();
 
   const [isSettingRendered, setIsSettingRendered] = useState(false);
 
@@ -31,9 +32,9 @@ export default function Carousel({ story, closingTrigger }: Props) {
     setGallerySize: true,
   }; // bound to flickity.css
 
- useEffect(() => {
-  setIsSettingRendered(false)
- }, [closingTrigger])
+  useEffect(() => {
+    setIsSettingRendered(false);
+  }, [closingTrigger]);
 
   function handleStoryTitle() {
     const newTitle = prompt("Enter new title");
@@ -43,7 +44,7 @@ export default function Carousel({ story, closingTrigger }: Props) {
   }
 
   function handleStorySetting() {
-    setIsUStoryCreating(false)
+    setIsUStoryCreating(false);
     setIsSettingRendered((s) => !s);
   }
 

@@ -11,7 +11,7 @@ import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
 import { MdOutlineFlipToBack } from "react-icons/md";
 import { SlSizeFullscreen } from "react-icons/sl";
-import { PhotoType } from "../context/Photos";
+import Photo from "../interfacesAndTypes/Photo";
 import usePhotos from "../context/usePhotos";
 import setBackgroundImage from "../services/setBackground";
 import { cc } from "../utils/cc";
@@ -21,7 +21,7 @@ import useStories from "./uStory/store";
 import useGallery from "./gallery/store";
 
 interface PhotoContainerProps {
-  photo: PhotoType;
+  photo: Photo;
 }
 
 interface PhotoSizesProps {

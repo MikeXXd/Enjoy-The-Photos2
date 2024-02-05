@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { PhotoType } from "../context/Photos";
+import Photo from "../interfacesAndTypes/Photo";
 import setBackgroundImage from "../services/setBackground";
 import PhotoContainer from "./PhotoContainer";
 import useAppSetting from "./setting/store";
 
 interface PhotosGridProps {
-  photos: PhotoType[];
+  photos: Photo[];
 }
 
 const PhotosGrid = ({ photos }: PhotosGridProps) => {

@@ -1,21 +1,21 @@
 import { useState } from "react";
-import { PhotoType } from "../context/Photos";
+import Photo from "../interfacesAndTypes/Photo";
 import usePhotos from "../context/usePhotos";
 import useStories from "./uStory/store";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
   word: string;
-  photo: PhotoType;
+  photo: Photo;
 }
 // onClick > component adds photo to uStory
 // if word === query > no new query will be set and the rendered photos will stay the same, otherwise query set to word
 
 export default function UStoryOptionBtn({ word, photo }: Props) {
   const { setNewQuery, query } = usePhotos();
-  const {addingUStory} = useStories();
+  const { addingUStory } = useStories();
   const [addedToStory, setAddedToStory] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleOnClick() {
     addingUStory(photo, word, query);

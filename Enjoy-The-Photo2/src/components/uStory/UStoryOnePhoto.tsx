@@ -8,11 +8,13 @@ import setBackgroundImage from "../../services/setBackground";
 import { cc } from "../../utils/cc";
 import useGallery from "../gallery/store";
 import useAppSetting from "../setting/store";
-import useStories, { UStoryChain, UStoryType } from "./store";
+import useStories from "./store";
+import UStoryPhoto from "../../interfacesAndTypes/UStoryPhoto";
+import UStory from "../../interfacesAndTypes/UStory";
 
 interface Props {
-  story: UStoryType;
-  photo: UStoryChain;
+  story: UStory;
+  photo: UStoryPhoto;
   isSettingRendered: boolean;
 }
 

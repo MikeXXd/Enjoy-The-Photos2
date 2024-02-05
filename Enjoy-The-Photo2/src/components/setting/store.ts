@@ -8,7 +8,7 @@ import {
 } from "../../data/defaultConst";
 import getLocalStorage from "../../services/getLocalStorage";
 import saveToLocalStorage from "../../services/saveToLocalStorage";
-import { GridSize, UStorySize } from "./Setting";
+import { GridSize, UStorySize } from "../../interfacesAndTypes/Sizes";
 
 interface SettingProps {
   isDynamicBackground: boolean;

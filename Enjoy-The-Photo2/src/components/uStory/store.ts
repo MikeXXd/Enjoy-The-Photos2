@@ -1,54 +1,41 @@
 import { create } from "zustand";
-import { USTORY_DEFAULT_PHOTOS } from "../../data/defaultData";
+import { U_STORY } from "../../data/defaultConst";
+import Photo from "../../interfacesAndTypes/Photo";
+import UStory from "../../interfacesAndTypes/UStory";
+import UStoryPhoto from "../../interfacesAndTypes/UStoryPhoto";
 import getLocalStorage from "../../services/getLocalStorage";
-import { PhotoType } from "../../context/Photos";
 
-const LS_USTORY_KEY = "ETP-uStory";
-
-interface UStoryPhotoTitleType {
-  storyId: UStoryType["id"];
-  photoId: UStoryChain["id"];
-  name: UStoryChain["photoInStoryName"];
-}
-
-export interface UStoryChain extends PhotoType {
-  photoInStoryName: string;
-}
-
-export interface UStoryType {
-  id: string;
-  name: string;
-  body: UStoryChain[];
-}
-
-interface UStoryPhotoTitleType {
-  storyId: UStoryType["id"];
-  photoId: UStoryChain["id"];
-  name: UStoryChain["photoInStoryName"];
+interface UStoryPhotoTitleProps {
+  storyId: UStory["id"];
+  photoId: UStoryPhoto["id"];
+  name: UStoryPhoto["photoInStoryName"];
 }
 
 interface UStoryStoreProps {
-  uStories: UStoryType[];
+  uStories: UStory[];
   isUStoryCreating: boolean;
   setIsUStoryCreating: (isCreating: boolean) => void;
-  addingUStory: (photo: PhotoType, photoTitle: string, query: string) => void;
-  deleteUStory: (uStoryId: Pick<UStoryType, "id">) => void;
+  addingUStory: (photo: Photo, photoTitle: string, query: string) => void;
+  deleteUStory: (uStoryId: Pick<UStory, "id">) => void;
   setDefaultUStories: () => void;
-  changeUStoryName: ({ id, name }: Omit<UStoryType, "body">) => void;
+  changeUStoryName: ({ id, name }: Omit<UStory, "body">) => void;
   changePhotoNameInUStory: ({
     storyId,
     photoId,
     name,
-  }: UStoryPhotoTitleType) => void;
+  }: UStoryPhotoTitleProps) => void;
   deletePhotoInUStory: ({
     storyId,
     photoId,
-  }: Omit<UStoryPhotoTitleType, "name">) => void;
+  }: Omit<UStoryPhotoTitleProps, "name">) => void;
 }
 
 const useStories = create<UStoryStoreProps>((set) => ({
   uStories:
-    getLocalStorage<UStoryType[]>(LS_USTORY_KEY, USTORY_DEFAULT_PHOTOS) || [],
+    getLocalStorage<UStory[]>(
+      U_STORY.LOCAL_STORAGE_KEY,
+      U_STORY.DEFAULT_VALUE
+    ) || [],
   isUStoryCreating: false,
   setIsUStoryCreating: (value) => set({ isUStoryCreating: value }),
 
@@ -60,7 +47,7 @@ const useStories = create<UStoryStoreProps>((set) => ({
   },
   addingUStory: (photo, photoTitle, query) => {
     const title = photoTitle === query ? query : photoTitle; // if photoTitle =  query, it means that photo is added but no new query search initiated
-    const newPhoto: UStoryChain = { ...photo, photoInStoryName: title };
+    const newPhoto: UStoryPhoto = { ...photo, photoInStoryName: title };
 
     const getCurrent = useStories.getState();
 
@@ -99,7 +86,7 @@ const useStories = create<UStoryStoreProps>((set) => ({
     saveUStoriesToLC();
   },
   setDefaultUStories: () => {
-    set({ uStories: USTORY_DEFAULT_PHOTOS });
+    set({ uStories: U_STORY.DEFAULT_VALUE });
     saveUStoriesToLC();
   },
   changePhotoNameInUStory: ({ storyId, photoId, name }) => {
@@ -133,7 +120,7 @@ export default useStories;
 
 function saveUStoriesToLC() {
   localStorage.setItem(
-    LS_USTORY_KEY,
+    U_STORY.LOCAL_STORAGE_KEY,
     JSON.stringify(useStories.getState().uStories)
   );
 }

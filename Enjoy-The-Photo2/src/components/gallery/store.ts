@@ -1,21 +1,20 @@
 import { create } from "zustand";
 import getLocalStorage from "../../services/getLocalStorage";
-import { PhotoType } from "../../context/Photos";
+import Photo from "../../interfacesAndTypes/Photo";
 import { GALLERY } from "../../data/defaultConst";
 
 interface GalleryStoreProps {
-  gallery: PhotoType[];
-  arrangeGallery: (photo: PhotoType) => void;
+  gallery: Photo[];
+  arrangeGallery: (photo: Photo) => void;
   setDefaultGallery: () => void;
-  isInGallery: (photo: PhotoType) => boolean;
+  isInGallery: (photo: Photo) => boolean;
 }
 
+const LS_KEY = GALLERY.LOCAL_STORAGE_KEY;
+const DEF_VALUE = GALLERY.DEFAULT_VALUE;
+
 const useGallery = create<GalleryStoreProps>((set) => ({
-  gallery:
-    getLocalStorage<PhotoType[]>(
-      GALLERY.LOCAL_STORAGE_KEY,
-      GALLERY.DEFAULT_VALUE
-    ) || [],
+  gallery: getLocalStorage<Photo[]>(LS_KEY, DEF_VALUE) || [],
   arrangeGallery: (photo) => {
     set((state) => {
       const updatedGallery = state.gallery.find((p) => p.id === photo.id)
@@ -23,11 +22,11 @@ const useGallery = create<GalleryStoreProps>((set) => ({
         : [photo, ...state.gallery];
       return { gallery: updatedGallery };
     });
-    saveGalleryToLC();
+    saveGallery();
   },
   setDefaultGallery: () => {
-    set({ gallery: GALLERY.DEFAULT_VALUE });
-    saveGalleryToLC();
+    set({ gallery: DEF_VALUE });
+    saveGallery();
   },
   isInGallery: (photo): boolean => {
     const current = useGallery.getState().gallery;
@@ -37,9 +36,6 @@ const useGallery = create<GalleryStoreProps>((set) => ({
 
 export default useGallery;
 
-function saveGalleryToLC() {
-  localStorage.setItem(
-    GALLERY.LOCAL_STORAGE_KEY,
-    JSON.stringify(useGallery.getState().gallery)
-  );
+function saveGallery() {
+  localStorage.setItem(LS_KEY, JSON.stringify(useGallery.getState().gallery));
 }

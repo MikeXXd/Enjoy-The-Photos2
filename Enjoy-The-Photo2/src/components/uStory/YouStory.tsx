@@ -7,13 +7,11 @@ export default function UStoryMain() {
   const { uStories } = useStories();
   const [closingTrigger, setClosingTrigger] = useState(0)
  
-  console.log('no uStories available', uStories.length)
-
   useEffect(() => {
     const handleEvent = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        //setting closingTrigger is used to close the setting menu in child components
-        setClosingTrigger(Math.random());
+        //closingTrigger is used to close the setting menu in child components
+        setClosingTrigger(Math.random());//random No. to trigger re-render
       }
     };
     document.addEventListener("keydown", handleEvent);

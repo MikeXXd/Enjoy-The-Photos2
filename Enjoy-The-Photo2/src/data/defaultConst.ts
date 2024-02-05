@@ -1,43 +1,40 @@
-import { GridSize, UStorySize } from "../components/setting/Setting";
-import { PhotoType } from "../context/Photos";
-import { GALERY_DEFAULT_PHOTOS } from "./defaultData";
+import { GridSize, UStorySize } from "../interfacesAndTypes/Sizes";
+import Photo from "../interfacesAndTypes/Photo";
+import UStory from "../interfacesAndTypes/UStory";
+import { GALERY_DEFAULT_DATA, USTORY_DEFAULT_DATA } from "./defaultData";
 
 interface Props<T> {
   LOCAL_STORAGE_KEY: string;
   DEFAULT_VALUE: T;
 }
 
+function createProps<T>(localStorageKey: string, defaultValue: T): Props<T> {
+  return {
+    LOCAL_STORAGE_KEY: localStorageKey,
+    DEFAULT_VALUE: defaultValue,
+  };
+}
+
 //default query
 export const INNITIAL_QUERY: string = "enter space time";
 
 // gallery
-export const GALLERY: Props<PhotoType[]> = {
-  LOCAL_STORAGE_KEY: "ETP-gallery",
-  DEFAULT_VALUE: GALERY_DEFAULT_PHOTOS,
-};
+export const GALLERY: Props<Photo[]> = createProps("ETP-gallery", GALERY_DEFAULT_DATA);
+
+//uStory
+export const U_STORY: Props<UStory[]> = createProps("ETP-uStory", USTORY_DEFAULT_DATA);
 
 //dynamic background
-export const DYNAMIC_BACKGROUND: Props<boolean> = {
-  LOCAL_STORAGE_KEY: "ETP-dynamic_background",
-  DEFAULT_VALUE: true,
-};
+export const DYNAMIC_BACKGROUND: Props<boolean> = createProps("ETP-dynamic_background", true);
+
 //sticky search bar
-export const STICKY_SEARCH_BAR: Props<boolean> = {
-  LOCAL_STORAGE_KEY: "ETP-sticky_search_bar",
-  DEFAULT_VALUE: true,
-};
+export const STICKY_SEARCH_BAR: Props<boolean> = createProps("ETP-sticky_search_bar", true);
+
 //uStory photo title
-export const USTORY_PHOTO_TITLE: Props<boolean> = {
-  LOCAL_STORAGE_KEY: "ETP-uStory_photo_title",
-  DEFAULT_VALUE: false,
-};
+export const USTORY_PHOTO_TITLE: Props<boolean> = createProps("ETP-uStory_photo_title", false);
+
 //masonri grid size
-export const GRID_SIZE: Props<GridSize> = {
-  LOCAL_STORAGE_KEY: "ETP-grid_size",
-  DEFAULT_VALUE: "medium",
-};
+export const GRID_SIZE: Props<GridSize> = createProps("ETP-grid_size", "medium");
+
 //uStory size
-export const USTORY_SIZE: Props<UStorySize> = {
-  LOCAL_STORAGE_KEY: "ETP-uStory_size",
-  DEFAULT_VALUE: "medium",
-};
+export const USTORY_SIZE: Props<UStorySize> = createProps("ETP-uStory_size", "medium");

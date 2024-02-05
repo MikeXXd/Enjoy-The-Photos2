@@ -2,22 +2,10 @@ import { CanceledError } from "axios";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { INNITIAL_QUERY } from "../data/defaultConst";
 import apiClient from "../services/api-client";
-
-export interface PhotoType {
-  id: string;
-  urls: {
-    full: string;
-    raw: string;
-    regular: string;
-    small: string;
-    thumb: string;
-  };
-  description: string;
-  alt_description: string;
-}
+import Photo from "../interfacesAndTypes/Photo";
 
 export interface PhotosContext {
-  actualPhotos: PhotoType[];
+  actualPhotos: Photo[];
   error: string;
   query: string;
   setNewQuery: (query: string) => void;
@@ -26,13 +14,13 @@ export interface PhotosContext {
 }
 
 interface FetchPhotosResponse {
-  results: PhotoType[];
+  results: Photo[];
 }
 
 export const Context = createContext<PhotosContext>({} as PhotosContext);
 
 export function PhotosProvider({ children }: { children: ReactNode }) {
-  const [actualPhotos, setActualPhotos] = useState<PhotoType[]>([]);
+  const [actualPhotos, setActualPhotos] = useState<Photo[]>([]);
 
   const [error, setError] = useState("");
   const [query, setQuery] = useState(INNITIAL_QUERY);

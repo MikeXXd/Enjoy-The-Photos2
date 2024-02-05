@@ -1,6 +1,6 @@
-import { PhotoType } from "../context/Photos";
+import Photo from "../interfacesAndTypes/Photo";
 
-const setBackgroundImage = async (photo: PhotoType | string) => {
+const setBackgroundImage = async (photo: Photo | string) => {
   const source = typeof photo === "string" ? photo : photo.urls.regular;
   let HTMLElement = document.getElementById("root") as HTMLElement;
   const response = await fetch(source);

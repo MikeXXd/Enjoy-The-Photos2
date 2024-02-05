@@ -10,9 +10,7 @@ import useGallery from "../gallery/store";
 import useStories from "../uStory/store";
 import useAppSetting from "./store";
 import "./styles-setting.css";
-
-export type GridSize = "small" | "medium" | "large";
-export type UStorySize = GridSize;
+import { GridSize, UStorySize } from "../../interfacesAndTypes/Sizes";
 
 const GRID_SIZE_ARRAY: GridSize[] = ["small", "medium", "large"];
 const USTORY_SIZE_ARRAY: UStorySize[] = ["small", "medium", "large"];

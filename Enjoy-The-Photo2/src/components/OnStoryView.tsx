@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FiArrowDownCircle, FiArrowUpCircle } from "react-icons/fi";
 import { cc } from "../utils/cc";
-import { UStoryType } from "./uStory/store";
+import UStory from "../interfacesAndTypes/UStory";
 
 interface Props {
-  uStory: UStoryType;
+  uStory: UStory;
 }
 
 export default function OnStoryView({ uStory }: Props) {

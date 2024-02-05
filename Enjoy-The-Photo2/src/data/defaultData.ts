@@ -1,7 +1,7 @@
-import { UStoryType } from "../components/uStory/store";
-import { PhotoType } from "../context/Photos";
+import Photo from "../interfacesAndTypes/Photo";
+import UStory from "../interfacesAndTypes/UStory";
 
-export const GALERY_DEFAULT_PHOTOS: PhotoType[] = [
+export const GALERY_DEFAULT_DATA: Photo[] = [
   {
     id: "RaDUPebv734",
     description: "the sun",
@@ -34,7 +34,7 @@ export const GALERY_DEFAULT_PHOTOS: PhotoType[] = [
   },
 ];
 
-export const USTORY_DEFAULT_PHOTOS: UStoryType[] = [
+export const USTORY_DEFAULT_DATA: UStory[] = [
   {
     id: "62cfe5be-2570-45dd-bb2c-bfb54b0fd5a8",
     name: "Dream of mine",
@@ -191,4 +191,4 @@ export const SENTENCES_FOR_ACTIVE_TEXT = [
   "Blossoming colors unveil hidden symmetries, intricacies woven into the vast tapestry of being.",
   "Chaos surrenders gracefully to geometry's structured ballet, a sublime elegance in cosmic beauty.",
   "Within shapes' simplicity, complexity finds a tranquil refuge, a sanctuary of intricate form.",
-]
+];

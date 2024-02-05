@@ -1,7 +1,6 @@
 import { CanceledError } from "axios";
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { GALERY_DEFAULT_PHOTOS } from "../data/defaultData";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { INNITIAL_QUERY } from "../data/defaultConst";
 import apiClient from "../services/api-client";
 
 export interface PhotoType {
@@ -24,13 +23,6 @@ export interface PhotosContext {
   setNewQuery: (query: string) => void;
   pageNo: number;
   setPageNo: (pageNo: number) => void;
-  gallery: PhotoType[];
-  arrangeGallery: (Photo: PhotoType) => void;
-  renderGallery: () => void;
-  isGalleryRendered: boolean;
-  setIsGalleryRendered: (active: boolean) => void;
-  clearGallery: () => void;
-  isInGalery: (photo: PhotoType) => boolean;
 }
 
 interface FetchPhotosResponse {
@@ -43,17 +35,10 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
   const [actualPhotos, setActualPhotos] = useState<PhotoType[]>([]);
 
   const [error, setError] = useState("");
-  const [query, setQuery] = useState("amazing colors");
+  const [query, setQuery] = useState(INNITIAL_QUERY);
   const [pageNo, setPageNo] = useState(1);
 
-  const [isGalleryRendered, setIsGalleryRendered] = useState(false);
-  const [gallery, setGallery] = useLocalStorage<PhotoType[]>(
-    "ETP-galery",
-    GALERY_DEFAULT_PHOTOS
-  );
-
   useEffect(() => {
-    setIsGalleryRendered(false);
     const controller = new AbortController();
 
     apiClient
@@ -74,41 +59,9 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
     return () => controller.abort();
   }, [query, pageNo]);
 
-  useEffect(() => {
-    if (gallery.length >= 1 || !isGalleryRendered) return;
-    setGallery([]);
-    setIsGalleryRendered(false);
-    setQuery("empty gallery");
-  }, [gallery]);
-
-  function arrangeGallery(photo: PhotoType) {
-    if (gallery.find((p) => p.id === photo.id)) {
-      setGallery(gallery.filter((item) => item.id !== photo.id));
-    } else {
-      setGallery([photo, ...gallery]);
-    }
-  }
-
   function setNewQuery(query: string) {
     setQuery(query);
     setPageNo(1);
-  }
-
-  function renderGallery() {
-    if (gallery.length < 1) return null;
-    {
-      setActualPhotos(gallery);
-      setIsGalleryRendered(true);
-    }
-  }
-
-  function clearGallery() {
-    setGallery(GALERY_DEFAULT_PHOTOS);
-  }
-
-  function isInGalery(photo: PhotoType) {
-    const isOrNot = gallery.find((p) => p.id === photo.id);
-    return isOrNot ? true : false;
   }
 
   return (
@@ -120,13 +73,6 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         setNewQuery,
         pageNo,
         setPageNo,
-        gallery,
-        arrangeGallery,
-        renderGallery,
-        isGalleryRendered,
-        setIsGalleryRendered,
-        clearGallery,
-        isInGalery,
       }}
     >
       {children}

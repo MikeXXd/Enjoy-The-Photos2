@@ -1,16 +1,16 @@
 import PhotosGrid from "../components/PhotosGrid";
+import useGallery from "../components/gallery/store";
 import InformationMessage from "../components/messages/InfoMessage";
-import usePhotos from "../context/usePhotos";
 
 const GalleryPage = () => {
-  const { gallery: photos } = usePhotos();
+  const { gallery } = useGallery();
 
   return (
     <>
-      {!photos.length && (
+      {!gallery.length && (
         <InformationMessage>You have no photos in gallery</InformationMessage>
       )}
-      <PhotosGrid photos={photos} />
+      <PhotosGrid photos={gallery} />
     </>
   );
 };

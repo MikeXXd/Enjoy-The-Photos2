@@ -18,6 +18,7 @@ import { cc } from "../utils/cc";
 import Modal from "./Modal";
 import UStoryOptionBtn from "./UStoryOptionBtn";
 import useStories from "./uStory/store";
+import useGallery from "./gallery/store";
 
 interface PhotoContainerProps {
   photo: PhotoType;
@@ -38,7 +39,8 @@ const PHOTO_SIZES: PhotoSizesProps[] = [
 ];
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
-  const { gallery, arrangeGallery, query, isInGalery } = usePhotos();
+  const { query } = usePhotos();
+  const { gallery, arrangeGallery, isInGallery } = useGallery();
   const { isUStoryCreating } = useStories();
 
   const [isLiked, setIsLiked] = useState(false);
@@ -84,7 +86,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
   //--Galerry Icon------------------------------------------
   useEffect(() => {
-    setIsLiked(isInGalery(photo));
+    setIsLiked(isInGallery(photo));
   }, [gallery]);
 
   // this hook doest work properly - problem with reappearing icons

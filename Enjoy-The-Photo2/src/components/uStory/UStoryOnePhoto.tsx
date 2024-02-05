@@ -4,9 +4,9 @@ import {
   MdDriveFileRenameOutline,
   MdOutlineFlipToBack,
 } from "react-icons/md";
-import usePhotos from "../../context/usePhotos";
 import setBackgroundImage from "../../services/setBackground";
 import { cc } from "../../utils/cc";
+import useGallery from "../gallery/store";
 import useAppSetting from "../setting/store";
 import useStories, { UStoryChain, UStoryType } from "./store";
 
@@ -21,7 +21,7 @@ export default function UStoryOnePhoto({
   isSettingRendered,
   story,
 }: Props) {
-  const { isInGalery, arrangeGallery } = usePhotos();
+  const { isInGallery, arrangeGallery } = useGallery();
 
   const { deletePhotoInUStory, changePhotoNameInUStory } = useStories();
   const { isSeenUStoryPhotoTitle } = useAppSetting();
@@ -62,7 +62,7 @@ export default function UStoryOnePhoto({
       {isSettingRendered && (
         <div className="story-photo-icons-wrap">
           <div>
-            {isInGalery(photo) ? (
+            {isInGallery(photo) ? (
               <AiFillHeart
                 onClick={handleHeartIcon}
                 fill={"rgb(238, 93, 93)"}

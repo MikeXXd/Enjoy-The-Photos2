@@ -7,8 +7,7 @@ const About = () => {
         <h1>About</h1>
         <div className="about-text">
           <h2>
-            Enjoy the Photos2 has been created as a desktop-first application;
-            nevertheless, all functionalities also work on smartphones.
+          Enjoy the Photos2 has been designed as a desktop-first application; however, all functionalities are fully operational on other devices as well.
           </h2>
           <h3>
             uStory is the main feature that enables the creation of your own
@@ -48,7 +47,7 @@ const About = () => {
             <li>Close all open uStory settings by the ECS key.</li>
           </ul>
           <footer>
-            Current version: 2.1 <br />
+            Current version: 2.2 <br />
             Created by:{" "}
             <a href="https://www.linkedin.com/in/michal-vili%C5%A1-483196251/">
               Michal Viliš

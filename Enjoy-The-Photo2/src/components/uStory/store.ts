@@ -29,12 +29,11 @@ interface UStoryPhotoTitleType {
 
 interface UStoryStoreProps {
   uStories: UStoryType[];
-  isUStoryCreating: boolean; //IMPLEMENTED
-  setIsUStoryCreating: (isCreating: boolean) => void; //IMPLEMENTED
-  addingUStory: (photo: PhotoType, photoTitle: string, query: string) => void; //IMPLEMENTED
-
-  deleteUStory: (uStoryId: Pick<UStoryType, "id">) => void; //IMPLEMENTED
-  setDefaultUStories: () => void; //IMPLEMENTED
+  isUStoryCreating: boolean;
+  setIsUStoryCreating: (isCreating: boolean) => void;
+  addingUStory: (photo: PhotoType, photoTitle: string, query: string) => void;
+  deleteUStory: (uStoryId: Pick<UStoryType, "id">) => void;
+  setDefaultUStories: () => void;
   changeUStoryName: ({ id, name }: Omit<UStoryType, "body">) => void;
   changePhotoNameInUStory: ({
     storyId,
@@ -44,7 +43,7 @@ interface UStoryStoreProps {
   deletePhotoInUStory: ({
     storyId,
     photoId,
-  }: Omit<UStoryPhotoTitleType, "name">) => void; //IMPLEMENTED
+  }: Omit<UStoryPhotoTitleType, "name">) => void;
 }
 
 const useStories = create<UStoryStoreProps>((set) => ({
@@ -75,8 +74,7 @@ const useStories = create<UStoryStoreProps>((set) => ({
 
       set((state) => ({ uStories: [newUStory, ...state.uStories] }));
     } else {
-      const nowCretingStoryId =
-        getCurrent.uStories[0].id;
+      const nowCretingStoryId = getCurrent.uStories[0].id;
       set((state) => ({
         uStories: state.uStories.map((story) =>
           story.id === nowCretingStoryId

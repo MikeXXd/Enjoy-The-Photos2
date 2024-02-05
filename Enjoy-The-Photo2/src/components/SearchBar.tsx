@@ -11,7 +11,6 @@ export default function SearchBar() {
     pageNo,
     setPageNo,
     actualPhotos,
-    isGalleryRendered,
   } = usePhotos();
  const {isSearchBarSticky} = useAppSetting()
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
@@ -34,12 +33,12 @@ export default function SearchBar() {
   }, [pageNo]);
 
   useEffect(() => {
-    if (!isGalleryRendered && actualPhotos.length < 30) {
+    if (actualPhotos.length < 30) {
       setIsNextBtnDisabled(true);
     } else {
       setIsNextBtnDisabled(false);
     }
-  }, [actualPhotos, isGalleryRendered]);
+  }, [actualPhotos]);
 
   function handleEntries(
     e: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>

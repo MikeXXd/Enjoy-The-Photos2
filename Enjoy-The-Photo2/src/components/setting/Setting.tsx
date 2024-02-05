@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   DYNAMIC_BACKGROUND,
   GRID_SIZE,
@@ -18,6 +19,7 @@ const USTORY_SIZE_ARRAY: UStorySize[] = ["small", "medium", "large"];
 
 // -----SETTING---------------------------------------------------------
 const Setting = () => {
+  const navigate = useNavigate();
   const { setDefaultGallery } = useGallery();
   const { setDefaultUStories } = useStories();
   const {
@@ -45,7 +47,8 @@ const Setting = () => {
       setUStorySize(USTORY_SIZE.DEFAULT_VALUE);
       setIsSearchBarSticky(STICKY_SEARCH_BAR.DEFAULT_VALUE);
       setIsSeenUStoryPhotoTitle(USTORY_PHOTO_TITLE.DEFAULT_VALUE);
-      window.location.reload();
+      navigate("/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
 

@@ -1,6 +1,6 @@
 import { CanceledError } from "axios";
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { INNITIAL_QUERY } from "../data/defaultConst";
+import { INNITIAL_QUERY, PHOTOS_PER_PAGE } from "../data/defaultConst";
 import apiClient from "../services/api-client";
 import Photo from "../interfacesAndTypes/Photo";
 
@@ -34,7 +34,7 @@ export function PhotosProvider({ children }: { children: ReactNode }) {
         signal: controller.signal,
         params: {
           page: pageNo,
-          per_page: 30,
+          per_page: PHOTOS_PER_PAGE,
           query,
         },
       })

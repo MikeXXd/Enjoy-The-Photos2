@@ -3,6 +3,7 @@ import usePhotos from "../context/usePhotos";
 import { cc } from "../utils/cc";
 import useAppSetting from "./setting/store";
 import { useNavigate } from "react-router-dom";
+import { PHOTOS_PER_PAGE } from "../data/defaultConst";
 
 export default function SearchBar() {
   const {
@@ -33,7 +34,7 @@ export default function SearchBar() {
   }, [pageNo]);
 
   useEffect(() => {
-    if (actualPhotos.length < 30) {
+    if (actualPhotos.length < PHOTOS_PER_PAGE) {
       setIsNextBtnDisabled(true);
     } else {
       setIsNextBtnDisabled(false);

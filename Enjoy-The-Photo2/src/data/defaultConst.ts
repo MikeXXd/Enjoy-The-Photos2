@@ -8,12 +8,7 @@ interface Props<T> {
   DEFAULT_VALUE: T;
 }
 
-function createProps<T>(localStorageKey: string, defaultValue: T): Props<T> {
-  return {
-    LOCAL_STORAGE_KEY: localStorageKey,
-    DEFAULT_VALUE: defaultValue,
-  };
-}
+export const PHOTOS_PER_PAGE: number = 30
 
 //default query
 export const INNITIAL_QUERY: string = "enter space time";
@@ -38,3 +33,12 @@ export const GRID_SIZE: Props<GridSize> = createProps("ETP-grid_size", "medium")
 
 //uStory size
 export const USTORY_SIZE: Props<UStorySize> = createProps("ETP-uStory_size", "medium");
+
+//--------------------FUNCTIONS--------------------
+
+function createProps<T>(localStorageKey: string, defaultValue: T): Props<T> {
+  return {
+    LOCAL_STORAGE_KEY: localStorageKey,
+    DEFAULT_VALUE: defaultValue,
+  };
+}

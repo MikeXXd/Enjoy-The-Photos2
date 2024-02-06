@@ -1,16 +1,15 @@
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {
   MdDelete,
   MdDriveFileRenameOutline,
   MdOutlineFlipToBack,
 } from "react-icons/md";
+import UStory from "../../interfacesAndTypes/UStory";
+import UStoryPhoto from "../../interfacesAndTypes/UStoryPhoto";
 import setBackgroundImage from "../../services/setBackground";
 import { cc } from "../../utils/cc";
-import useGallery from "../gallery/store";
+import IconHeart from "../IconHeart";
 import useAppSetting from "../setting/store";
 import useStories from "./store";
-import UStoryPhoto from "../../interfacesAndTypes/UStoryPhoto";
-import UStory from "../../interfacesAndTypes/UStory";
 
 interface Props {
   story: UStory;
@@ -23,14 +22,9 @@ export default function UStoryOnePhoto({
   isSettingRendered,
   story,
 }: Props) {
-  const { isInGallery, arrangeGallery } = useGallery();
 
   const { deletePhotoInUStory, changePhotoNameInUStory } = useStories();
   const { isSeenUStoryPhotoTitle } = useAppSetting();
-
-  function handleHeartIcon() {
-    arrangeGallery(photo);
-  }
 
   function handleSetBackground() {
     setBackgroundImage(photo);
@@ -64,19 +58,7 @@ export default function UStoryOnePhoto({
       {isSettingRendered && (
         <div className="story-photo-icons-wrap">
           <div>
-            {isInGallery(photo) ? (
-              <AiFillHeart
-                onClick={handleHeartIcon}
-                fill={"rgb(238, 93, 93)"}
-                title="In Gallery"
-              />
-            ) : (
-              <AiOutlineHeart
-                onClick={handleHeartIcon}
-                fill={"rgb(238, 93, 93)"}
-                title="Save to Gallery"
-              />
-            )}
+            <IconHeart photo={photo}/>
             <MdOutlineFlipToBack
               onClick={handleSetBackground}
               fill={"rgb(209, 202, 179)"}

@@ -1,24 +1,20 @@
 import nlp from "compromise";
 import { useEffect, useState } from "react";
-import {
-  AiFillHeart,
-  AiOutlineEyeInvisible,
-  AiOutlineHeart,
-} from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaInfo } from "react-icons/fa";
 import { GiFlowerEmblem } from "react-icons/gi";
 import { IoIosResize } from "react-icons/io";
 import { IoOpen } from "react-icons/io5";
 import { MdOutlineFlipToBack } from "react-icons/md";
 import { SlSizeFullscreen } from "react-icons/sl";
-import Photo from "../interfacesAndTypes/Photo";
 import usePhotos from "../context/usePhotos";
+import Photo from "../interfacesAndTypes/Photo";
 import setBackgroundImage from "../services/setBackground";
 import { cc } from "../utils/cc";
+import IconHeart from "./IconHeart";
 import Modal from "./Modal";
 import UStoryOptionBtn from "./UStoryOptionBtn";
 import useStories from "./uStory/store";
-import useGallery from "./gallery/store";
 
 interface PhotoContainerProps {
   photo: Photo;
@@ -40,10 +36,8 @@ const PHOTO_SIZES: PhotoSizesProps[] = [
 
 const PhotoContainer = ({ photo }: PhotoContainerProps) => {
   const { query } = usePhotos();
-  const { gallery, arrangeGallery, isInGallery } = useGallery();
   const { isUStoryCreating } = useStories();
 
-  const [isLiked, setIsLiked] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [photoSize, setPhotoSize] = useState(
     () => PHOTO_SIZES[Math.floor(Math.random() * PHOTO_SIZES.length)]
@@ -78,16 +72,6 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
     setIsResizing(true);
     handleMouseLeave(); //serving the purpose of hiding icons
   }
-
-  //--Heart Icon------------------------------------------
-  function handleHeartIcon() {
-    arrangeGallery(photo);
-  }
-
-  //--Galerry Icon------------------------------------------
-  useEffect(() => {
-    setIsLiked(isInGallery(photo));
-  }, [gallery]);
 
   // this hook doest work properly - problem with reappearing icons
   useEffect(() => {
@@ -199,19 +183,7 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           areIconsActive && !isUStoryIconSpread && !isPhotoInvisible && "show"
         )}
       >
-        {isLiked ? (
-          <AiFillHeart
-            onClick={handleHeartIcon}
-            fill={"rgb(238, 93, 93)"}
-            title="In Gallery"
-          />
-        ) : (
-          <AiOutlineHeart
-            onClick={handleHeartIcon}
-            fill="pink"
-            title="Save to Gallery"
-          />
-        )}
+        <IconHeart photo={photo} />
         <FaInfo
           onClick={() => setIsInfoActive(!isInfoActive)}
           fill="pink"

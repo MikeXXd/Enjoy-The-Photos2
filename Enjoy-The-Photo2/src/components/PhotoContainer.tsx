@@ -223,6 +223,8 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
 
 export default PhotoContainer;
 
+//-------------------------------helper functions--------------------------------
+
 function extractVerbsAndNouns(text: string) {
   // extracting verbs and nouns from photo description to use then for further search in uStory
   if (!text) return;

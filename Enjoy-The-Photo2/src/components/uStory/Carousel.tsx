@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import Flickity from "react-flickity-component";
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
+import UStory from "../../interfacesAndTypes/UStory";
 import { cc } from "../../utils/cc";
+import Modal from "../Modal";
 import useAppSetting from "../setting/store";
+import ModalFormTitleChange from "./ModalFormTitleChange";
 import UStoryOnePhoto from "./UStoryOnePhoto";
 import "./flickity.css";
 import useStories from "./store";
-import UStory from "../../interfacesAndTypes/UStory";
 
 interface Props {
   story: UStory;
@@ -18,6 +20,7 @@ export default function Carousel({ story, closingTrigger }: Props) {
   const { uStorySize } = useAppSetting();
 
   const [isSettingRendered, setIsSettingRendered] = useState(false);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   const flickityOptions = {
     initialIndex: 1,
@@ -35,13 +38,6 @@ export default function Carousel({ story, closingTrigger }: Props) {
   useEffect(() => {
     setIsSettingRendered(false);
   }, [closingTrigger]);
-
-  function handleStoryTitle() {
-    const newTitle = prompt("Enter new title");
-    if (newTitle) {
-      changeUStoryName({ id: story.id, name: newTitle });
-    }
-  }
 
   function handleStorySetting() {
     setIsUStoryCreating(false);
@@ -67,7 +63,7 @@ export default function Carousel({ story, closingTrigger }: Props) {
             {story.name}
             {isSettingRendered && (
               <MdDriveFileRenameOutline
-                onClick={handleStoryTitle}
+                onClick={() => setIsModalOpened(true)}
                 className="rename-whole-ustory-icon"
                 title="Rename uStory"
               />
@@ -98,6 +94,20 @@ export default function Carousel({ story, closingTrigger }: Props) {
           />
         ))}
       </Flickity>
+      <Modal
+        isOpen={isModalOpened}
+        onClose={() => {
+          setIsModalOpened(false);
+        }}
+      >
+        <ModalFormTitleChange
+          currentTitle={story.name}
+          onClose={() => setIsModalOpened(false)}
+          saveNewTitle={(newTitle) =>
+            changeUStoryName({ id: story.id, name: newTitle })
+          }
+        />
+      </Modal>
     </>
   );
 }

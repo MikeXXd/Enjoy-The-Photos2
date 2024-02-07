@@ -128,7 +128,7 @@ const Setting = () => {
 
 export default Setting;
 
-// helping functions-----------------------------------
+// ---------------------helping functions-----------------------------------
 function toFirstLetterUpperCase(word: string) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }

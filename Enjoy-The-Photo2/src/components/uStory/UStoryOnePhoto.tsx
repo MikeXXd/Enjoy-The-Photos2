@@ -10,6 +10,9 @@ import { cc } from "../../utils/cc";
 import IconHeart from "../IconHeart";
 import useAppSetting from "../setting/store";
 import useStories from "./store";
+import Modal from "../Modal";
+import ModalFormTitleChange from "./ModalFormTitleChange";
+import { useState } from "react";
 
 interface Props {
   story: UStory;
@@ -22,66 +25,87 @@ export default function UStoryOnePhoto({
   isSettingRendered,
   story,
 }: Props) {
-
   const { deletePhotoInUStory, changePhotoNameInUStory } = useStories();
   const { isSeenUStoryPhotoTitle } = useAppSetting();
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
 
   function handleSetBackground() {
     setBackgroundImage(photo);
   }
 
-  function handleRenamePhoto() {
-    const newTitle = prompt("Enter new title");
-    if (newTitle) {
-      changePhotoNameInUStory({
-        storyId: story.id,
-        photoId: photo.id,
-        name: newTitle,
-      });
-    }
-  }
+  // function handleRenamePhoto() {
+  //   const newTitle = prompt("Enter new title");
+  //   if (newTitle) {
+  //     changePhotoNameInUStory({
+  //       storyId: story.id,
+  //       photoId: photo.id,
+  //       name: newTitle,
+  //     });
+  //   }
+  // }
 
   function handleDeletePhoto() {
     deletePhotoInUStory({ storyId: story.id, photoId: photo.id });
   }
 
   return (
-    <div
-      className={cc(
-        "ustory-photo-container",
-        !isSettingRendered && "show-on-hover",
-        (isSeenUStoryPhotoTitle || isSettingRendered) && "show-title",
-        isSettingRendered && "on-setting"
-      )}
-      data-img={photo.photoInStoryName}
-    >
-      {isSettingRendered && (
-        <div className="story-photo-icons-wrap">
-          <div>
-            <IconHeart photo={photo}/>
-            <MdOutlineFlipToBack
-              onClick={handleSetBackground}
-              fill={"rgb(209, 202, 179)"}
-              title="Set photo to background"
-            />
-            <MdDriveFileRenameOutline
-              onClick={handleRenamePhoto}
-              fill={"rgb(227, 208, 80)"}
-              title="Rename photo"
+    <>
+      <Modal
+        isOpen={isModalOpened}
+        onClose={() => {
+          setIsModalOpened(false);
+        }}
+      >
+        <ModalFormTitleChange
+          currentTitle={photo.photoInStoryName}
+          onClose={() => setIsModalOpened(false)}
+          saveNewTitle={(newTitle) =>
+            changePhotoNameInUStory({
+              storyId: story.id,
+              photoId: photo.id,
+              name: newTitle,
+            })
+          }
+        />
+      </Modal>
+      <div
+        className={cc(
+          "ustory-photo-container",
+          !isSettingRendered && "show-on-hover",
+          (isSeenUStoryPhotoTitle || isSettingRendered) && "show-title",
+          isSettingRendered && "on-setting"
+        )}
+        data-img={photo.photoInStoryName}
+      >
+        {isSettingRendered && (
+          <div className="story-photo-icons-wrap">
+            <div>
+              <IconHeart photo={photo} />
+              <MdOutlineFlipToBack
+                onClick={handleSetBackground}
+                fill={"rgb(209, 202, 179)"}
+                title="Set photo to background"
+              />
+              <MdDriveFileRenameOutline
+                onClick={() => setIsModalOpened(true)}
+                fill={"rgb(227, 208, 80)"}
+                title="Rename photo"
+              />
+            </div>
+            <MdDelete
+              className="delete-icon"
+              onClick={handleDeletePhoto}
+              title="Delete photo"
             />
           </div>
-          <MdDelete
-            className="delete-icon"
-            onClick={handleDeletePhoto}
-            title="Delete photo"
-          />
-        </div>
-      )}
-      <img
-        className="ustory-img "
-        src={photo.urls.raw + "&h=480&dpr=2"}
-        alt={photo.alt_description}
-      />
-    </div>
+        )}
+        <img
+          className="ustory-img "
+          src={photo.urls.raw + "&h=480&dpr=2"}
+          alt={photo.alt_description}
+        />
+      </div>
+    </>
   );
 }

@@ -1,5 +1,6 @@
-import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useHotkeys } from "react-hotkeys-hook";
 import { cc } from "../utils/cc";
 
 export type ModalProps = {
@@ -12,27 +13,8 @@ const Modal = ({ children, isOpen, onClose }: ModalProps) => {
   const [isClosing, setIsClosing] = useState(false);
   const prevIsOpen = useRef<boolean>();
 
-  // function returnChildren() {if (children !== null &&  children !== undefined) return children.type.name}
-  // console.log('Modal Component',returnChildren() )
-
-
-  useEffect(() => {
-    const handleEvent = (e: KeyboardEvent) => {
-      if (e.key === "Tab") {
-        e.preventDefault();
-      }
-
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    document.addEventListener("keydown", handleEvent);
-
-    return () => {
-      document.removeEventListener("keydown", handleEvent);
-    };
-  }, [onClose]);
+  useHotkeys("esc", onClose);
+  useHotkeys("Tab", onClose);
 
   useLayoutEffect(() => {
     if (!isOpen && prevIsOpen.current) {

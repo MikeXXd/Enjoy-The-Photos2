@@ -180,7 +180,7 @@ export const USTORY_DEFAULT_DATA: UStory[] = [
   },
 ];
 
-export const SENTENCES_FOR_ACTIVE_TEXT = [
+export const SENTENCES_FOR_ACTIVE_TEXT: string[] = [
   "Whispering forms, secrets unfold, tales of cosmic interconnection echoing through the vast universe.",
   "Vibrant collisions of hues compose perception's kaleidoscopic symphony, a vivid exploration of reality.",
   "Contours weave sagas, geometry's murmurs shaping the narrative of existence.",
@@ -191,4 +191,192 @@ export const SENTENCES_FOR_ACTIVE_TEXT = [
   "Blossoming colors unveil hidden symmetries, intricacies woven into the vast tapestry of being.",
   "Chaos surrenders gracefully to geometry's structured ballet, a sublime elegance in cosmic beauty.",
   "Within shapes' simplicity, complexity finds a tranquil refuge, a sanctuary of intricate form.",
+];
+
+export const HOMEPAGE_DEFAULT_DATA: Photo[] = [
+  {
+    id: "QwoNAhbmLLo",
+    description: "Space story",
+    alt_description: "multicolored abstract painting",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1484589065579-248aad0d8b13?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1484589065579-248aad0d8b13?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1484589065579-248aad0d8b13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1484589065579-248aad0d8b13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1484589065579-248aad0d8b13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "8Hjx3GNZYeA",
+
+    description: "Satellite in orbit",
+    alt_description: "satellite flying on space",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwyfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "jlV2k_Fx0fc",
+    description: "photo of moon surface",
+    alt_description: "photo of moon surface",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwzfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwzfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwzfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwzfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwzfHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "e5eDHbmHprg",
+    description:
+      "Apollo 11 astronaut Buzz Aldrin walks on the surface of the moon on July 20, 1969, in a photograph taken by Neil Armstrong.",
+    alt_description: "astronaut standing on gray sand",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1541873676-a18131494184?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1541873676-a18131494184?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1541873676-a18131494184?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1541873676-a18131494184?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1541873676-a18131494184?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw0fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "FlHdnPO6dlw",
+    description: "brown-and-white clocks",
+    alt_description: "brown-and-white clocks",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1533749047139-189de3cf06d3?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw1fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1533749047139-189de3cf06d3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw1fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1533749047139-189de3cf06d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw1fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1533749047139-189de3cf06d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw1fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1533749047139-189de3cf06d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw1fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "VBNb52J8Trk",
+    description: "Satellite over the coast",
+    alt_description: "A space satellite hovering above the coastline",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1460186136353-977e9d6085a1?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw2fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1460186136353-977e9d6085a1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw2fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1460186136353-977e9d6085a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw2fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1460186136353-977e9d6085a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw2fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1460186136353-977e9d6085a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw2fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "_WR6tUIAJe8",
+    description:
+      "The Great Rift, also know as The Dark Rift, or The Dark River, is a section of non-luminous clouds within the Milky Way. I paired this section of the milky way with a lonely tree for a heavier mood. \r\ns: 2x2x3 tracked/stacked panorama - 50mm @ f2.8, ISO1600, 120s\r\nfg: 20mm @ f11, ISO100, 5s (hoya nd1000x)",
+    alt_description: "green leafed tree on body of water under starry sky",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1502318217862-aa4e294ba657?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw3fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1502318217862-aa4e294ba657?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw3fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1502318217862-aa4e294ba657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw3fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1502318217862-aa4e294ba657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw3fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1502318217862-aa4e294ba657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw3fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "UAvYasdkzq8",
+    description: "Alarm clock friends situation with hand",
+    alt_description: "person holding white mini bell alarmclock",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw4fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw4fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw4fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw4fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw4fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "BXOXnQ26B7o",
+    description:
+      "Eventually everything hits the bottom, and all you have to do is wait until someone comes along, and turns it back again. ⌛️",
+    alt_description:
+      "selective focus photo of brown and blue hourglass on stones",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1501139083538-0139583c060f?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw5fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1501139083538-0139583c060f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw5fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1501139083538-0139583c060f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw5fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1501139083538-0139583c060f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw5fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1501139083538-0139583c060f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHw5fHxlbnRlciUyMHNwYWNlJTIwdGltZXxlbnwwfHx8fDE3MDgxNTcxNTF8MA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "eIkbSc3SDtI",
+    description: "clock alarm",
+    alt_description: "round Timex analog clock at 2:33",
+    urls: {
+      raw: "https://images.unsplash.com/37/tEREUy1vSfuSu8LzTop3_IMG_2538.jpg?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMHx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/37/tEREUy1vSfuSu8LzTop3_IMG_2538.jpg?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMHx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/37/tEREUy1vSfuSu8LzTop3_IMG_2538.jpg?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMHx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/37/tEREUy1vSfuSu8LzTop3_IMG_2538.jpg?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMHx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/37/tEREUy1vSfuSu8LzTop3_IMG_2538.jpg?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMHx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "RmoWqDCqN2E",
+    description: "Warp speed",
+    alt_description: "timelapse photography of warped lines",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1537420327992-d6e192287183?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMXx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1537420327992-d6e192287183?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMXx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1537420327992-d6e192287183?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMXx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1537420327992-d6e192287183?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMXx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1537420327992-d6e192287183?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMXx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
+  {
+    id: "_ok8uVzL2gI",
+    description: "digital",
+    alt_description: "digital wallpaper of eclipse",
+    urls: {
+      raw: "https://images.unsplash.com/photo-1504192010706-dd7f569ee2be?ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMnx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3",
+      full: "https://images.unsplash.com/photo-1504192010706-dd7f569ee2be?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMnx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=85",
+      regular:
+        "https://images.unsplash.com/photo-1504192010706-dd7f569ee2be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMnx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=1080",
+      small:
+        "https://images.unsplash.com/photo-1504192010706-dd7f569ee2be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMnx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=400",
+      thumb:
+        "https://images.unsplash.com/photo-1504192010706-dd7f569ee2be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTM0MTl8MHwxfHNlYXJjaHwxMnx8ZW50ZXIlMjBzcGFjZSUyMHRpbWV8ZW58MHx8fHwxNzA4MTU3MTUxfDA&ixlib=rb-4.0.3&q=80&w=200",
+    },
+  },
 ];

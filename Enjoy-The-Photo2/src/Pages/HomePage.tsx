@@ -5,7 +5,7 @@ import usePhotos from "../context/usePhotos";
 
 const HomePage = () => {
   const { actualPhotos: photos, error } = usePhotos();
-
+console.log(photos)
   return (
     <>
       {error && <ErrorMessage>{error}</ErrorMessage>}

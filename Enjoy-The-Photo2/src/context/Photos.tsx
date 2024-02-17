@@ -3,6 +3,7 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 import { INNITIAL_QUERY, PHOTOS_PER_PAGE } from "../data/defaultConst";
 import apiClient from "../services/api-client";
 import Photo from "../interfacesAndTypes/Photo";
+import { HOMEPAGE_DEFAULT_DATA } from "../data/defaultData";
 
 export interface PhotosContext {
   actualPhotos: Photo[];
@@ -20,7 +21,7 @@ interface FetchPhotosResponse {
 export const Context = createContext<PhotosContext>({} as PhotosContext);
 
 export function PhotosProvider({ children }: { children: ReactNode }) {
-  const [actualPhotos, setActualPhotos] = useState<Photo[]>([]);
+  const [actualPhotos, setActualPhotos] = useState<Photo[]>(HOMEPAGE_DEFAULT_DATA);
 
   const [error, setError] = useState("");
   const [query, setQuery] = useState(INNITIAL_QUERY);

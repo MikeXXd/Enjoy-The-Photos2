@@ -4,11 +4,11 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaInfo } from "react-icons/fa";
 import { GiFlowerEmblem } from "react-icons/gi";
 import { IoIosResize } from "react-icons/io";
-import { IoOpen } from "react-icons/io5";
-import { MdOutlineFlipToBack } from "react-icons/md";
+import { MdOutlineFlipToBack, MdOutlineSaveAlt } from "react-icons/md";
 import { SlSizeFullscreen } from "react-icons/sl";
 import usePhotos from "../context/usePhotos";
 import Photo from "../interfacesAndTypes/Photo";
+import savePhoto from "../services/savePhoto";
 import setBackgroundImage from "../services/setBackground";
 import { cc } from "../utils/cc";
 import IconHeart from "./IconHeart";
@@ -189,10 +189,10 @@ const PhotoContainer = ({ photo }: PhotoContainerProps) => {
           fill="pink"
           title="Show info"
         />
-        <IoOpen
-          onClick={() => window.open(photo.urls.full)}
+        <MdOutlineSaveAlt
+          onClick={() => savePhoto(photo)}
           fill="pink"
-          title="Open photo in new window"
+          title="Save photo to your device"
         />
       </div>
 
